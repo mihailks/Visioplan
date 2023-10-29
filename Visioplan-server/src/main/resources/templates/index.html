@@ -1,14 +1,75 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" th:fragment="head">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/reset.css}"/>
+    <link rel="stylesheet" th:href="@{/css/typography.css}"/>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+    <title>Visioplan</title>
 </head>
+
 <body>
-<h1>Hello</h1>
+<div th:replace="~{fragments/commons::navbar}"></div>
+<div class="top-container">
+    <section class="hero">
+        <h1 class="main-title">Visioplan is the help you need.</h1>
+        <p class="hero-info">Visioplan is a project management tool that helps you plan your projects and keep track of
+            your progress.</p>
+    </section>
+</div>
+
+
+<section class="card">
+    <div class="titles">
+        <h1 class="main-title">Financial Services</h1>
+        <h2 class="sub-title">ALIQUAM ID URNA IMPERDIET LIBERO MOLLIS HENDRERIT</h2>
+    </div>
+
+    <article class="options">
+        <article class="article-sm">
+            <div class="img-cont">
+                <img src="/images/img_01.png" class="img">
+            </div>
+            <div class="article-text">
+                <h3 class="title-sm">Plan review</h3>
+                <p class="desc">Sed tincidunt dictum lobortis. Aenean tempus diam vel augue luctus dignissim. Nunc ornare leo tortor.
+                </p>
+                <button class="btn">READ MORE</button>
+            </div>
+        </article>
+
+        <article class="article-sm">
+            <div class="img-cont">
+                <img src="/images/img_02.png" class="img">
+            </div>
+            <div class="article-text">
+                <h3 class="title-sm">Schema Review</h3>
+                <p class="desc">Sed tincidunt dictum lobortis. Aenean tempus diam vel augue luctus dignissim. Nunc ornare leo tortor.
+                </p>
+                <button class="btn">READ MORE</button>
+            </div>
+        </article>
+
+        <article class="article-sm">
+            <div class="img-cont">
+                <img src="/images/img_03.png" class="img">
+            </div>
+            <div class="article-text">
+                <h3 class="title-sm">Data Sheets</h3>
+                <p class="desc">Sed tincidunt dictum lobortis. Aenean tempus diam vel augue luctus dignissim. Nunc ornare leo tortor.
+                </p>
+                <button class="btn">READ MORE</button>
+            </div>
+        </article>
+    </article>
+</section>
+
+<footer th:replace="~{fragments/commons::footer}"></footer>
 
 </body>
 </html>

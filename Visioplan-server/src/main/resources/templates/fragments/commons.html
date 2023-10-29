@@ -1,0 +1,44 @@
+<head>
+    <meta charset="UTF-8" th:fragment="head">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/reset.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery-3.5.1.slim.min.js}"></script>
+
+    <title>Visioplan</title>
+</head>
+
+<div class="nav-container" th:fragment="navbar">
+    <header class="site-header">
+        <nav class="site-nav">
+            <a class="navbar-brand" href="/"><img alt="company-logo" src="/images/logo-white.png"
+                                                  class="company-logo"></a>
+            <ul class="nav-list">
+                <li class="nav-list-elements"><a href="#">Features</a></li>
+                <li class="nav-list-elements"><a href="#">How it works</a></li>
+                <li class="nav-list-elements"><a href="#">Prices</a></li>
+                <li class="nav-list-elements"><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <ul class="login">
+            <li class="btn sign-bnt"><a href="#">Feedback</a></li>
+            <li class="btn sign-bnt"><a href="#">Profile</a></li>
+            <li class="btn sign-bnt"><a href="#">Projects</a></li>
+            <li class="btn sign-bnt"><a href="#">Admin</a></li>
+            <li class="btn sign-bnt"><a href="#">Register company</a></li>
+            <li class="btn login-bnt"><a th:href="@{/users/login}">Login</a></li>
+            <li class="btn sign-bnt"><a th:href="@{/users/register}">Register</a></li>
+        </ul>
+    </header>
+</div>
+
+
+<footer class="footer" th:fragment="footer">
+    <p> &copy; All rights reserved</p>
+</footer>
+
