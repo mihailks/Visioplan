@@ -1,2 +1,2 @@
 # Visioplan
-Spring Boot + Angular Full Stack
+Spring Boot app
