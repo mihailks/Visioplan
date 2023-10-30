@@ -1,4 +1,4 @@
-package com.visioplanserver.entity;
+package com.visioplanserver.model.entity;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

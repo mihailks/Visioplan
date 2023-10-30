@@ -1,20 +1,22 @@
-package com.visioplanserver.entity;
+package com.visioplanserver.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Set;
 
 @Entity
 @Table(name = "companies")
 public class CompanyEntity extends BaseEntity {
+    @Column(nullable = false, unique = true)
     private String name;
+    @Column(nullable = false)
     private String address;
+    @Column(nullable = false)
     private String city;
+    @Column(nullable = false)
     private String country;
     private String phone;
+    @Column(nullable = false, unique = true)
     private String email;
     private String website;
     @ManyToMany(mappedBy = "companies")
@@ -106,4 +108,5 @@ public class CompanyEntity extends BaseEntity {
         this.employees = employees;
         return this;
     }
+
 }

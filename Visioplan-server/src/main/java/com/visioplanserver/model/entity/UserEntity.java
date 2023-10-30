@@ -1,16 +1,18 @@
-package com.visioplanserver.entity;
+package com.visioplanserver.model.entity;
 
 import jakarta.persistence.*;
 
 import java.util.List;
 
 
-@MappedSuperclass
+@Entity
+@Table(name = "users")
 public class UserEntity extends BaseEntity {
+    @Column(unique = true, nullable = false)
     private String username;
-    private String firstName;
-    private String lastName;
+    @Column(unique = true, nullable = false)
     private String email;
+    @Column(nullable = false)
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
@@ -19,24 +21,6 @@ public class UserEntity extends BaseEntity {
     private List<UserRoleEntity> role;
 
     public UserEntity() {
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public UserEntity setFirstName(String firstName) {
-        this.firstName = firstName;
-        return this;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public UserEntity setLastName(String lastName) {
-        this.lastName = lastName;
-        return this;
     }
 
     public String getEmail() {
@@ -76,4 +60,5 @@ public class UserEntity extends BaseEntity {
         this.role = role;
         return this;
     }
+
 }

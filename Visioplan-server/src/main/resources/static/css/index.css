@@ -5,8 +5,8 @@
     --main-color-blue: rgb(22, 33, 65);
 }
 
-.html{
-    height:100vh;
+.html {
+    height: 100vh;
 }
 
 .site-container {
@@ -28,11 +28,12 @@ a {
     border-radius: 6px;
 }
 
-.company-logo{
+.company-logo {
     width: 250px;
     margin-right: 2rem;
 }
-.site-nav{
+
+.site-nav {
     display: flex;
     align-items: center;
 
@@ -60,12 +61,13 @@ a {
 .login-bnt {
     background-color: white;
 }
+
 .sign-bnt {
     color: white;
     background-color: var(--main-color-blue);
 }
 
-.sign-bnt a{
+.sign-bnt a {
     color: white;
 }
 
@@ -73,15 +75,15 @@ a {
 
 .top-container {
     text-align: center;
-    background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(22,33,65,1) 80%, rgba(0,212,255,1) 100%);
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(22, 33, 65, 1) 80%, rgba(0, 212, 255, 1) 100%);
 }
 
 .main-title {
     color: white;
     font-size: 3rem;
     font-weight: bold;
-    padding-top: 4rem;
+    padding-top: 1rem;
     padding-bottom: 1rem;
 }
 
@@ -100,14 +102,14 @@ a {
     margin-bottom: 5rem;
 }
 
-.image-section{
+.image-section {
     display: flex;
     align-items: center;
     flex-direction: column;
     wrap-option: wrap;
 }
 
-.image-section img{
+.image-section img {
     border: 1px solid var(--main-color-blue);
     border-radius: 6px;
     margin: 1rem;
@@ -138,42 +140,38 @@ a {
 }
 
 
-
-
-
-
-
-.titles{
+.titles {
     margin-top: 30px;
     text-align: center;
     color: var(--main-color-blue);
 }
 
-.titles .main-title{
+.titles .main-title {
     font-weight: bold;
     margin-bottom: 1.75rem;
     color: var(--main-color-blue);
 }
-.titles .sub-title{
+
+.titles .sub-title {
     font-size: 1.1rem;
     letter-spacing: 1px;
 }
 
-.options{
+.options {
     display: flex;
     justify-content: center;
     max-width: 80%;
     margin: 3rem auto;
-    gap: 2rem;
+    gap: 8rem;
 }
 
-.article-sm .img-cont img{
+.article-sm .img-cont img {
     width: 100%;
     height: auto;
 }
 
 
-.article-sm .article-text{
+.article-sm .article-text {
     padding: 2rem;
 }
 
@@ -186,12 +184,13 @@ a {
     font-weight: bold;
     cursor: pointer;
 }
-.article-sm .title-sm{
+
+.article-sm .title-sm {
     font-size: 1.25rem;
     margin-bottom: 1.5rem;
 }
 
-.article-sm .desc{
+.article-sm .desc {
     margin-bottom: 2rem;
     line-height: 1.5;
 }

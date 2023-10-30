@@ -1,5 +1,6 @@
-package com.visioplanserver.entity;
+package com.visioplanserver.model.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -11,7 +12,9 @@ import java.time.LocalDateTime;
 public class CommentsEntity extends BaseEntity{
     @ManyToOne
     private EmployeeEntity author;
+    @Column(nullable = false)
     private String textContent;
+    @Column(nullable = false)
     private LocalDateTime created;
 
     public CommentsEntity() {
@@ -43,4 +46,5 @@ public class CommentsEntity extends BaseEntity{
         this.created = created;
         return this;
     }
+
 }

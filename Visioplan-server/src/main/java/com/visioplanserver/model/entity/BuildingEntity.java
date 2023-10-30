@@ -1,17 +1,18 @@
-package com.visioplanserver.entity;
+package com.visioplanserver.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Set;
 @Entity
 @Table(name = "buildings")
 public class BuildingEntity extends BaseEntity{
+    @Column(nullable = false, unique = true)
     private String name;
+    @Column(nullable = false)
     private String address;
+    @Column(nullable = false)
     private String city;
+    @Column(nullable = false)
     private String country;
     @ManyToMany
     private Set<CompanyEntity> companies;
@@ -63,6 +64,15 @@ public class BuildingEntity extends BaseEntity{
 
     public BuildingEntity setFloors(Set<FloorEntity> floors) {
         this.floors = floors;
+        return this;
+    }
+
+    public Set<CompanyEntity> getCompanies() {
+        return companies;
+    }
+
+    public BuildingEntity setCompanies(Set<CompanyEntity> companies) {
+        this.companies = companies;
         return this;
     }
 }

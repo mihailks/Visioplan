@@ -1,4 +1,4 @@
-package com.visioplanserver.entity.enums;
+package com.visioplanserver.model.entity.enums;
 
 public enum FileExtensionEnum {
     RVT,

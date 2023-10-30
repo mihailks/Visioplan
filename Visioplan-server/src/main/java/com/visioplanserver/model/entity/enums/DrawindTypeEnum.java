@@ -1,4 +1,4 @@
-package com.visioplanserver.entity.enums;
+package com.visioplanserver.model.entity.enums;
 
 public enum DrawindTypeEnum {
     FLOOR_PLAN,

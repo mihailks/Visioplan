@@ -1,6 +1,6 @@
-package com.visioplanserver.entity;
+package com.visioplanserver.model.entity;
 
-import com.visioplanserver.entity.enums.RolesEnum;
+import com.visioplanserver.model.entity.enums.RolesEnum;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -23,4 +23,6 @@ public class UserRoleEntity extends BaseEntity{
         this.role = role;
         return this;
     }
+
+
 }
