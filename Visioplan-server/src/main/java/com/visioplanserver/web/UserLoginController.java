@@ -1,7 +1,7 @@
 package com.visioplanserver.web;
 
-import com.visioplanserver.model.dto.UserLoginDTO;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,15 +11,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/users")
 public class UserLoginController {
 
-    @ModelAttribute
-    public UserLoginDTO userLoginDTO() {
-        return UserLoginDTO.createEmpty();
-    }
 
     @GetMapping("/login")
     public String login() {
         return "loginUser";
     }
 
-//    @PostMapping("/login-error")
+    @PostMapping("/login-error")
+    public String onFail(
+            @ModelAttribute("username") String username,
+            Model model) {
+        model.addAttribute("username", username);
+        model.addAttribute("bad_credentials", "true");
+        return "loginUser";
+    }
+
+
 }

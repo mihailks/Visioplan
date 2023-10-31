@@ -18,16 +18,15 @@
 
 
 <div class="container">
-    <h2 class="text-center text-white">Register User</h2>
-    <form   th:action="@{/users/register}"
-            th:method="POST"
-            th:object="${userLoginDTO}"
+    <h2 class="text-center text-white">Login User</h2>
+    <form th:action="@{/users/login}" th:method="POST"
             class="form-myForm mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="row">
             <div class="form-group col-md-6 mb-3">
                 <label for="username" class="text-white font-weight-bold">Username</label>
                 <input id="username"
-                       th:field="*{username}"
+                       name="username"
+                       th:value="${username}"
                        type="text"
                        class="form-control"
                        placeholder="Username"/>
@@ -40,23 +39,25 @@
         <div class="row">
             <div class="form-group col-md-6 mb-3">
                 <label for="password" class="text-white font-weight-bold">Password</label>
-                <input id="password"
-                       th:field="*{password}"
-
-                       type="password"
-                       class="form-control"
-                       placeholder="Password"/>
+                <input  id="password"
+                        name="password"
+                        type="password"
+                        class="form-control"
+                        placeholder="Password"/>
                 <p class="invalid-feedback errors alert alert-danger">
                     Password is required.
                 </p>
             </div>
-
         </div>
+
+        <p th:if="${bad_credentials}" class="errors alert alert-danger">
+            Invalid username or password.
+        </p>
 
         <div class="row">
             <div class="col col-md-4">
-                <div class="button-holder">
-                    <input type="submit" class="btn btn-info btn-lg" value="Register"/>
+                <div class="button-holder d-flex">
+                    <input type="submit" class="btn btn-info btn-lg" value="login"/>
                 </div>
             </div>
         </div>

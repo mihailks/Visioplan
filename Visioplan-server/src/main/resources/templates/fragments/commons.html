@@ -1,3 +1,6 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8" th:fragment="head">
     <meta name="viewport"
@@ -27,15 +30,25 @@
             </ul>
         </nav>
         <ul class="login">
-            <li class="btn sign-bnt"><a href="#">Feedback</a></li>
-            <li class="btn sign-bnt"><a href="#">Profile</a></li>
-            <li class="btn sign-bnt"><a href="#">Projects</a></li>
-            <li class="btn sign-bnt"><a href="#">Admin</a></li>
-            <li class="btn sign-bnt"><a href="#">Register company</a></li>
-            <li class="btn login-bnt"><a th:href="@{/users/login}">Login</a></li>
-            <li class="btn sign-bnt"><a th:href="@{/users/register}">Register</a></li>
-            <li class="btn sign-bnt"><a th:href="@{/employees/register}">Register Employee</a></li>
-            <li class="btn login-bnt"><a th:href="@{/users/logout}">Logout</a></li>
+            <th:block sec:authorize="isAuthenticated()">
+                <li class="btn sign-bnt"><a th:href="@{/feedback}">Feedback</a></li>
+                <li class="btn sign-bnt"><a href="#">Profile</a></li>
+                <li class="btn sign-bnt"><a href="#">Projects</a></li>
+                <li class="btn sign-bnt"><a th:href="@{/admin}">Admin</a></li>
+                <li class="btn sign-bnt"><a href="#">Register company</a></li>
+                <li class="btn sign-bnt"><a th:href="@{/projects}">projects_all</a></li>
+                <form th:method="POST"
+                      th:action="@{/users/logout}">
+                    <input type="submit" class="btn btn-link" value="logout">
+                </form>
+            </th:block>
+            <th:block sec:authorize="!isAuthenticated()">
+                <li class="btn login-bnt"><a th:href="@{/users/login}">Login</a></li>
+                <li class="btn sign-bnt"><a th:href="@{/users/register}">Register</a></li>
+                <li class="btn sign-bnt"><a th:href="@{/employees/register}">Register Employee</a></li>
+            </th:block>
+
+
         </ul>
     </header>
 </div>

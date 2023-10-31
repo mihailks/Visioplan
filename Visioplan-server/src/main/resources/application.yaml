@@ -17,7 +17,6 @@ spring:
       filter:
         enabled: true
   jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: update
     open-in-view: false
@@ -45,5 +44,6 @@ logging:
     #    org.springframework: DEBUG
     org.hibernate.SQL: DEBUG
     org.hibernate.org.jdbc.bind: TRACE
+#    org.springframework.security: TRACE
 
 
