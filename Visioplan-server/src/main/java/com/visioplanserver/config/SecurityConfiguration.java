@@ -1,5 +1,7 @@
 package com.visioplanserver.config;
 
+import com.visioplanserver.model.entity.UserRoleEntity;
+import com.visioplanserver.model.entity.enums.RolesEnum;
 import com.visioplanserver.repository.UserRepository;
 import com.visioplanserver.service.impl.LoginUserDetailService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -20,6 +22,7 @@ public class SecurityConfiguration {
                 authorizeRequests -> authorizeRequests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/", "/users/login", "/users/register", "/users/login-error").permitAll()
+                        .requestMatchers("/projects").hasRole(RolesEnum.ADMIN.name())
                         .anyRequest().authenticated()
         ).formLogin(
                 formLogin -> {

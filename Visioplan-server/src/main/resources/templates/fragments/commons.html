@@ -34,7 +34,7 @@
                 <li class="btn sign-bnt"><a th:href="@{/feedback}">Feedback</a></li>
                 <li class="btn sign-bnt"><a href="#">Profile</a></li>
                 <li class="btn sign-bnt"><a href="#">Projects</a></li>
-                <li class="btn sign-bnt"><a th:href="@{/admin}">Admin</a></li>
+                <li class="btn sign-bnt" sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin}">Admin</a></li>
                 <li class="btn sign-bnt"><a href="#">Register company</a></li>
                 <li class="btn sign-bnt"><a th:href="@{/projects}">projects_all</a></li>
                 <form th:method="POST"
