@@ -2,14 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+<head th:replace="~{fragments/commons::head-bootstrap}"><title>About page</title></head>
 <body>
+<header><div th:replace="~{fragments/commons::navbar}"></div></header>
+<h1>about page</h1>
 
+<footer th:replace="~{fragments/commons::footer}"></footer>
 </body>
 </html>

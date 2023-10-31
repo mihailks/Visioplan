@@ -2,19 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head>
-    <meta charset="UTF-8" th:fragment="head">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" th:href="@{/css/reset.css}"/>
-    <link rel="stylesheet" th:href="@{/css/typography.css}"/>
-    <link rel="stylesheet" th:href="@{/css/index.css}"/>
-    <title>Visioplan</title>
-</head>
+<head th:replace="~{fragments/commons::head-my}"><title>Home page</title></head>
+
+<link rel="stylesheet" th:href="@{/css/index.css}"/>
 
 <body>
-<div th:replace="~{fragments/commons::navbar}"></div>
+
+<header><div th:replace="~{fragments/commons::navbar}"></div></header>
+
 <div class="top-container">
     <section class="hero">
         <h1 class="main-title">Visioplan is the help you need.</h1>
@@ -24,7 +19,7 @@
 </div>
 
 <th:block sec:authorize="isAuthenticated()">
-   <th:block sec:authentication="name"></th:block>
+    <th:block sec:authentication="name"></th:block>
 </th:block>
 
 <th:block sec:authorize="!isAuthenticated()">
@@ -45,7 +40,8 @@
             </div>
             <div class="article-text">
                 <h3 class="title-sm">Plan review</h3>
-                <p class="desc">Sed tincidunt dictum lobortis. Aenean tempus diam vel augue luctus dignissim. Nunc ornare leo tortor.
+                <p class="desc">Sed tincidunt dictum lobortis. Aenean tempus diam vel augue luctus dignissim. Nunc
+                    ornare leo tortor.
                 </p>
                 <button class="btn">READ MORE</button>
             </div>
@@ -57,7 +53,8 @@
             </div>
             <div class="article-text">
                 <h3 class="title-sm">Schema Review</h3>
-                <p class="desc">Sed tincidunt dictum lobortis. Aenean tempus diam vel augue luctus dignissim. Nunc ornare leo tortor.
+                <p class="desc">Sed tincidunt dictum lobortis. Aenean tempus diam vel augue luctus dignissim. Nunc
+                    ornare leo tortor.
                 </p>
                 <button class="btn">READ MORE</button>
             </div>
@@ -69,7 +66,8 @@
             </div>
             <div class="article-text">
                 <h3 class="title-sm">Data Sheets</h3>
-                <p class="desc">Sed tincidunt dictum lobortis. Aenean tempus diam vel augue luctus dignissim. Nunc ornare leo tortor.
+                <p class="desc">Sed tincidunt dictum lobortis. Aenean tempus diam vel augue luctus dignissim. Nunc
+                    ornare leo tortor.
                 </p>
                 <button class="btn">READ MORE</button>
             </div>

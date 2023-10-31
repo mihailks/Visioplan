@@ -4,6 +4,7 @@ import com.visioplanserver.model.entity.enums.BuldingDocumentationPartEnum;
 import com.visioplanserver.model.entity.enums.FileExtensionEnum;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 
@@ -15,6 +16,8 @@ public class FileEntity extends BaseEntity {
     private String name;
     @Column(name = "file_url", nullable = false, unique = true)
     private String url;
+    @Column(name = "upload_date", nullable = false)
+    private LocalDateTime uploadDate;
     @ManyToOne
     private FloorEntity floor;
     @OneToMany
@@ -80,6 +83,15 @@ public class FileEntity extends BaseEntity {
 
     public FileEntity setPart(BuldingDocumentationPartEnum part) {
         this.part = part;
+        return this;
+    }
+
+    public LocalDateTime getUploadDate() {
+        return uploadDate;
+    }
+
+    public FileEntity setUploadDate(LocalDateTime uploadDate) {
+        this.uploadDate = uploadDate;
         return this;
     }
 }
