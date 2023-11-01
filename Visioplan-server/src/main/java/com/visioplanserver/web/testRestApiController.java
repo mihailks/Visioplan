@@ -1,17 +1,11 @@
 package com.visioplanserver.web;
 
-import com.visioplanserver.model.entity.EmployeeEntity;
-import com.visioplanserver.repository.EmployeeRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import com.visioplanserver.repository.UserRepository;
 
 public class testRestApiController {
-    private final EmployeeRepository userRepository;
+    private final UserRepository userRepository;
 
-    public testRestApiController(EmployeeRepository userRepository) {
+    public testRestApiController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

@@ -9,8 +9,8 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "floors")
 public class FloorEntity extends BaseEntity {
-    @Column(name = "floor_name", nullable = false, unique = true)
-    private String name;
+    @Column(name = "floor_number", nullable = false, unique = true)
+    private String number;
     @ManyToOne
     private BuildingEntity building;
 
@@ -18,12 +18,12 @@ public class FloorEntity extends BaseEntity {
     public FloorEntity() {
     }
 
-    public String getName() {
-        return name;
+    public String getNumber() {
+        return number;
     }
 
-    public FloorEntity setName(String name) {
-        this.name = name;
+    public FloorEntity setNumber(String number) {
+        this.number = number;
         return this;
     }
 

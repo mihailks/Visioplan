@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import org.apache.catalina.User;
 
 import java.time.LocalDateTime;
 
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "comments")
 public class CommentsEntity extends BaseEntity{
     @ManyToOne
-    private EmployeeEntity author;
+    private UserEntity author;
     @Column(nullable = false)
     private String textContent;
     @Column(nullable = false)
@@ -20,11 +21,11 @@ public class CommentsEntity extends BaseEntity{
     public CommentsEntity() {
     }
 
-    public EmployeeEntity getAuthor() {
+    public UserEntity getAuthor() {
         return author;
     }
 
-    public CommentsEntity setAuthor(EmployeeEntity author) {
+    public CommentsEntity setAuthor(UserEntity author) {
         this.author = author;
         return this;
     }

@@ -1,9 +1,12 @@
 package com.visioplanserver.service;
 
-import com.visioplanserver.model.view.ProjectViewModel;
+import com.visioplanserver.model.dto.AddBuildingDTO;
+import com.visioplanserver.model.view.BuildingViewModel;
 
 import java.util.List;
 
 public interface BuildingService {
-    List<ProjectViewModel> getAllBuildings();
+    List<BuildingViewModel> getAllBuildings();
+
+    void addNewBuilding(AddBuildingDTO addBuildingDTO);
 }

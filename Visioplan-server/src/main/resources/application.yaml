@@ -24,11 +24,10 @@ spring:
       hibernate:
         format_sql: true
     defer-datasource-initialization: true
-  #Cloudinary Properties
-  #cloudinary:
-  #api-key:
-  #api-secret:
-  #cloud-name:
+cloudinary:
+  cloud-name: "${CLOUDINARY_NAME}"
+  api-key: "${CLOUDINARY_NAME_API_KEY}"
+  api-secret: "${CLOUDINARY_NAME_API_SECRET}"
 
   #  default.admin.pass: ${DEFAULT_ADMIN_PASS:root}
 

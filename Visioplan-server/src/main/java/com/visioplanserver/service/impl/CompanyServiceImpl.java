@@ -24,4 +24,10 @@ public class CompanyServiceImpl implements CompanyService {
 
         companyRepository.save(modelMapper.map(companyRegistrationDTO, CompanyEntity.class));
     }
+
+    @Override
+    public String getNameById(Long id) {
+        CompanyEntity company = companyRepository.findById(id).orElse(null);
+        return company.getName();
+    }
 }

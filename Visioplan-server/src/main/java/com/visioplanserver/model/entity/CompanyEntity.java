@@ -22,7 +22,7 @@ public class CompanyEntity extends BaseEntity {
     @ManyToMany(mappedBy = "companies")
     private Set<BuildingEntity> buildings;
     @OneToMany(mappedBy = "company")
-    private Set<EmployeeEntity> employees;
+    private Set<UserEntity> employees;
 
     public CompanyEntity() {
     }
@@ -100,13 +100,12 @@ public class CompanyEntity extends BaseEntity {
     }
 
 
-    public Set<EmployeeEntity> getEmployees() {
+    public Set<UserEntity> getEmployees() {
         return employees;
     }
 
-    public CompanyEntity setEmployees(Set<EmployeeEntity> employees) {
+    public CompanyEntity setEmployees(Set<UserEntity> employees) {
         this.employees = employees;
         return this;
     }
-
 }

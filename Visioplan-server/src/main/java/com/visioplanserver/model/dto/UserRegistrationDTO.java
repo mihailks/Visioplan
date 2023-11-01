@@ -4,11 +4,14 @@ public record UserRegistrationDTO(
         String username,
         String email,
         String password,
-        String confirmPassword) {
+        String confirmPassword,
+        String firstName,
+        String lastName,
+        String companyName){
 
 
     public static UserRegistrationDTO createEmpty(){
-                return new UserRegistrationDTO(
-                        null, null, null, null);
+        return new UserRegistrationDTO(
+                null, null, null, null, null, null, null);
         }
 }

@@ -1,16 +1,17 @@
 package com.visioplanserver.model.view;
 
-public class ProjectViewModel {
+public class BuildingViewModel {
     private String name;
     private String address;
     private String city;
     private String country;
+    private String imgUrl;
 
     public String getName() {
         return name;
     }
 
-    public ProjectViewModel setName(String name) {
+    public BuildingViewModel setName(String name) {
         this.name = name;
         return this;
     }
@@ -19,7 +20,7 @@ public class ProjectViewModel {
         return address;
     }
 
-    public ProjectViewModel setAddress(String address) {
+    public BuildingViewModel setAddress(String address) {
         this.address = address;
         return this;
     }
@@ -28,7 +29,7 @@ public class ProjectViewModel {
         return city;
     }
 
-    public ProjectViewModel setCity(String city) {
+    public BuildingViewModel setCity(String city) {
         this.city = city;
         return this;
     }
@@ -37,13 +38,20 @@ public class ProjectViewModel {
         return country;
     }
 
-    public ProjectViewModel setCountry(String country) {
+    public BuildingViewModel setCountry(String country) {
         this.country = country;
         return this;
     }
 
-    public ProjectViewModel() {
+    public BuildingViewModel() {
+    }
 
+    public String getImgUrl() {
+        return imgUrl;
+    }
 
+    public BuildingViewModel setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+        return this;
     }
 }

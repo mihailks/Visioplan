@@ -37,6 +37,32 @@
 
         <div class="row">
             <div class="form-group col-md-6 mb-3">
+                <label for="firstName" class="text-white font-weight-bold">First name</label>
+                <input id="firstName"
+                       th:field="*{firstName}"
+                       type="text"
+                       class="form-control"
+                       placeholder="First Name"/>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Username name is required.
+                </p>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label for="lastName" class="text-white font-weight-bold">Last name</label>
+                <input id="lastName"
+                       th:field="*{lastName}"
+
+                       type="text"
+                       class="form-control"
+                       placeholder="Last Name"/>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Email is required.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
                 <label for="password" class="text-white font-weight-bold">Password</label>
                 <input id="password"
                         th:field="*{password}"

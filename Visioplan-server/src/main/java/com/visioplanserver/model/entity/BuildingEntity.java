@@ -14,6 +14,7 @@ public class BuildingEntity extends BaseEntity{
     private String city;
     @Column(nullable = false)
     private String country;
+    private String imgUrl;
     @ManyToMany
     private Set<CompanyEntity> companies;
     @OneToMany(mappedBy = "building")
@@ -73,6 +74,15 @@ public class BuildingEntity extends BaseEntity{
 
     public BuildingEntity setCompanies(Set<CompanyEntity> companies) {
         this.companies = companies;
+        return this;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public BuildingEntity setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
         return this;
     }
 }

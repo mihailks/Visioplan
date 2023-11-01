@@ -14,6 +14,12 @@ public class UserEntity extends BaseEntity {
     private String email;
     @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
+    private String firstName;
+    @Column(nullable = false)
+    private String lastName;
+    @ManyToOne
+    private CompanyEntity company;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -61,4 +67,30 @@ public class UserEntity extends BaseEntity {
         return this;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public UserEntity setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public UserEntity setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public CompanyEntity getCompany() {
+        return company;
+    }
+
+    public UserEntity setCompany(CompanyEntity company) {
+        this.company = company;
+        return this;
+    }
 }

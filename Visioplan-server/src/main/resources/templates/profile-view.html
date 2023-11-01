@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center text-white">Profile</h2>
+    <div th:action="@{/user/profile}"
+         th:method="POST"
+         th:object="${user}">
+
+        <p th:text="*{username}">username</p>
+        <p th:text="*{email}">email</p>
+        <p th:text="*{firstName}">first name</p>
+        <p th:text="*{lastName}">last name</p>
+        <p th:text="*{company}">company</p>
+
+
+    </div>
+</div>
+
+</body>
+
+</html>
+
+
