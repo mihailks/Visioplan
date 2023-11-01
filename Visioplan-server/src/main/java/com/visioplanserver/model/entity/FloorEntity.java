@@ -9,8 +9,10 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "floors")
 public class FloorEntity extends BaseEntity {
-    @Column(name = "floor_number", nullable = false, unique = true)
+    @Column(name = "number", nullable = false)
     private String number;
+    @Column(name = "elevation")
+    private String elevation;
     @ManyToOne
     private BuildingEntity building;
 
