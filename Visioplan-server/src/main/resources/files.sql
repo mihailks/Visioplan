@@ -1,0 +1,16 @@
+insert into visiodb.files (id, drawing_type, file_extension, file_name, design_part, text_file_type, upload_date, file_url, floor_id)
+values  (1, 'DETAIL', 'DWG', 'TEST_FILE_NAME', 'PLUMBING', 'NOT_SPECIFIED', '2023-11-02 13:57:24.000000', 'https://test', 1),
+  (2, 'DETAIL', 'DWG', 'TEST_FILE_NAME1', 'PLUMBING', 'NOT_SPECIFIED', '2023-11-02 13:57:24.000000', 'https://test1', 1),
+  (3, 'DETAIL', 'DWG', 'TEST_FILE_NAME2', 'PLUMBING', 'NOT_SPECIFIED', '2023-11-02 13:57:24.000000', 'https://test2', 1),
+  (4, 'DETAIL', 'DWG', 'TEST_FILE_NAME3', 'PLUMBING', 'NOT_SPECIFIED', '2023-11-02 13:57:24.000000', 'https://test3', 1),
+  (5, 'DETAIL', 'DWG', 'TEST_FILE_NAME4', 'PLUMBING', 'NOT_SPECIFIED', '2023-11-02 13:57:24.000000', 'https://test4', 1),
+  (6, 'DETAIL', 'DWG', 'TEST_FILE_NAME5', 'PLUMBING', 'NOT_SPECIFIED', '2023-11-02 13:57:24.000000', 'https://test5', 1),
+  (7, 'DETAIL', 'DWG', 'TEST_FILE_NAME6', 'PLUMBING', 'NOT_SPECIFIED', '2023-11-02 13:57:24.000000', 'https://test6', 1),
+  (8, 'DETAIL', 'DWG', 'TEST_FILE_NAME7', 'PLUMBING', 'NOT_SPECIFIED', '2023-11-02 13:57:24.000000', 'https://test7', 1),
+  (9, 'DETAIL', 'DWG', 'TEST_FILE_NAME8', 'PLUMBING', 'NOT_SPECIFIED', '2023-11-02 13:57:24.000000', 'https://test8', 1),
+  (10, 'DETAIL', 'DWG', 'TEST_FILE_NAME9', 'PLUMBING', 'NOT_SPECIFIED', '2023-11-02 13:57:24.000000', 'https://test9', 1),
+  (11, 'DETAIL', 'DWG', 'TEST_FILE_NAME10', 'PLUMBING', 'NOT_SPECIFIED', '2023-11-02 13:57:24.000000', 'https://test10', 1),
+  (12, 'DETAIL', 'DWG', 'TEST_FILE_NAME11', 'PLUMBING', 'NOT_SPECIFIED', '2023-11-02 13:57:24.000000', 'https://test11', 1),
+  (13, 'DETAIL', 'DWG', 'TEST_FILE_NAME12', 'PLUMBING', 'NOT_SPECIFIED', '2023-11-02 13:57:24.000000', 'https://test12', 1),
+  (14, 'DETAIL', 'DWG', 'TEST_FILE_NAME13', 'PLUMBING', 'NOT_SPECIFIED', '2023-11-02 13:57:24.000000', 'https://test13', 1),
+  (15, 'DETAIL', 'DWG', 'TEST_FILE_NAME14', 'PLUMBING', 'NOT_SPECIFIED', '2023-11-02 13:57:24.000000', 'https://test14', 1);

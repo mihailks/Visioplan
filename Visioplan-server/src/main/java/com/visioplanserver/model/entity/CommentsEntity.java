@@ -17,6 +17,8 @@ public class CommentsEntity extends BaseEntity{
     private String textContent;
     @Column(nullable = false)
     private LocalDateTime created;
+    @ManyToOne
+    private FileEntity file;
 
     public CommentsEntity() {
     }
@@ -48,4 +50,12 @@ public class CommentsEntity extends BaseEntity{
         return this;
     }
 
+    public FileEntity getFile() {
+        return file;
+    }
+
+    public CommentsEntity setFile(FileEntity file) {
+        this.file = file;
+        return this;
+    }
 }
