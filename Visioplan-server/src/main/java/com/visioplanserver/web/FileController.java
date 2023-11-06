@@ -1,12 +1,11 @@
 package com.visioplanserver.web;
 
 import com.dropbox.core.DbxException;
-import com.visioplanserver.model.dto.AddBuildingDTO;
 import com.visioplanserver.model.dto.AddFileDTO;
-import com.visioplanserver.model.dto.TESTAddFileDTO;
 import com.visioplanserver.model.view.FileViewModel;
-import com.visioplanserver.service.DropboxService;
+import com.visioplanserver.service.BuildingService;
 import com.visioplanserver.service.FileService;
+import com.visioplanserver.service.FloorService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +21,14 @@ import java.util.List;
 @RequestMapping("/file")
 public class FileController {
     private final FileService fileService;
-    private final DropboxService dropboxService;
+    private final BuildingService buildingService;
+    private final FloorService floorService;
 
-    public FileController(FileService fileService, DropboxService dropboxService) {
+
+    public FileController(FileService fileService, BuildingService buildingService, FloorService floorService) {
         this.fileService = fileService;
-        this.dropboxService = dropboxService;
+        this.buildingService = buildingService;
+        this.floorService = floorService;
     }
 
     @GetMapping("/all")
@@ -41,7 +43,11 @@ public class FileController {
         if (!model.containsAttribute("addFileDTO")){
             model.addAttribute("addFileDTO", AddFileDTO.createEmpty());
         }
-        return "fileUploadTest";
+
+        model.addAttribute("buildings", buildingService.getAllBuildingsNames());
+
+
+        return "file-upload";
     }
 
     @PostMapping("/add")
@@ -55,6 +61,8 @@ public class FileController {
             return "redirect:add";
         }
 
+
+
         fileService.addNewFile(addFileDTO);
 
         return "redirect:/dropbox-test";
@@ -62,10 +70,10 @@ public class FileController {
 
     @GetMapping("/dropbox")
     public String dropbox(Model model) throws DbxException {
-        String toPrint = dropboxService.getAccountDetails();
-        model.addAttribute("files", toPrint);
-
-        dropboxService.getFileNames();
+//        String toPrint = dropboxService.getAccountDetails();
+//        model.addAttribute("files", toPrint);
+//
+//        dropboxService.getFileNames();
 
         return "dropbox-test";
     }

@@ -21,4 +21,9 @@ public class HomeController {
     public String picture() {
         return "testAddBuildingUploadPic";
     }
+
+    @GetMapping("/testForm")
+    public String testForm() {
+        return "testForm";
+    }
 }

@@ -42,9 +42,10 @@ class DropboxServiceImpl implements DropboxService {
 
     @Override
     public String getAccountDetails() throws DbxException {
-        FullAccount account = client.users().getCurrentAccount();
-        System.out.println(account.getName().getDisplayName());
-        return account.getName().getDisplayName();
+//        FullAccount account = client.users().getCurrentAccount();
+//        System.out.println(account.getName().getDisplayName());
+//        return account.getName().getDisplayName();
+        return null;
     }
 
     @Override
@@ -52,9 +53,6 @@ class DropboxServiceImpl implements DropboxService {
         ListFolderResult result = client.files().listFolder("");
         while (true) {
             for (Metadata metadata : result.getEntries()) {
-                System.out.println(metadata.getPathDisplay());
-                System.out.println(metadata.getPreviewUrl());
-                System.out.println(metadata.getPathLower());
                 System.out.println(metadata.getName());
             }
 

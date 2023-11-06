@@ -2,6 +2,7 @@ package com.visioplanserver.service.impl;
 
 import com.visioplanserver.model.dto.AddBuildingDTO;
 import com.visioplanserver.model.entity.BuildingEntity;
+import com.visioplanserver.model.view.BuildingNameDTO;
 import com.visioplanserver.model.view.BuildingViewModel;
 import com.visioplanserver.repository.BuildingRepository;
 import com.visioplanserver.service.BuildingService;
@@ -42,6 +43,29 @@ public class BuildingServiceImpl implements BuildingService {
         buildingEntity.setImgUrl(imageUrl);
 
         buildingRepository.save(buildingEntity);
+    }
+
+    @Override
+    public Long getBuildingByName(String buildingName) {
+        return buildingRepository.findByName(buildingName)
+                .map(BuildingEntity::getId)
+                .orElse(null);
+    }
+
+    @Override
+    public List<BuildingNameDTO> getAllBuildingsNamesAndFloors() {
+        return buildingRepository.findAll()
+                .stream()
+                .map(building -> modelMapper.map(building, BuildingNameDTO.class))
+                .toList();
+    }
+
+    @Override
+    public List<BuildingNameDTO> getAllBuildingsNames() {
+        return buildingRepository.findAll()
+                .stream()
+                .map(building -> modelMapper.map(building, BuildingNameDTO.class))
+                .toList();
     }
 }
 

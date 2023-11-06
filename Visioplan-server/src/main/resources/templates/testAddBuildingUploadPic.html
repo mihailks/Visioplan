@@ -4,9 +4,7 @@
 <head th:replace="~{fragments/commons::head-bootstrap}"><title>Login User</title></head>
 
 <body>
-
 <div>
-
     <form th:action="@{/building/add}"
           th:method="POST"
           th:object="${addBuildingDTO}"
@@ -66,7 +64,7 @@
 
         <h4>Choose picture</h4>
         <div class="custom-file">
-            <input type="file" class="custom-file-input" th:field="*{imageFile}"
+            <input type="file" class="form-control" th:field="*{imageFile}"
                    accept="image/jpeg, image/png, image/jpg" id="productImage"/>
             <label class="custom-file-label" for="productImage">Choose file</label>
         </div>
@@ -99,8 +97,4 @@
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
 </script>
-
-
-
-
 </body>
