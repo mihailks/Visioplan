@@ -37,6 +37,9 @@ cloudinary:
     username: ${mailUsername}
     password: ${mailPassword}
 
+dropbox:
+  accessToken: "${DROPBOX-TOKEN}"
+
 
 logging:
   level:

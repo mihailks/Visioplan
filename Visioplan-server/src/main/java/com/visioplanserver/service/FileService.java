@@ -1,5 +1,7 @@
 package com.visioplanserver.service;
 
+import com.visioplanserver.model.dto.AddFileDTO;
+import com.visioplanserver.model.dto.TESTAddFileDTO;
 import com.visioplanserver.model.entity.FileEntity;
 import com.visioplanserver.model.view.FileViewModel;
 
@@ -9,4 +11,5 @@ public interface FileService {
 
     List<FileViewModel> getAllFiles();
 
+    void addNewFile(AddFileDTO addFileDTO);
 }

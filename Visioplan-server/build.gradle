@@ -33,6 +33,14 @@ dependencies {
     implementation 'com.cloudinary:cloudinary-core:1.35.0'
     implementation 'com.cloudinary:cloudinary-http44:1.35.0'
 
+
+    implementation 'com.microsoft.graph:microsoft-graph-core:2.0.20'
+    implementation 'com.microsoft.graph:microsoft-graph:5.75.0'
+    implementation 'com.azure:azure-identity:1.2.5'
+
+    implementation 'com.dropbox.core:dropbox-core-sdk:5.4.6'
+
+
 }
 
 tasks.named('test') {

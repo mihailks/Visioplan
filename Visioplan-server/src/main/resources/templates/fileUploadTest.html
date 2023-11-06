@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head-bootstrap}"><title>Login User</title></head>
+
+<body>
+<div>
+    <form th:action="@{/file/add}"
+          th:method="POST"
+          th:object="${addFileDTO}"
+          enctype="multipart/form-data">
+        <input type="hidden" id="id" name="routeId">
+
+        <h4>Choose picture</h4>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" th:field="*{dataFile}"
+                   accept="application/pdf" id="productImage"/>
+            <label class="custom-file-label" for="productImage">Choose file</label>
+        </div>
+        <div class="form-group">
+            <img src="#" id="imgPreview" height="200px" width="200px" style="margin-top: 20px"
+                 alt=" ">
+        </div>
+        <div class="form-group">
+            <button class="btn-primary rounded">Upload Picture</button>
+        </div>
+    </form>
+</div>
+</body>
