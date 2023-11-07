@@ -13,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,6 +40,7 @@ public class FileServiceImpl implements FileService {
                 .stream()
                 .map(file -> {
                     FileViewModel fileViewModel = modelMapper.map(file, FileViewModel.class);
+                    fileViewModel.setFloor(file.getFloor().getNumber());
                     fileViewModel.setCommentsCounter(file.getComments().size());
                     return fileViewModel;
                 }).collect(Collectors.toList());
@@ -48,7 +50,7 @@ public class FileServiceImpl implements FileService {
     public void addNewFile(AddFileDTO addFileDTO) {
         MultipartFile dataFile = addFileDTO.dataFile();
         //upload to dropbox
-//        String dataFileUrl = dropboxService.testMyUpload(dataFile);
+        String dataFileUrl = dropboxService.upload(dataFile);
         //get building id
         String buildingName = addFileDTO.buildingName();
         Long buildingId = buildingService.getBuildingByName(buildingName);
@@ -57,7 +59,9 @@ public class FileServiceImpl implements FileService {
         FloorEntity floorId = floorService.getFloorIdByNameAndBuildingId(floorName,buildingId);
 
         FileEntity file = modelMapper.map(addFileDTO, FileEntity.class);
-        file.setFloor(floorId);
+        file.setFloor(floorId)
+                .setUploadDate(LocalDateTime.now())
+                .setUrl(dataFileUrl);
         fileRepository.save(file);
     }
 

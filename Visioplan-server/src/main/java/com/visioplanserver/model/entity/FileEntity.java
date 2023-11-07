@@ -22,7 +22,7 @@ public class FileEntity extends BaseEntity {
     @Column(name = "drawing_type", nullable = false)
     private DrawingTypeEnum drawingType;
     @Enumerated(EnumType.STRING)
-    @Column(name = "TextFile_type", nullable = false)
+    @Column(name = "text_file_type", nullable = false)
     private TextFileTypeEnum textFileType;
     @Enumerated(EnumType.STRING)
     @Column(name = "file_extension", nullable = false)

@@ -66,7 +66,7 @@ class DropboxServiceImpl implements DropboxService {
     }
 
     @Override
-    public String testMyUpload(MultipartFile dataFile) {
+    public String upload(MultipartFile dataFile) {
         File file;
 
         try {
@@ -86,7 +86,7 @@ class DropboxServiceImpl implements DropboxService {
                     .files()
                     .uploadBuilder("/" + dataFile.getOriginalFilename())
                     .uploadAndFinish(in)
-                    .toString();
+                    .getPathLower();
         } catch (IOException | DbxException e) {
             throw new RuntimeException(e);
         }

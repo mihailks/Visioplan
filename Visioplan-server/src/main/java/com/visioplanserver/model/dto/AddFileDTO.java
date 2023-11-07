@@ -5,6 +5,7 @@ import com.visioplanserver.model.entity.FloorEntity;
 import com.visioplanserver.model.entity.enums.BuldingDocumentationPartEnum;
 import com.visioplanserver.model.entity.enums.DrawingTypeEnum;
 import com.visioplanserver.model.entity.enums.FileExtensionEnum;
+import com.visioplanserver.model.entity.enums.TextFileTypeEnum;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
@@ -20,6 +21,8 @@ public record AddFileDTO(
 
         DrawingTypeEnum drawingType,
 
+        TextFileTypeEnum textFileType,
+
         String name,
 
         FileExtensionEnum extension,
@@ -28,6 +31,7 @@ public record AddFileDTO(
 
     public static AddFileDTO createEmpty() {
         return new AddFileDTO(
+                null,
                 null,
                 null,
                 null,

@@ -44,9 +44,9 @@ public class FileController {
             model.addAttribute("addFileDTO", AddFileDTO.createEmpty());
         }
 
+        List<String> testPrint = List.of(new String[]{"test1", "test2", "test3", "test4"});
         model.addAttribute("buildings", buildingService.getAllBuildingsNames());
-
-
+        model.addAttribute("testPrint", "testPrint");
         return "file-upload";
     }
 
@@ -65,7 +65,7 @@ public class FileController {
 
         fileService.addNewFile(addFileDTO);
 
-        return "redirect:/dropbox-test";
+        return "redirect:/file/all";
     }
 
     @GetMapping("/dropbox")

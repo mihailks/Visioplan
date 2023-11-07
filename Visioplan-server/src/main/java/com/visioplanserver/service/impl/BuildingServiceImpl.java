@@ -2,8 +2,10 @@ package com.visioplanserver.service.impl;
 
 import com.visioplanserver.model.dto.AddBuildingDTO;
 import com.visioplanserver.model.entity.BuildingEntity;
+import com.visioplanserver.model.entity.FloorEntity;
 import com.visioplanserver.model.view.BuildingNameDTO;
 import com.visioplanserver.model.view.BuildingViewModel;
+import com.visioplanserver.model.view.FloorNameDTO;
 import com.visioplanserver.repository.BuildingRepository;
 import com.visioplanserver.service.BuildingService;
 import com.visioplanserver.service.CloudImageService;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class BuildingServiceImpl implements BuildingService {
@@ -62,10 +66,24 @@ public class BuildingServiceImpl implements BuildingService {
 
     @Override
     public List<BuildingNameDTO> getAllBuildingsNames() {
-        return buildingRepository.findAll()
-                .stream()
-                .map(building -> modelMapper.map(building, BuildingNameDTO.class))
-                .toList();
+
+        List<BuildingEntity> all = buildingRepository.findAll();
+
+        List<BuildingNameDTO> list =
+                all
+                        .stream()
+                        .map(building -> {
+                            BuildingNameDTO buildingNameDTO = new BuildingNameDTO();
+                            buildingNameDTO.setName(building.getName());
+                            Set<FloorEntity> floors = building.getFloors();
+
+                                buildingNameDTO.setFloors(floors.stream().map(FloorEntity::getNumber).collect(Collectors.toList()));
+
+                            return buildingNameDTO;
+                        })
+                        .toList();
+
+        return list;
     }
 }
 

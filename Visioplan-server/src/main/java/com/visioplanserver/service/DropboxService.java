@@ -18,6 +18,6 @@ public interface DropboxService {
 
     String getFileNames() throws DbxException;
 
-    String testMyUpload(MultipartFile dataFile);
+    String upload(MultipartFile dataFile);
 
 }

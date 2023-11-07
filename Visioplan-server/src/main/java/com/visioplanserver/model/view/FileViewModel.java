@@ -12,7 +12,7 @@ public class FileViewModel {
     private String name;
     private String url;
     private LocalDateTime uploadDate;
-    private FloorEntity floor;
+    private String floor;
     private Integer commentsCounter;
     private FileExtensionEnum extension;
     private BuldingDocumentationPartEnum part;
@@ -20,16 +20,15 @@ public class FileViewModel {
     public FileViewModel() {
     }
 
-    public FileViewModel(String name, String url, LocalDateTime uploadDate, FloorEntity floor, FileExtensionEnum extension, BuldingDocumentationPartEnum part, Integer commentsCounter) {
+    public FileViewModel(String name, String url, LocalDateTime uploadDate, String floor, Integer commentsCounter, FileExtensionEnum extension, BuldingDocumentationPartEnum part) {
         this.name = name;
         this.url = url;
         this.uploadDate = uploadDate;
         this.floor = floor;
+        this.commentsCounter = commentsCounter;
         this.extension = extension;
         this.part = part;
-        this.commentsCounter = commentsCounter;
     }
-
 
     public String getName() {
         return name;
@@ -58,16 +57,23 @@ public class FileViewModel {
         return this;
     }
 
-    public FloorEntity getFloor() {
+    public String getFloor() {
         return floor;
     }
 
-    public FileViewModel setFloor(FloorEntity floor) {
+    public FileViewModel setFloor(String floor) {
         this.floor = floor;
         return this;
     }
 
+    public Integer getCommentsCounter() {
+        return commentsCounter;
+    }
 
+    public FileViewModel setCommentsCounter(Integer commentsCounter) {
+        this.commentsCounter = commentsCounter;
+        return this;
+    }
 
     public FileExtensionEnum getExtension() {
         return extension;
@@ -84,15 +90,6 @@ public class FileViewModel {
 
     public FileViewModel setPart(BuldingDocumentationPartEnum part) {
         this.part = part;
-        return this;
-    }
-
-    public Integer getCommentsCounter() {
-        return commentsCounter;
-    }
-
-    public FileViewModel setCommentsCounter(Integer commentsCounter) {
-        this.commentsCounter = commentsCounter;
         return this;
     }
 }

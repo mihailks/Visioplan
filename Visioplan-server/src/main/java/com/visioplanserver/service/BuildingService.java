@@ -14,6 +14,7 @@ public interface BuildingService {
     Long getBuildingByName(String buildingName);
 
     List<BuildingNameDTO> getAllBuildingsNamesAndFloors();
+
     List<BuildingNameDTO> getAllBuildingsNames();
 
 }

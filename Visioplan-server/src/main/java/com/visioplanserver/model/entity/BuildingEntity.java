@@ -17,7 +17,7 @@ public class BuildingEntity extends BaseEntity{
     private String imgUrl;
     @ManyToMany
     private Set<CompanyEntity> companies;
-    @OneToMany(mappedBy = "building")
+    @OneToMany(mappedBy = "building", fetch = FetchType.EAGER)
     private Set<FloorEntity> floors;
 
     public BuildingEntity() {
