@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 public class FileViewModel {
+    private Long id;
     private String name;
     private String url;
     private LocalDateTime uploadDate;
@@ -90,6 +91,15 @@ public class FileViewModel {
 
     public FileViewModel setPart(BuldingDocumentationPartEnum part) {
         this.part = part;
+        return this;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public FileViewModel setId(Long id) {
+        this.id = id;
         return this;
     }
 }

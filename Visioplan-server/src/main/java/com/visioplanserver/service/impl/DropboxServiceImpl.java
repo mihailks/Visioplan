@@ -3,6 +3,7 @@ package com.visioplanserver.service.impl;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.*;
+import com.dropbox.core.v2.sharing.SharedLinkMetadata;
 import com.dropbox.core.v2.users.FullAccount;
 import com.visioplanserver.service.DropboxActionResolver;
 import com.visioplanserver.service.DropboxService;
@@ -82,11 +83,19 @@ class DropboxServiceImpl implements DropboxService {
         }
 
         try (InputStream in = new FileInputStream(file)) {
-            return client
+            String pathLower = client
                     .files()
                     .uploadBuilder("/" + dataFile.getOriginalFilename())
                     .uploadAndFinish(in)
-                    .getPathLower();
+                    .getPreviewUrl();
+
+            SharedLinkMetadata meta = client.sharing().createSharedLinkWithSettings("/" + dataFile.getOriginalFilename());
+
+            String url = meta.getUrl();
+            url = url.split("\\?")[0];
+//            url = url + "\\?raw=1";
+
+            return url;
         } catch (IOException | DbxException e) {
             throw new RuntimeException(e);
         }

@@ -12,4 +12,6 @@ public interface FileService {
     List<FileViewModel> getAllFiles();
 
     void addNewFile(AddFileDTO addFileDTO);
+
+    void deleteFile(Long id);
 }

@@ -12,46 +12,43 @@
                   th:action="@{/file/add}"
                   th:method="POST"
                   th:object="${addFileDTO}"
-                  enctype="multipart/form-data">
+                  enctype="multipart/form-data" novalidate>
 
 
                 <div class="col-md-9">
                     <label for="buildingName" class="form-label">Building name</label>
-                    <select class="form-select is-invalid"
+                    <select class="form-select"
                             th:field="*{buildingName}"
+                            th:errorclass="is-invalid"
                             id="buildingName"
-                            required="">
-                        <option selected="" disabled="" value="">Select building</option>
+                            aria-describedby="buildingNameError">
+                        <option th:selected="selected" value="">Select building</option>
                         <option th:each="b : ${buildings}"
                                 th:text="${b.name}"
                                 th:value="${b.name}">
                         </option>
                     </select>
-
-                    <div class="valid-feedback">
-                        Looks good!
+                    <div th:if="${#fields.hasErrors('buildingName')}"
+                         th:errors="*{buildingName}"
+                         id="buildingNameError"
+                         class="invalid-feedback">
+                        Please choose a building.
                     </div>
                 </div>
 
                 <div class="col-md-3">
                     <label for="floor" class="form-label">Floor</label>
-
-                    <!--                            <input type="text"-->
-                    <!--                                      th:field="*{floor}"-->
-                    <!--                                   class="form-control is-invalid"-->
-                    <!--                                   id="floor"-->
-                    <!--                                   aria-describedby="inputGroupPrepend3"-->
-                    <!--                                   required="">-->
-
-                    <select class="form-select is-invalid"
+                    <select class="form-select"
                             id="floor"
                             th:field="*{floor}"
-                            required="">
-                        <option selected="" disabled="" value="" name="floor">Select Floor</option>
-
+                            th:errorclass="is-invalid">
+                        <option th:selected="selected" value="">Select Floor</option>
                     </select>
                     <div class="valid-feedback">
                         Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please choose a floor.
                     </div>
                 </div>
 
@@ -59,103 +56,106 @@
                     <label for="documentationPart" class="form-label">Select part</label>
                     <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend3">@</span>
-                        <select class="form-select is-invalid"
+                        <select class="form-select"
                                 th:field="*{part}"
+                                th:errorclass="is-invalid"
                                 id="documentationPart"
-                                required="">
-                            <option selected="" disabled="" value="">Select part</option>
+                                required=""
+                                aria-describedby="documentationPart">
+                            <option selected="selected" value="">Select part</option>
                             <option th:each="p : ${T(com.visioplanserver.model.entity.enums.BuldingDocumentationPartEnum).values()}"
                                     th:text="${p}"
                                     th:value="${p}">
                             </option>
                         </select>
                         <div class="invalid-feedback">
-                            Please choose a username.
+                            Please choose a document part.
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-12">
+
+                <div class="form-check col-md-6">
+                    <input type="radio" class="form-check-input" id="drawing-upload" name="radio-stacked" required>
+                    <label class="form-check-label" for="drawing-upload">Select for drawings</label>
+                </div>
+                <div class="form-check col-md-6">
+                    <input type="radio" class="form-check-input" id="text-upload" name="radio-stacked" required>
+                    <label class="form-check-label" for="text-upload">Select for text documentation</label>
+                </div>
+
+
+                <div class="col-md-6">
                     <label for="drawingType" class="form-label">Select Type</label>
                     <div class="input-group has-validation">
-                        <select class="form-select is-invalid"
+                        <select class="form-select"
                                 th:field="*{drawingType}"
+                                th:errorclass="is-invalid"
                                 id="drawingType"
+                                disabled
                                 required="">
-                            <option selected="" disabled="" value="">Select Type</option>
+                            <option th:selected="selected" value="NOT_SPECIFIED">Select Type</option>
                             <option th:each="t : ${T(com.visioplanserver.model.entity.enums.DrawingTypeEnum).values()}"
                                     th:text="${t}"
                                     th:value="${t}">
                             </option>
                         </select>
                         <div class="invalid-feedback">
-                            Please choose a username.
+                            Please choose a type of the drawing.
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <label for="textType" class="form-label">Select Type</label>
                     <div class="input-group has-validation">
-                        <select class="form-select is-invalid"
+                        <select class="form-select"
                                 th:field="*{textFileType}"
+                                th:errorclass="is-invalid"
                                 id="textType"
+                                disabled
                                 required="">
-                            <option selected="" disabled="" value="">Select Type</option>
+                            <option selected="selected" value="NOT_SPECIFIED">Select Type</option>
                             <option th:each="tft : ${T(com.visioplanserver.model.entity.enums.TextFileTypeEnum).values()}"
                                     th:text="${tft}"
                                     th:value="${tft}">
                             </option>
                         </select>
                         <div class="invalid-feedback">
-                            Please choose a username.
+                            Please choose a type ot the document.
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-12">
-                    <label for="name" class="form-label">File name</label>
+                    <label for="name" class="form-label d-block">File name</label>
                     <input type="text"
+                           class="form-control"
                            th:field="*{name}"
-                           class="form-control is-invalid"
+                           th:errorclass="is-invalid"
                            id="name"
-                           required="">
-                    <div class="invalid-feedback">
-                        Please provide a valid city.
+                           placeholder="File name">
+                    <div
+                         class="invalid-feedback">
+                        Please choose a name.
                     </div>
                 </div>
 
                 <div class="col-md-12">
-                    <label for="fileExtension" class="form-label">Select file extension</label>
-                    <div class="input-group has-validation">
-                        <select class="form-select is-invalid"
-                                th:field="*{extension}"
-                                id="fileExtension"
-                                required="">
-                            <option selected="" disabled="" value="">Select Type</option>
-                            <option th:each="fx : ${T(com.visioplanserver.model.entity.enums.FileExtensionEnum).values()}"
-                                    th:text="${fx}"
-                                    th:value="${fx}">
-                            </option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Please choose a username.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" th:field="*{dataFile}"
-                               accept="application/pdf" id="customFile"/>
-                    </div>
+                    <input type="file"
+                           class="form-control"
+                           th:field="*{dataFile}"
+                           th:errorclass="is-invalid"
+                           accept="application/pdf"
+                           id="customFile"/>
                     <div class="invalid-feedback">
                         Please provide a valid zip.
                     </div>
                 </div>
-
+                <div class="col-md-12">
                 <div class="col-12">
-                    <button class="btn btn-primary" type="submit">Submit form</button>
+                    <button class="btn btn-primary" type="submit">Submit file</button>
+                </div>
                 </div>
             </form>
         </div>
@@ -164,15 +164,17 @@
 </article>
 
 <script th:inline="javascript">
+    // buildingName -> get list of floors
     const floors = document.getElementById('floor');
     const buildings = [[${buildings}]];
     const currentBuilding = document.getElementById('buildingName');
 
     currentBuilding.addEventListener('change', changeEventHandler)
-    const temp ={
+    const temp = {
         name: null,
         floors: null
     }
+
     function changeEventHandler() {
         floors.innerHTML = '';
         const currentSelectedBuilding = buildings.find(b => b.name === currentBuilding.value);
@@ -185,6 +187,22 @@
             floors.appendChild(option);
         }
     }
+
+    //radio button select drawing or text
+    const drawingUpload = document.getElementById('drawing-upload');
+    const textUpload = document.getElementById('text-upload');
+
+    drawingUpload.onchange = function () {
+        document.getElementById('drawingType').disabled = false;
+        document.getElementById('textType').disabled = true;
+    }
+
+    textUpload.onchange = function () {
+        document.getElementById('drawingType').disabled = true;
+        document.getElementById('textType').disabled = false;
+    }
+
+
 </script>
 
 </body>

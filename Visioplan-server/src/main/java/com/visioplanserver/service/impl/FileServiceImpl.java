@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,7 +51,8 @@ public class FileServiceImpl implements FileService {
     public void addNewFile(AddFileDTO addFileDTO) {
         MultipartFile dataFile = addFileDTO.dataFile();
         //upload to dropbox
-        String dataFileUrl = dropboxService.upload(dataFile);
+//        String dataFileUrl = dropboxService.upload(dataFile);
+        String dataFileUrl = UUID.randomUUID().toString();
         //get building id
         String buildingName = addFileDTO.buildingName();
         Long buildingId = buildingService.getBuildingByName(buildingName);
@@ -63,6 +65,11 @@ public class FileServiceImpl implements FileService {
                 .setUploadDate(LocalDateTime.now())
                 .setUrl(dataFileUrl);
         fileRepository.save(file);
+    }
+
+    @Override
+    public void deleteFile(Long id) {
+        fileRepository.deleteById(id);
     }
 
 }
