@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head-bootstrap}"><title>404</title></head>
+<body>
+<header><div th:replace="~{fragments/commons::navbar}"></div></header>
+
+<div class="container-fluid">
+    <h5 class="text-center text-black mt-5">
+        nothing here error 404!, this is my custom page for it!
+    </h5>
+    <a th:href="@{/}">go back</a>
+</div>
+
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>
