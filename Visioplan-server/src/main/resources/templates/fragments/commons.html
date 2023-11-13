@@ -2,20 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head-bootstrap">
-    <meta charset="UTF-8" >
+    <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>-->
-<!--    <link rel="stylesheet" th:href="@{/css/register.css}"/>-->
+    <!--    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>-->
+    <!--    <link rel="stylesheet" th:href="@{/css/register.css}"/>-->
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
     <!--    <link rel="stylesheet" th:href="@{/css/bootstrap.rtl.css}"/>-->
     <!--    <link rel="stylesheet" th:href="@{/css/bootstrap-grid.css}"/>-->
-<!--    <link rel="stylesheet" th:href="@{/css/bootstrap-grid.rtl.css}"/>-->
-<!--    <link rel="stylesheet" th:href="@{/css/bootstrap-reboot.css}"/>-->
-<!--    <link rel="stylesheet" th:href="@{/css/bootstrap-reboot.rtl.css}"/>-->
-<!--    <link rel="stylesheet" th:href="@{/css/bootstrap-utilities.css}"/>-->
-<!--    <link rel="stylesheet" th:href="@{/css/bootstrap-utilities.rtl.css}"/>-->
+    <!--    <link rel="stylesheet" th:href="@{/css/bootstrap-grid.rtl.css}"/>-->
+    <!--    <link rel="stylesheet" th:href="@{/css/bootstrap-reboot.css}"/>-->
+    <!--    <link rel="stylesheet" th:href="@{/css/bootstrap-reboot.rtl.css}"/>-->
+    <!--    <link rel="stylesheet" th:href="@{/css/bootstrap-utilities.css}"/>-->
+    <!--    <link rel="stylesheet" th:href="@{/css/bootstrap-utilities.rtl.css}"/>-->
 
 
     <script th:src="@{/js/bootstrap.min.js}"></script>
@@ -28,7 +28,7 @@
 
 
 <head th:fragment="head-my">
-    <meta charset="UTF-8" >
+    <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -39,7 +39,7 @@
 </head>
 
 
-<div class="nav-container" th:fragment="navbar">
+<div class="nav-container" th:fragment="navbar-my">
     <header class="site-header">
         <nav class="site-nav">
             <a class="navbar-brand" href="/"><img alt="company-logo" src="/images/logo-white.png"
@@ -62,8 +62,9 @@
                 <li class="btn sign-bnt"><a th:href="@{/file/all}">files_all</a></li>
                 <li class="btn sign-bnt"><a th:href="@{/file/add}">files_add</a></li>
                 <li class="btn sign-bnt" sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin}">Admin</a></li>
-                <li class="btn sign-bnt" sec:authorize="hasRole('ADMIN')"><a th:href="@{company/register}">Register company</a></li>
-<!--                <li class="btn sign-bnt"><a th:href="@{/employee/register}">Register Employee</a></li>-->
+                <li class="btn sign-bnt" sec:authorize="hasRole('ADMIN')"><a th:href="@{company/register}">Register
+                    company</a></li>
+                <!--                <li class="btn sign-bnt"><a th:href="@{/employee/register}">Register Employee</a></li>-->
                 <form th:method="POST"
                       th:action="@{/users/logout}">
                     <input type="submit" class="btn btn-link" value="logout">
@@ -81,7 +82,61 @@
 </div>
 
 
-<footer class="footer" th:fragment="footer">
-    <p> &copy; All rights reserved</p>
+<nav class="navbar navbar-expand-md bg-white" th:fragment="navbar">
+    <div class="container-fluid">
+        <div class="col-md-1">
+            <a class="navbar-brand" th:href="@{/}"><img class="img-fluid" src="/images/logo-white.png"
+                                                        alt="company-logo"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto">
+                <th:block sec:authorize="!isAuthenticated()">
+                    <li class="nav-link"><a class="nav-link text-black" href="#">Features</a></li>
+                    <li class="nav-link"><a class="nav-link text-black" th:href="@{/about}">How it works</a></li>
+                    <li class="nav-link"><a class="nav-link text-black" href="#">Prices</a></li>
+                    <li class="nav-link"><a class="nav-link text-black" th:href="@{/contact}">Contact</a></li>
+                </th:block>
+                <th:block sec:authorize="isAuthenticated()">
+                    <li class="nav-link"><a class="nav-link text-black" th:href="@{/feedback}">Feedback</a></li>
+                    <li class="nav-link"><a class="nav-link text-black" th:href="@{/testForm}">testForm</a></li>
+                </th:block>
+            </ul>
+            <ul class="navbar-nav">
+                <th:block sec:authorize="isAuthenticated()">
+                    <li class="nav-link"><a class="nav-link text-black" th:href="@{/user/profile}">Profile</a></li>
+                    <li class="nav-link"><a class="nav-link text-black" th:href="@{/building/add}">Upload building</a>
+                    </li>
+                    <li class="nav-link"><a class="nav-link text-black" th:href="@{/building/all}">projects_all</a></li>
+                    <li class="nav-link"><a class="nav-link text-black" th:href="@{/file/all}">files_all</a></li>
+                    <li class="nav-link"><a class="nav-link text-black" th:href="@{/file/add}">files_add</a></li>
+                    <li class="nav-link" sec:authorize="hasRole('ADMIN')"><a class="nav-link text-black"
+                                                                             th:href="@{/admin}">Admin</a></li>
+                    <li class="nav-link" sec:authorize="hasRole('ADMIN')"><a class="nav-link text-black"
+                                                                             th:href="@{company/register}">Register
+                        company</a></li>
+                    <!--                <li class="btn sign-bnt"><a th:href="@{/employee/register}">Register Employee</a></li>-->
+                    <li class="nav-link">
+                        <form th:method="POST"
+                              th:action="@{/users/logout}">
+                            <input type="submit" class="btn btn-outline-dark" value="logout">
+                        </form>
+                    </li>
+                </th:block>
+
+                <th:block sec:authorize="!isAuthenticated()">
+                    <li class="btn btn-outline-dark"><a th:href="@{/users/login}">Login</a></li>
+                    <li class="btn btn-outline-dark"><a th:href="@{/users/register}">Register</a></li>
+                </th:block>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<footer class="footer text-center text-white pt-1 pb-1 fixed-bottom"
+        style="background-image: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(22, 33, 65, 1) 80%, rgba(0, 212, 255, 1) 100%)"
+        th:fragment="footer">
+    <div>&copy; All rights reserved</div>
 </footer>
 
