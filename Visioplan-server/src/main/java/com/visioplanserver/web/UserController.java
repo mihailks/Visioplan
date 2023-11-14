@@ -3,6 +3,7 @@ package com.visioplanserver.web;
 import com.visioplanserver.model.dto.UserProfileEditDTO;
 import com.visioplanserver.model.view.UserViewModel;
 import com.visioplanserver.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,8 +36,9 @@ public class UserController {
         return "profile-edit";
     }
 
-    @PostMapping("/profile/edit")
-    public String editProfile(@Valid UserProfileEditDTO userProfileEditDTO,
+    @PostMapping("/profile/edit/{id}")
+    public String editProfile(@PathVariable("id") Long id,
+            @Valid UserProfileEditDTO userProfileEditDTO,
                               BindingResult bindingResult,
                               RedirectAttributes redirectAttributes) {
 
@@ -45,11 +47,18 @@ public class UserController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userProfileEditDTO", bindingResult);
             return "redirect:profile-edit";
         }
-
+        userProfileEditDTO.setId(id);
         userService.updateUserProfile(userProfileEditDTO);
 
 
-        return "redirect:/profile";
+        return "redirect:/user/profile";
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") Long id){
+        userService.deleteUser(id);
+        //TODO: logout after delete user. How to make POST request from controller?
+        return "redirect:/users/logout";
     }
 
 

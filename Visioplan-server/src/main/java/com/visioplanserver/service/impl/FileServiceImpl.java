@@ -10,6 +10,9 @@ import com.visioplanserver.service.DropboxService;
 import com.visioplanserver.service.FileService;
 import com.visioplanserver.service.FloorService;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,6 +48,27 @@ public class FileServiceImpl implements FileService {
                     fileViewModel.setCommentsCounter(file.getComments().size());
                     return fileViewModel;
                 }).collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<FileViewModel> getAllFiles(Pageable pageable) {
+        //TODO: from mobile app, but only one page...
+//        return fileRepository
+//                .findAll(pageable)
+//                .map(fileEntity -> modelMapper.map(fileEntity, FileViewModel.class));
+        return null;
+    }
+
+    @Override
+    public Page<FileViewModel> findPage(int pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber-1, 10);
+        return fileRepository.findAll(pageable)
+                .map(file -> {
+                    FileViewModel fileViewModel = modelMapper.map(file, FileViewModel.class);
+                    fileViewModel.setFloor(file.getFloor().getNumber());
+                    fileViewModel.setCommentsCounter(file.getComments().size());
+                    return fileViewModel;
+                });
     }
 
     @Override

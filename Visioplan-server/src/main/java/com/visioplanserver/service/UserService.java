@@ -13,6 +13,8 @@ public interface UserService {
     UserViewModel findUserByUsername(String name);
 
     void updateUserProfile(UserProfileEditDTO userProfileEditDTO);
+
+    void deleteUser(Long id);
 }
 
 

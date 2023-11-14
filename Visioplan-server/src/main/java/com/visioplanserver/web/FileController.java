@@ -7,6 +7,9 @@ import com.visioplanserver.service.BuildingService;
 import com.visioplanserver.service.FileService;
 import com.visioplanserver.service.FloorService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,17 +31,40 @@ public class FileController {
         this.buildingService = buildingService;
         this.floorService = floorService;
     }
+// old getAllFiles
+//    @GetMapping("/all")
+//    public String allFiles(Model model,
+//                           @PageableDefault(size = 10)
+//                           Pageable pageable) {
+//        List<FileViewModel> files = fileService.getAllFiles(); // all files, no pagination
+//        Page<FileViewModel> allFiles = fileService.getAllFiles(pageable); // no pagination, 10 files per page
+//
+//        model.addAttribute("files", allFiles);
+//        return "all-files";
+//    }
 
     @GetMapping("/all")
-    public String allFiles(Model model) {
-        List<FileViewModel> files = fileService.getAllFiles();
+    public String getAllPages(Model model){
+        return getOnePage(model, 1);
+    }
+
+    @GetMapping("/all/{pageNumber}")
+    public String getOnePage(Model model, @PathVariable("pageNumber") int currentPage){
+        Page<FileViewModel> page = fileService.findPage(currentPage);
+        int totalPages = page.getTotalPages();
+        Long totalFiles = page.getTotalElements();
+        List<FileViewModel> files = page.getContent();
+
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("totalFiles", totalFiles);
         model.addAttribute("files", files);
         return "all-files";
     }
 
     @GetMapping("/add")
     public String allProjects(Model model) {
-        if (!model.containsAttribute("addFileDTO")){
+        if (!model.containsAttribute("addFileDTO")) {
             model.addAttribute("addFileDTO", AddFileDTO.createEmpty());
         }
 
@@ -60,7 +86,6 @@ public class FileController {
         }
 
 
-
         fileService.addNewFile(addFileDTO);
 
         return "redirect:/file/all";
@@ -77,7 +102,7 @@ public class FileController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Long id){
+    public String delete(@PathVariable("id") Long id) {
         fileService.deleteFile(id);
         return "redirect:/file/all";
     }

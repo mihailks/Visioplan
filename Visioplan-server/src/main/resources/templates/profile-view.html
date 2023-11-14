@@ -6,15 +6,21 @@
 <nav th:replace="~{fragments/commons::navbar}"></nav>
 
 <div class="card text-center m-auto mt-5" style="width: 18rem;"
-     th:action="@{/user/profile/edit}"
-     th:method="GET"
      th:object="${user}">
     <img src="/images/Empty_profile_pic.jpg" class="card-img-top" alt="empty profile picture">
     <div class="card-body">
         <h5 class="card-title" th:text="*{fullName}">Full name</h5>
         <h6 class="card-title" th:text="*{company}">Full name</h6>
         <h6 class="card-title" th:text="*{email}">Full name</h6>
-        <a th:href="@{/user/profile/edit}" class="btn btn-primary">edit profile</a>
+<!--        <a th:href="@{/user/profile/edit}" class="btn btn-primary">Edit profile</a>-->
+        <form th:method="GET"
+              th:action="@{/user/profile/edit}">
+            <input type="submit" value="Edit profile" class="btn btn-primary">
+        </form>
+        <form th:method="DELETE"
+              th:action="@{/user/delete/{id}(id=*{id})}">
+            <input type="submit" value="Delete profile" class="btn btn-danger">
+        </form>
     </div>
 </div>
 

@@ -1,6 +1,7 @@
 package com.visioplanserver.web;
 
 import com.visioplanserver.model.dto.UserRegistrationDTO;
+import com.visioplanserver.service.CompanyService;
 import com.visioplanserver.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -15,9 +16,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/users")
 public class UserRegisterController {
     private final UserService userService;
+    private final CompanyService companyService;
 
-    public UserRegisterController(UserService userService) {
+    public UserRegisterController(UserService userService, CompanyService companyService) {
         this.userService = userService;
+        this.companyService = companyService;
     }
 
     @GetMapping("/register")
@@ -25,6 +28,7 @@ public class UserRegisterController {
         if (!model.containsAttribute("userRegistrationDTO")){
             model.addAttribute("userRegistrationDTO", UserRegistrationDTO.createEmpty());
         }
+        model.addAttribute("companies", companyService.getAllCompanies());
         return "registerUser";
     }
 

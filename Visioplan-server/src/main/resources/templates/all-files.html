@@ -44,22 +44,39 @@
     </table>
 </div>
 
-<nav aria-label="...">
+<nav aria-label="file-pages">
+
     <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-            <a class="page-link">Previous</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item active" aria-current="page">
-            <a class="page-link" href="#">2</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
+
         <li class="page-item">
-            <a class="page-link" href="#">Next</a>
+            <a class="page-link" th:href="@{/file/all}">First</a>
+        </li>
+
+        <li class="page-item" th:if="${currentPage > 1}">
+            <a class="page-link" th:href="@{'/file/all/' + ${currentPage - 1}}">Previous</a>
+        </li>
+
+
+        <li class="page-item" th:each="page : ${#numbers.sequence(1,totalPages)}">
+            <a class="page-link" th:href="@{'/file/all/' + ${page}}">[[${page}]]</a>
+        </li>
+
+
+        <li class="page-item" th:if="${currentPage < totalPages}">
+            <a class="page-link" th:href="@{'/file/all/' + ${currentPage + 1}}">Next</a>
+        </li>
+
+        <li class="page-item" th:if="${currentPage < totalPages}">
+            <a class="page-link" th:href="@{'/file/all/' + ${totalPages}}">Last</a>
         </li>
     </ul>
+    <p class="text-center">Total files found: [[${totalFiles}]] : Page [[${currentPage}]] of [[${totalPages}]]</p>
 </nav>
 
 <footer th:replace="~{fragments/commons::footer}"></footer>
 </body>
 </html>
+
+<!--<li class="page-item active" aria-current="page">-->
+<!--    <a class="page-link" href="#">2</a>-->
+<!--</li>-->
