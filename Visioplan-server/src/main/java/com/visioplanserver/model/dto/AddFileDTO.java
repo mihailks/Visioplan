@@ -22,14 +22,14 @@ public record AddFileDTO(
         String floor,
         @NotNull
         BuldingDocumentationPartEnum part,
-        @NotNull
+
         DrawingTypeEnum drawingType,
-        @NotNull
+
         TextFileTypeEnum textFileType,
         @NotNull
         @Size(min = 2, max = 250, message = "Name must be between 2 and 40 characters!")
         String name,
-        @NotNull
+
         FileExtensionEnum extension,
         @NotNull
         MultipartFile dataFile) {

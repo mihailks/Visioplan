@@ -29,7 +29,7 @@ public class BuildingController {
         if (!model.containsAttribute("addBuildingDTO")){
             model.addAttribute("addBuildingDTO", AddBuildingDTO.createEmpty());
         }
-        return "testAddBuildingUploadPic";
+        return "bulding-add";
     }
 
     @GetMapping("/all")

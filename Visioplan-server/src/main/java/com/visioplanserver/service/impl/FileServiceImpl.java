@@ -3,6 +3,9 @@ package com.visioplanserver.service.impl;
 import com.visioplanserver.model.dto.AddFileDTO;
 import com.visioplanserver.model.entity.FileEntity;
 import com.visioplanserver.model.entity.FloorEntity;
+import com.visioplanserver.model.entity.enums.DrawingTypeEnum;
+import com.visioplanserver.model.entity.enums.FileExtensionEnum;
+import com.visioplanserver.model.entity.enums.TextFileTypeEnum;
 import com.visioplanserver.model.view.FileViewModel;
 import com.visioplanserver.repository.FileRepository;
 import com.visioplanserver.service.BuildingService;
@@ -16,7 +19,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -61,7 +66,7 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public Page<FileViewModel> findPage(int pageNumber) {
-        Pageable pageable = PageRequest.of(pageNumber-1, 10);
+        Pageable pageable = PageRequest.of(pageNumber - 1, 10);
         return fileRepository.findAll(pageable)
                 .map(file -> {
                     FileViewModel fileViewModel = modelMapper.map(file, FileViewModel.class);
@@ -74,20 +79,38 @@ public class FileServiceImpl implements FileService {
     @Override
     public void addNewFile(AddFileDTO addFileDTO) {
         MultipartFile dataFile = addFileDTO.dataFile();
-        //upload to dropbox
-//        String dataFileUrl = dropboxService.upload(dataFile);
-        String dataFileUrl = UUID.randomUUID().toString();
+//        upload to dropbox
+        String dataFileUrl = dropboxService.upload(dataFile);
+
+        // file extension enum from file URL
+        String fileExtension = dataFile.getOriginalFilename().substring(dataFile.getOriginalFilename().lastIndexOf(".") + 1);
+        FileExtensionEnum fileExtensionEnum = null;
+        for (FileExtensionEnum value : FileExtensionEnum.values()) {
+            if (value.name().equals(fileExtension.toUpperCase())) {
+                fileExtensionEnum = value;
+                break;
+            }
+            fileExtensionEnum = FileExtensionEnum.NOT_SPECIFIED;
+        }
+
+//        String dataFileUrl = UUID.randomUUID().toString(); // for testing urls are unique
         //get building id
         String buildingName = addFileDTO.buildingName();
         Long buildingId = buildingService.getBuildingByName(buildingName);
         //get floor id
         String floorName = addFileDTO.floor();
-        FloorEntity floorId = floorService.getFloorIdByNameAndBuildingId(floorName,buildingId);
+        FloorEntity floorId = floorService.getFloorIdByNameAndBuildingId(floorName, buildingId);
 
         FileEntity file = modelMapper.map(addFileDTO, FileEntity.class);
         file.setFloor(floorId)
+                .setUrl(dataFileUrl)
+                .setFloor(floorId)
                 .setUploadDate(LocalDateTime.now())
-                .setUrl(dataFileUrl);
+                .setUrl(dataFileUrl)
+                .setTextFileType(file.getTextFileType() == null ? TextFileTypeEnum.NOT_SPECIFIED : file.getTextFileType())
+                .setDrawingType(file.getDrawingType() == null ? DrawingTypeEnum.NOT_SPECIFIED : file.getDrawingType())
+                .setComments(new HashSet<>())
+                .setExtension(fileExtensionEnum);
         fileRepository.save(file);
     }
 

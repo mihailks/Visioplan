@@ -29,7 +29,7 @@ public class UserRegisterController {
             model.addAttribute("userRegistrationDTO", UserRegistrationDTO.createEmpty());
         }
         model.addAttribute("companies", companyService.getAllCompanies());
-        return "registerUser";
+        return "user-register";
     }
 
     @PostMapping("/register")

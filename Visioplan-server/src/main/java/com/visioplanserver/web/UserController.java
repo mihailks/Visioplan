@@ -1,9 +1,7 @@
 package com.visioplanserver.web;
 
 import com.visioplanserver.model.dto.UserProfileEditDTO;
-import com.visioplanserver.model.view.UserViewModel;
 import com.visioplanserver.service.UserService;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,14 +24,14 @@ public class UserController {
     public String profile(Model model, Principal principal) {
         model.addAttribute("user", userService.findUserByUsername(principal.getName()));
 
-        return "profile-view";
+        return "user-profile-view";
     }
 
 
     @GetMapping("/profile/edit")
     public String editProfile(Model model, Principal principal) {
         model.addAttribute("user", userService.findUserByUsername(principal.getName()));
-        return "profile-edit";
+        return "user-profile-edit";
     }
 
     @PostMapping("/profile/edit/{id}")

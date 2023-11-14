@@ -26,7 +26,7 @@ public class CompanyController {
             model.addAttribute("companyRegistrationDTO", CompanyRegistrationDTO.createEmpty());
         }
 
-        return "registerCompany";
+        return "company-register";
     }
 
     @PostMapping("/register")

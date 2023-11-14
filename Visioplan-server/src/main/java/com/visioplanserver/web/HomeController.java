@@ -19,7 +19,7 @@ public class HomeController {
 
     @GetMapping("/picture")
     public String picture() {
-        return "testAddBuildingUploadPic";
+        return "bulding-add";
     }
 
     @GetMapping("/test-side-bar")

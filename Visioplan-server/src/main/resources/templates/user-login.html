@@ -1,0 +1,107 @@
+<head th:replace="~{fragments/commons::head-bootstrap}"><title>Login User</title></head>
+
+<style>
+    body {
+        background-image: url("/images/user-login.jpg");
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .card {
+        width: 450px;
+        padding: 10px;
+        border-radius: 20px;
+        background: #fff;
+        border: 2px solid #f2f2f2;
+        height: 400px;
+        position: relative;
+        box-shadow: 0px 1px 92px 20px rgba(0, 0, 0, 1);
+        -webkit-box-shadow: 0px 1px 92px 20px rgba(0, 0, 0, 1);
+        -moz-box-shadow: 0px 1px 92px 20px rgba(0, 0, 0, 1);
+    }
+
+    img {
+        width: 350px;
+        margin: -10px auto;
+        display: block;
+    }
+    h4{
+        margin-top: 20px;
+    }
+
+    .card {
+        margin-bottom: 200px;
+    }
+
+    .container {
+        height: 100vh;
+    }
+
+    .btn {
+        width: 100%;
+        margin-top: 20px;
+        background-color: rgb(22, 33, 65);
+        border: 1px solid white;
+        font-size: 1.2rem;
+    }
+</style>
+
+<body>
+
+
+<div class="d-flex justify-content-center align-items-center container">
+
+    <div class="card py-5 px-3">
+
+        <img src="/images/logo-white.png" alt="logo">
+
+        <h4 class="text-center text-black">Please Login</h4>
+        <form class="row g-3"
+              th:action="@{/users/login}"
+              th:method="POST">
+
+            <div class="col-md-12">
+                <label for="username" class="text-black font-weight-bold"></label>
+                <input id="username"
+                       name="username"
+                       th:value="${username}"
+                       type="text"
+                       class="form-control"
+                       placeholder="Username"/>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Username name is required.
+                </p>
+            </div>
+
+
+            <div class="col-md-12">
+                <label for="password" class="text-black font-weight-bold"></label>
+                <input id="password"
+                       name="password"
+                       type="password"
+                       class="form-control"
+                       placeholder="Password"/>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Password is required.
+                </p>
+            </div>
+
+
+            <p th:if="${bad_credentials}" class="errors alert alert-danger">
+                Invalid username or password.
+            </p>
+
+            <div class="col-md-12 text-center">
+                <div class="button-holder">
+                    <input type="submit" class="btn btn-primary" value="Login"/>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+
+</body>
