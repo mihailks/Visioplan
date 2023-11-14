@@ -19,27 +19,29 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    // https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-java8time
+
     implementation 'org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE'
 
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.mysql:mysql-connector-j'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+
     implementation 'org.webjars:bootstrap:5.3.2'
+
+
     implementation 'org.modelmapper:modelmapper:3.2.0'
     implementation "org.modelmapper:modelmapper-module-record:1.0.0"
 
+
     implementation 'com.cloudinary:cloudinary-core:1.35.0'
     implementation 'com.cloudinary:cloudinary-http44:1.35.0'
-
-
-    implementation 'com.microsoft.graph:microsoft-graph-core:2.0.20'
-    implementation 'com.microsoft.graph:microsoft-graph:5.75.0'
-    implementation 'com.azure:azure-identity:1.2.5'
 
     implementation 'com.dropbox.core:dropbox-core-sdk:5.4.6'
 

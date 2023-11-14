@@ -5,21 +5,19 @@
 <body>
 <nav th:replace="~{fragments/commons::navbar}"></nav>
 
-<div class="container">
-    <h2 class="text-center text-white">Profile</h2>
-    <div th:action="@{/user/profile}"
-         th:method="POST"
-         th:object="${user}">
-
-        <p th:text="*{username}">username</p>
-        <p th:text="*{email}">email</p>
-        <p th:text="*{firstName}">first name</p>
-        <p th:text="*{lastName}">last name</p>
-        <p th:text="*{company}">company</p>
-
-
+<div class="card text-center m-auto mt-5" style="width: 18rem;"
+     th:action="@{/user/profile/edit}"
+     th:method="GET"
+     th:object="${user}">
+    <img src="/images/Empty_profile_pic.jpg" class="card-img-top" alt="empty profile picture">
+    <div class="card-body">
+        <h5 class="card-title" th:text="*{fullName}">Full name</h5>
+        <h6 class="card-title" th:text="*{company}">Full name</h6>
+        <h6 class="card-title" th:text="*{email}">Full name</h6>
+        <a th:href="@{/user/profile/edit}" class="btn btn-primary">edit profile</a>
     </div>
 </div>
+
 <footer th:replace="~{fragments/commons::footer}"></footer>
 
 </body>

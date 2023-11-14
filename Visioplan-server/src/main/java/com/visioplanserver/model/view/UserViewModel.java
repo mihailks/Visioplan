@@ -64,4 +64,8 @@ public class UserViewModel {
         this.company = company;
         return this;
     }
+
+    public String getFullName() {
+        return this.firstName + " " + this.lastName;
+    }
 }

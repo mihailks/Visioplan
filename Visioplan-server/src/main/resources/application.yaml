@@ -31,11 +31,11 @@ cloudinary:
 
   #  default.admin.pass: ${DEFAULT_ADMIN_PASS:root}
 
-  mail:
-    host: sandbox.smtp.mailtrap.io
-    port: 2525
-    username: ${mailUsername}
-    password: ${mailPassword}
+mail:
+  host: sandbox.smtp.mailtrap.io
+  port: 2525
+  username: ${mailUsername}
+  password: ${mailPassword}
 
 dropbox:
   accessToken: "${DROPBOX-TOKEN}"

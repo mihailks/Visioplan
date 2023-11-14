@@ -1,10 +1,14 @@
 package com.visioplanserver.web;
 
+import com.visioplanserver.model.dto.UserProfileEditDTO;
+import com.visioplanserver.model.view.UserViewModel;
 import com.visioplanserver.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 
@@ -23,6 +27,32 @@ public class UserController {
 
         return "profile-view";
     }
+
+
+    @GetMapping("/profile/edit")
+    public String editProfile(Model model, Principal principal) {
+        model.addAttribute("user", userService.findUserByUsername(principal.getName()));
+        return "profile-edit";
+    }
+
+    @PostMapping("/profile/edit")
+    public String editProfile(@Valid UserProfileEditDTO userProfileEditDTO,
+                              BindingResult bindingResult,
+                              RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()){
+            redirectAttributes.addFlashAttribute("userProfileEditDTO", userProfileEditDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userProfileEditDTO", bindingResult);
+            return "redirect:profile-edit";
+        }
+
+        userService.updateUserProfile(userProfileEditDTO);
+
+
+        return "redirect:/profile";
+    }
+
+
 
 }
 

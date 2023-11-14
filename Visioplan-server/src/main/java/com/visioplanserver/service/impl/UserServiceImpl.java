@@ -1,5 +1,6 @@
 package com.visioplanserver.service.impl;
 
+import com.visioplanserver.model.dto.UserProfileEditDTO;
 import com.visioplanserver.model.dto.UserRegistrationDTO;
 import com.visioplanserver.model.entity.UserEntity;
 import com.visioplanserver.model.view.UserViewModel;
@@ -41,6 +42,11 @@ public class UserServiceImpl implements UserService {
             return userViewModel;
         }
         return null;
+    }
+
+    @Override
+    public void updateUserProfile(UserProfileEditDTO userProfileEditDTO) {
+            Optional<UserEntity> userEntity = userRepository.findByUsername(userProfileEditDTO.firstName());
     }
 
 

@@ -36,7 +36,7 @@ public class BuildingController {
     public String project(Model model) {
         List<BuildingViewModel> buildings = buildingService.getAllBuildings();
         model.addAttribute("buildings", buildings);
-        return "allBuildings";
+        return "buildings-all";
     }
 
     @PostMapping("/add")

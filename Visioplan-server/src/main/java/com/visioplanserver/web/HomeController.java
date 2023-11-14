@@ -22,8 +22,8 @@ public class HomeController {
         return "testAddBuildingUploadPic";
     }
 
-    @GetMapping("/testForm")
+    @GetMapping("/test-side-bar")
     public String testForm() {
-        return "testForm";
+        return "test-side-bar";
     }
 }
