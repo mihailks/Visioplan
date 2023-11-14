@@ -24,48 +24,6 @@ class DropboxServiceImpl implements DropboxService {
         this.client = client;
     }
 
-
-    @Override
-    public FolderMetadata getFolderDetails(String folderPath) {
-        return getMetadata(folderPath, FolderMetadata.class, String.format("Error getting folder details: %s", folderPath));
-    }
-
-    @Override
-    public FileMetadata getFileDetails(String filePath) {
-        return getMetadata(filePath, FileMetadata.class, String.format("Error getting file details: %s", filePath));
-    }
-
-    @Override
-    public FileMetadata uploadFile(String filePath, InputStream fileStream) {
-        return handleDropboxAction(() -> client.files().uploadBuilder(filePath).uploadAndFinish(fileStream),
-                String.format("Error uploading file: %s", filePath));
-    }
-
-    @Override
-    public String getAccountDetails() throws DbxException {
-//        FullAccount account = client.users().getCurrentAccount();
-//        System.out.println(account.getName().getDisplayName());
-//        return account.getName().getDisplayName();
-        return null;
-    }
-
-    @Override
-    public String getFileNames() throws DbxException {
-        ListFolderResult result = client.files().listFolder("");
-        while (true) {
-            for (Metadata metadata : result.getEntries()) {
-                System.out.println(metadata.getName());
-            }
-
-            if (!result.getHasMore()) {
-                break;
-            }
-
-            result = client.files().listFolderContinue(result.getCursor());
-        }
-        return null;
-    }
-
     @Override
     public String upload(MultipartFile dataFile) {
         File file;
@@ -94,35 +52,10 @@ class DropboxServiceImpl implements DropboxService {
             String url = meta.getUrl();
             url = url.split("\\?")[0];
 //            url = url + "\\?raw=1";
-
             return url;
         } catch (IOException | DbxException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private <T> T handleDropboxAction(DropboxActionResolver<T> action, String exceptionMessage) {
-        try {
-            return action.perform();
-        } catch (Exception e) {
-            String messageWithCause = String.format("%s with cause: %s", exceptionMessage, e.getMessage());
-            throw new RuntimeException();
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    private <T> T getMetadata(String path, Class<T> type, String message) {
-        Metadata metadata = handleDropboxAction(() -> client.files().getMetadata(path),
-                String.format("Error accessing details of: %s", path));
-
-        checkIfMetadataIsInstanceOfGivenType(metadata, type, message);
-        return (T) metadata;
-    }
-
-    private <T> void checkIfMetadataIsInstanceOfGivenType(Metadata metadata, Class<T> validType, String exceptionMessage) {
-        boolean isValidType = validType.isInstance(metadata);
-        if (!isValidType) {
-            throw new RuntimeException();
-        }
-    }
 }

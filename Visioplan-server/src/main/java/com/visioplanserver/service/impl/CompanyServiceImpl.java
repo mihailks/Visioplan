@@ -5,6 +5,7 @@ import com.visioplanserver.model.entity.CompanyEntity;
 import com.visioplanserver.model.view.CompanyNameViewModel;
 import com.visioplanserver.repository.CompanyRepository;
 import com.visioplanserver.service.CompanyService;
+import com.visioplanserver.service.exeption.CompanyNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -20,17 +21,14 @@ public class CompanyServiceImpl implements CompanyService {
         this.modelMapper = modelMapper;
     }
 
-
     @Override
     public void register(CompanyRegistrationDTO companyRegistrationDTO) {
-
-
         companyRepository.save(modelMapper.map(companyRegistrationDTO, CompanyEntity.class));
     }
 
     @Override
     public String getNameById(Long id) {
-        CompanyEntity company = companyRepository.findById(id).orElse(null);
+        CompanyEntity company = companyRepository.findById(id).orElseThrow(() -> new CompanyNotFoundException("Company not found"));
         return company.getName();
     }
 
@@ -43,6 +41,6 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public CompanyEntity getCompanyByName(String companyName) {
-        return companyRepository.findByName(companyName).orElseThrow(()-> new RuntimeException("Company not found"));
+        return companyRepository.findByName(companyName).orElseThrow(() -> new CompanyNotFoundException("Company not found"));
     }
 }

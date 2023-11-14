@@ -4,6 +4,7 @@ import com.visioplanserver.model.entity.FloorEntity;
 import com.visioplanserver.model.view.FloorNameDTO;
 import com.visioplanserver.repository.FloorRepository;
 import com.visioplanserver.service.FloorService;
+import com.visioplanserver.service.exeption.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class FloorServiceImpl implements FloorService {
     @Override
     public FloorEntity getFloorIdByNameAndBuildingId(String floorName, Long buildingId) {
         return floorRepository.findIdByNumberAndBuildingId(floorName, buildingId)
-                .orElseThrow(() -> new IllegalArgumentException("Floor with name " + floorName + " and building id " + buildingId + " does not exist!"));
+                .orElseThrow(() -> new ObjectNotFoundException("Floor with name " + floorName + " and building id " + buildingId + " does not exist!"));
 
     }
 

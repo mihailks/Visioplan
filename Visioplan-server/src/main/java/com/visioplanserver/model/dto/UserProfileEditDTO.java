@@ -1,7 +1,5 @@
 package com.visioplanserver.model.dto;
 
-import java.util.Objects;
-
 public class UserProfileEditDTO {
     private Long id;
     private String username;

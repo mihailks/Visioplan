@@ -38,24 +38,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserViewModel findUserByUsername(String name) {
-        UserEntity userEntity = userRepository.findByUsername(name).orElse(null);
-        if (userEntity!=null){
-            String companyName = userEntity.getCompany().getName();
-            UserViewModel userViewModel = modelMapper.map(userEntity, UserViewModel.class);
-            userViewModel.setCompany(companyName);
-            return userViewModel;
-        }
-        return null;
+        UserEntity userEntity = userRepository.findByUsername(name)
+                .orElseThrow(() -> new UserNotFoundException("User with name " + name + " not found!"));
+
+        String companyName = userEntity.getCompany().getName();
+        UserViewModel userViewModel = modelMapper.map(userEntity, UserViewModel.class);
+        userViewModel.setCompany(companyName);
+        return userViewModel;
     }
 
     @Override
     public void updateUserProfile(UserProfileEditDTO userProfileEditDTO) {
-            UserEntity userEntity = userRepository.findById(userProfileEditDTO.getId())
-                    .orElseThrow(()-> new UserNotFoundException("User with id " + userProfileEditDTO.getId() + " not found!"));
-            userEntity.setFirstName(userProfileEditDTO.getFirstName())
-                    .setLastName(userProfileEditDTO.getLastName())
-                    .setEmail(userProfileEditDTO.getEmail());
-            userRepository.save(userEntity);
+        UserEntity userEntity = userRepository.findById(userProfileEditDTO.getId())
+                .orElseThrow(() -> new UserNotFoundException("User with id " + userProfileEditDTO.getId() + " not found!"));
+        userEntity.setFirstName(userProfileEditDTO.getFirstName())
+                .setLastName(userProfileEditDTO.getLastName())
+                .setEmail(userProfileEditDTO.getEmail());
+        userRepository.save(userEntity);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.visioplanserver.config;
 
-import com.visioplanserver.model.entity.UserRoleEntity;
 import com.visioplanserver.model.entity.enums.RolesEnum;
 import com.visioplanserver.repository.UserRepository;
 import com.visioplanserver.service.impl.LoginUserDetailService;

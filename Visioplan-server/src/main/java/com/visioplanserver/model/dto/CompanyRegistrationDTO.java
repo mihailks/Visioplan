@@ -1,7 +1,5 @@
 package com.visioplanserver.model.dto;
 
-import jakarta.persistence.Column;
-
 public record CompanyRegistrationDTO(
         String name,
         String address,

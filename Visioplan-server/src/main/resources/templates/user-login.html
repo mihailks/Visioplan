@@ -14,7 +14,6 @@
         border-radius: 20px;
         background: #fff;
         border: 2px solid #f2f2f2;
-        height: 400px;
         position: relative;
         box-shadow: 0px 1px 92px 20px rgba(0, 0, 0, 1);
         -webkit-box-shadow: 0px 1px 92px 20px rgba(0, 0, 0, 1);
@@ -26,12 +25,13 @@
         margin: -10px auto;
         display: block;
     }
-    h4{
-        margin-top: 20px;
-    }
 
     .card {
         margin-bottom: 200px;
+    }
+
+    .main-form{
+        margin-top: 20px;
     }
 
     .container {
@@ -56,10 +56,14 @@
 
         <img src="/images/logo-white.png" alt="logo">
 
-        <h4 class="text-center text-black">Please Login</h4>
-        <form class="row g-3"
+
+        <form class="row g-3 main-form"
               th:action="@{/users/login}"
               th:method="POST">
+
+            <p th:if="${bad_credentials}" class="errors alert alert-danger">
+                Invalid username or password.
+            </p>
 
             <div class="col-md-12">
                 <label for="username" class="text-black font-weight-bold"></label>
@@ -88,9 +92,7 @@
             </div>
 
 
-            <p th:if="${bad_credentials}" class="errors alert alert-danger">
-                Invalid username or password.
-            </p>
+
 
             <div class="col-md-12 text-center">
                 <div class="button-holder">
