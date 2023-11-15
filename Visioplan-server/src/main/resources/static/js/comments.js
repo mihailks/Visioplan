@@ -14,7 +14,7 @@ async function loadComments(e) {
 
     Object.values(comments).forEach(comment => {
         const p1 = document.createElement("p");
-        p1.textContent = `textContent: ${comment.textContent}`;
+        p1.textContent = `${comment.author}: ${comment.textContent}`;
         container.appendChild(p1);
     });
 }
@@ -24,5 +24,18 @@ function cleanComments(e) {
     let container = document.getElementById(`comments-${id}`);
     container.innerHTML = '';
 }
+
+
+const whiteSpace = document.querySelectorAll('.form-my');
+for (const whiteSpaceElement of whiteSpace) {
+    whiteSpaceElement.addEventListener('click', showSubmitComment);
+}
+
+function showSubmitComment(e) {
+    let id = e.target.value;
+    console.log(id);
+    let button = document.getElementById(`submit-btn-${id}`);
+}
+
 
 

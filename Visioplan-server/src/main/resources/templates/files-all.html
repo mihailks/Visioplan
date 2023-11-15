@@ -3,7 +3,15 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="~{fragments/commons::head-bootstrap}"><title>all files</title></head>
-
+<style>
+    .form-my{
+        padding: 0;
+        margin: 0;
+    }
+    /*.submit-my{*/
+    /*    display: none;*/
+    /*}*/
+</style>
 <body>
 
 <header>
@@ -18,12 +26,12 @@
             <th class="align-middle" scope="col">Part</th>
             <th class="align-middle" scope="col">Floor</th>
             <th class="align-middle" scope="col">File name</th>
-            <th class="align-middle" scope="col">Comments</th>
-            <th class="align-middle" scope="col">URL</th>
-            <th class="align-middle" scope="col">Upload Date</th>
             <th class="align-middle" scope="col">Extension</th>
-            <th class="align-middle" scope="col">Delete</th>
+            <th class="align-middle" scope="col">Upload Date</th>
+            <th class="align-middle" scope="col">Comments</th>
             <th class="align-middle" scope="col">White a comment</th>
+            <th class="align-middle" scope="col">Link</th>
+            <th class="align-middle" scope="col">Delete</th>
 
         </tr>
         </thead>
@@ -32,7 +40,9 @@
             <td class="align-middle col-md-auto" th:text="*{part}">cell3_1</td>
             <td class="align-middle col-md-auto" th:text="*{floor}">cell2_1</td>
             <td class="align-middle col-md-3" th:text="*{name}">cell1_1</td>
-
+            <td class="align-middle col-md-auto" th:text="*{extension}">cell4_1</td>
+            <td class="align-middle col-md-2" th:text="${#temporals.format(f.uploadDate, 'dd-MM-yyyy HH:mm')}">cell5_1
+            </td>
             <td class="align-middle col-md-auto">
                 <!--                <a th:href="@{/api/{id}/comments(id=*{id})}"-->
                 <!--                   class="btn btn-outline-success"-->
@@ -48,21 +58,30 @@
 
             </td>
 
+            <td class="align-middle">
+                <form th:method="POST"
+                        th:action="/comment/add">
+                    <textarea type="text"
+                              class="form-control form-my"
+                              th:id="'white-' + *{id}"
+                              placeholder="Enter your feedback here">
+                    </textarea>
+                    <button class="comments-btn btn btn-outline-success submit-my"
+                            th:id="'submit-btn' + *{id}"
+                            th:value="*{id}"
+                            >submit</button>
+                </form>
+            </td>
 
             <td class="align-middle col-md-auto">
                 <a th:href="*{url}"
                    class="btn btn-outline-success"
                    target="_blank">Download</a>
             </td>
-
-            <td class="align-middle col-md-2" th:text="${#temporals.format(f.uploadDate, 'dd-MM-yyyy HH:mm')}">cell5_1
-            </td>
-            <td class="align-middle col-md-auto" th:text="*{extension}">cell4_1</td>
-
             <td class="align-middle col-md-auto">
                 <form th:method="DELETE"
                       th:action="@{/file/delete/{id}(id=*{id})}">
-                    <input type="submit" value="Delete" class="btn btn-outline-danger">
+                    <input type="submit" id="delete-btn" value="Delete" class="btn btn-outline-danger">
                 </form>
             </td>
         </tr>

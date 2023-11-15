@@ -6,4 +6,7 @@ import java.util.List;
 
 public interface CommentsService {
     List<CommentsViewModel> getAllCommentsByFileId(Long fileId);
+
+
+    void addComment(Long id, String username);
 }
