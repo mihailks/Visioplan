@@ -1,8 +1,12 @@
 package com.visioplanserver.web;
 
 import com.visioplanserver.model.dto.UserProfileEditDTO;
+import com.visioplanserver.model.entity.enums.RolesEnum;
+import com.visioplanserver.model.view.UserViewModel;
+import com.visioplanserver.model.view.UserWithRoleViewModel;
 import com.visioplanserver.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -53,12 +58,46 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") Long id){
+    public String deleteUser(@PathVariable("id") Long id, Principal principal){
         userService.deleteUser(id);
+        UserWithRoleViewModel user = userService.findUserRoleByUsername(principal.getName());
+        if (user.getRole().contains(RolesEnum.ADMIN)){
+            return "redirect:/user/all";
+        }
         //TODO: logout after delete user. How to make POST request from controller?
         return "redirect:/users/logout";
     }
 
+    @GetMapping("/all")
+    public String getAllPages(Model model){
+        return getOnePage(model, 1);
+    }
+
+    @GetMapping("/all/{pageNumber}")
+    public String getOnePage(Model model, @PathVariable("pageNumber") int currentPage){
+        Page<UserWithRoleViewModel> page = userService.findPage(currentPage);
+        int totalPages = page.getTotalPages();
+        Long totalUsers = page.getTotalElements();
+        List<UserWithRoleViewModel> users = page.getContent();
+
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("totalUsers", totalUsers);
+        model.addAttribute("users", users);
+        return "admin-users-all";
+    }
+
+    @PostMapping("/promote/{id}")
+    public String promoteUser(@PathVariable("id") Long id){
+        userService.promoteUser(id);
+        return "redirect:/user/all";
+    }
+
+    @PostMapping("/demote/{id}")
+    public String demoteUser(@PathVariable("id") Long id){
+        userService.demoteUser(id);
+        return "redirect:/user/all";
+    }
 
 
 }

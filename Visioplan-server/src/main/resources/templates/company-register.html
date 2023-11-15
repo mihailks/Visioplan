@@ -1,6 +1,10 @@
 <head th:replace="~{fragments/commons::head-bootstrap}"><title>Register company</title></head>
 
 <body>
+
+<header>
+    <div th:replace="~{fragments/commons::navbar}"></div>
+
 <div class="container">
     <h2 class="text-center text-white">Register company</h2>
     <form th:action="@{/company/register}"

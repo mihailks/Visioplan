@@ -22,6 +22,9 @@
             <th class="align-middle" scope="col">URL</th>
             <th class="align-middle" scope="col">Upload Date</th>
             <th class="align-middle" scope="col">Extension</th>
+            <th class="align-middle" scope="col">Delete</th>
+            <th class="align-middle" scope="col">White a comment</th>
+
         </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -29,18 +32,37 @@
             <td class="align-middle col-md-auto" th:text="*{part}">cell3_1</td>
             <td class="align-middle col-md-auto" th:text="*{floor}">cell2_1</td>
             <td class="align-middle col-md-3" th:text="*{name}">cell1_1</td>
-            <td class="align-middle col-md-auto" th:text="*{commentsCounter}">cell6_1</td>
 
             <td class="align-middle col-md-auto">
-                <a th:href="*{url}" class="btn btn-outline-success" target="_blank">Download</a>
+                <!--                <a th:href="@{/api/{id}/comments(id=*{id})}"-->
+                <!--                   class="btn btn-outline-success"-->
+                <!--                   id="comments-btn"-->
+                <!--                   target="_blank"-->
+                <!--                   th:text="*{commentsCounter}">commentsCounter</a>-->
+                <button class="comments-btn btn btn-outline-success" th:value="*{id}" th:text="*{commentsCounter}">
+                    number of comments
 
-            <td class="align-middle col-md-2" th:text="${#temporals.format(f.uploadDate, 'dd-MM-yyyy HH:mm')}">cell5_1</td>
+                </button>
+
+                <div th:id="'comments-' + *{id}" th:classappend="*{id}"></div>
+
+            </td>
+
+
+            <td class="align-middle col-md-auto">
+                <a th:href="*{url}"
+                   class="btn btn-outline-success"
+                   target="_blank">Download</a>
+            </td>
+
+            <td class="align-middle col-md-2" th:text="${#temporals.format(f.uploadDate, 'dd-MM-yyyy HH:mm')}">cell5_1
+            </td>
             <td class="align-middle col-md-auto" th:text="*{extension}">cell4_1</td>
 
             <td class="align-middle col-md-auto">
                 <form th:method="DELETE"
-                th:action="@{/file/delete/{id}(id=*{id})}">
-                <input type="submit" value="Delete" class="btn btn-outline-danger">
+                      th:action="@{/file/delete/{id}(id=*{id})}">
+                    <input type="submit" value="Delete" class="btn btn-outline-danger">
                 </form>
             </td>
         </tr>
@@ -78,6 +100,7 @@
 </nav>
 
 <footer th:replace="~{fragments/commons::footer}"></footer>
+<script th:src="@{/js/comments.js}"></script>
 </body>
 </html>
 
