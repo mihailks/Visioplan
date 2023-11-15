@@ -12,6 +12,7 @@ import com.visioplanserver.service.BuildingService;
 import com.visioplanserver.service.DropboxService;
 import com.visioplanserver.service.FileService;
 import com.visioplanserver.service.FloorService;
+import com.visioplanserver.service.exeption.FileNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -117,6 +118,11 @@ public class FileServiceImpl implements FileService {
     @Override
     public void deleteFile(Long id) {
         fileRepository.deleteById(id);
+    }
+
+    @Override
+    public FileEntity findById(Long id) {
+        return fileRepository.findById(id).orElseThrow(() -> new FileNotFoundException("File with id " + id + " not found!"));
     }
 
 }

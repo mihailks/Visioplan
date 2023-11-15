@@ -1,13 +1,17 @@
 package com.visioplanserver.web;
 
 
+import com.visioplanserver.model.dto.CommentsAddDTO;
 import com.visioplanserver.model.view.CommentsViewModel;
 import com.visioplanserver.service.CommentsService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.List;
@@ -21,17 +25,29 @@ public class CommentsController {
     }
 
     @GetMapping("/api/{fileId}/comments")
-        public ResponseEntity<List<CommentsViewModel>> getComments(@PathVariable Long fileId) {
+    public ResponseEntity<List<CommentsViewModel>> getComments(@PathVariable Long fileId) {
         return ResponseEntity.ok(commentsService.getAllCommentsByFileId(fileId));
     }
 
-    @PostMapping("/comments/add/{id}")
-    public String addComment(@PathVariable Long id, Principal principal) {
-        commentsService.addComment(id, principal.getName());
+    @PostMapping("/comment/add/{id}")
+    public String addComment(@Valid CommentsAddDTO commentsAddDTO,
+                             BindingResult bindingResult,
+                             RedirectAttributes redirectAttributes,
+                             @PathVariable Long id,
+                             Principal principal) {
+
+        if (bindingResult.hasErrors()){
+            redirectAttributes.addFlashAttribute("commentsAddDTO", commentsAddDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.commentsAddDTO", bindingResult);
+
+            return "redirect:/file/all";
+        }
+
+
+        commentsService.addComment(id, principal.getName(), commentsAddDTO);
+
         return "redirect:/file/all";
     }
-
-
 
 
 }

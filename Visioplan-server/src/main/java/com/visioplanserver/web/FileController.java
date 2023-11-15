@@ -1,6 +1,7 @@
 package com.visioplanserver.web;
 
 import com.visioplanserver.model.dto.AddFileDTO;
+import com.visioplanserver.model.view.CommentsViewModel;
 import com.visioplanserver.model.view.FileViewModel;
 import com.visioplanserver.service.BuildingService;
 import com.visioplanserver.service.FileService;
@@ -68,6 +69,10 @@ public class FileController {
         model.addAttribute("buildings", buildingService.getAllBuildingsNames());
         model.addAttribute("testPrint", "testPrint");
         return "file-upload";
+    }
+    @ModelAttribute
+    public void addAttributes(Model model) {
+        model.addAttribute("comemnts", new CommentsViewModel());
     }
 
     @PostMapping("/add")

@@ -26,6 +26,8 @@ public interface UserService {
     void demoteUser(Long id);
 
     UserWithRoleViewModel findUserRoleByUsername(String name);
+
+    UserEntity findUserByUsernameEntity(String username);
 }
 
 
