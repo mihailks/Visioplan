@@ -9,6 +9,7 @@ import com.visioplanserver.repository.CommentsRepository;
 import com.visioplanserver.service.CommentsService;
 import com.visioplanserver.service.FileService;
 import com.visioplanserver.service.UserService;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,7 @@ public class CommentsServiceImpl implements CommentsService {
     public List<CommentsViewModel> getAllCommentsByFileId(Long fileId){
         return commentsRepository.getAllByFileId(fileId);
     }
-
+@Transactional
     @Override
     public void addComment(Long id, String username, CommentsAddDTO commentsAddDTO) {
         FileEntity file = fileService.findById(id);

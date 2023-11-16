@@ -1,9 +1,6 @@
 package com.visioplanserver.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 
 @Entity
@@ -13,7 +10,7 @@ public class FloorEntity extends BaseEntity {
     private String number;
     @Column(name = "elevation")
     private String elevation;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private BuildingEntity building;
 
 

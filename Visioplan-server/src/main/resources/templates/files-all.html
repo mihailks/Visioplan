@@ -4,10 +4,11 @@
 
 <head th:replace="~{fragments/commons::head-bootstrap}"><title>all files</title></head>
 <style>
-    .form-my{
+    .form-my {
         padding: 0;
         margin: 0;
     }
+
     /*.submit-my{*/
     /*    !*display: none;*!*/
     /*    display: inline-block;*/
@@ -15,7 +16,7 @@
     /*.form-my{*/
     /*    display: inline-block;*/
     /*}*/
-    .comment-submit-container{
+    .comment-submit-container {
         display: flex;
 
     }
@@ -49,7 +50,8 @@
             <td class="align-middle col-md-auto" th:text="*{floor}">cell2_1</td>
             <td class="align-middle col-md-auto" th:text="*{name}">cell1_1</td>
             <td class="align-middle col-md-auto" th:text="*{extension}">cell4_1</td>
-            <td class="align-middle col-md-auto" th:text="${#temporals.format(f.uploadDate, 'dd-MM-yyyy HH:mm')}">cell5_1
+            <td class="align-middle col-md-auto" th:text="${#temporals.format(f.uploadDate, 'dd-MM-yyyy HH:mm')}">
+                cell5_1
             </td>
             <td class="align-middle col-md-auto text-center">
                 <!--                <a th:href="@{/api/{id}/comments(id=*{id})}"-->
@@ -69,8 +71,8 @@
             <td class="align-middle">
 
                 <form class="comment-submit-container"
-                        th:method="POST"
-                        th:action="@{/comment/add/{id}(id=*{id})}">
+                      th:method="POST"
+                      th:action="@{/comment/add/{id}(id=*{id})}">
                     <textarea type="text"
                               th:field="${comemnts.textContent}"
                               class="form-control form-my"
@@ -80,7 +82,7 @@
                     <button class="comments-btn btn btn-outline-success submit-my"
                             th:id="'submit-btn' + *{id}"
                             th:value="*{id}"
-                            >submit</button>
+                    >submit</button>
                 </form>
 
             </td>

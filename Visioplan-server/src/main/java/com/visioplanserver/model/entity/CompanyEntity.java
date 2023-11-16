@@ -19,7 +19,7 @@ public class CompanyEntity extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String email;
     private String website;
-    @ManyToMany(mappedBy = "companies")
+    @ManyToMany(mappedBy = "companies", cascade = CascadeType.ALL)
     private Set<BuildingEntity> buildings;
     @OneToMany(mappedBy = "company")
     private Set<UserEntity> employees;

@@ -12,7 +12,9 @@ import java.util.List;
 public interface FileService {
 
     List<FileViewModel> getAllFiles();
+
     Page<FileViewModel> getAllFiles(Pageable pageable);
+
     Page<FileViewModel> findPage(int pageNumber);
 
     void addNewFile(AddFileDTO addFileDTO);

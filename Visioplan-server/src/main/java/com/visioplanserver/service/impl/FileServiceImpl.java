@@ -13,6 +13,7 @@ import com.visioplanserver.service.DropboxService;
 import com.visioplanserver.service.FileService;
 import com.visioplanserver.service.FloorService;
 import com.visioplanserver.service.exeption.FileNotFoundException;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -115,6 +116,7 @@ public class FileServiceImpl implements FileService {
         fileRepository.save(file);
     }
 
+    @Transactional
     @Override
     public void deleteFile(Long id) {
         fileRepository.deleteById(id);

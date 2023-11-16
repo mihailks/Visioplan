@@ -15,9 +15,9 @@ public class BuildingEntity extends BaseEntity{
     @Column(nullable = false)
     private String country;
     private String imgUrl;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private Set<CompanyEntity> companies;
-    @OneToMany(mappedBy = "building", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "building", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<FloorEntity> floors;
 
     public BuildingEntity() {

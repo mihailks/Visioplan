@@ -6,6 +6,7 @@ import com.visioplanserver.model.view.CommentsViewModel;
 import com.visioplanserver.service.CommentsService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.security.Principal;
 import java.util.List;
 
-@RestController
+//@RestController
+@Controller
 public class CommentsController {
     private final CommentsService commentsService;
 
@@ -47,6 +49,7 @@ public class CommentsController {
         commentsService.addComment(id, principal.getName(), commentsAddDTO);
 
         return "redirect:/file/all";
+
     }
 
 

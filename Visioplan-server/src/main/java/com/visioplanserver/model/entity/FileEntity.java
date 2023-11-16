@@ -32,7 +32,7 @@ public class FileEntity extends BaseEntity {
     private BuldingDocumentationPartEnum part;
     @ManyToOne
     private FloorEntity floor;
-    @OneToMany(mappedBy = "file", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "file", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<CommentsEntity> comments;
 
     public FileEntity() {

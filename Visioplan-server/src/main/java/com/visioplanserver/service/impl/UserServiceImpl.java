@@ -12,6 +12,7 @@ import com.visioplanserver.repository.UserRoleRepository;
 import com.visioplanserver.service.CompanyService;
 import com.visioplanserver.service.UserService;
 import com.visioplanserver.service.exeption.UserNotFoundException;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -40,9 +41,12 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    @Transactional
     public void registerUser(UserRegistrationDTO userRegistrationDTO) {
         UserEntity user = modelMapper.map(userRegistrationDTO, UserEntity.class);
         user.setCompany(companyService.getCompanyByName(userRegistrationDTO.companyName()));
+        user.setRole(List.of(userRoleRepository.findByRole(RolesEnum.USER)
+                .orElseThrow(() -> new IllegalArgumentException("Role USER not found!"))));
         user.setPassword(passwordEncoder.encode(userRegistrationDTO.password()));
         userRepository.save(user);
     }
@@ -69,9 +73,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
-
     }
 
     @Override

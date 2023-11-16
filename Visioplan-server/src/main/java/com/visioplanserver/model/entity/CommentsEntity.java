@@ -1,9 +1,6 @@
 package com.visioplanserver.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.apache.catalina.User;
 
 import java.time.LocalDateTime;
@@ -17,7 +14,7 @@ public class CommentsEntity extends BaseEntity{
     private String textContent;
     @Column(nullable = false)
     private LocalDateTime created;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private FileEntity file;
 
     public CommentsEntity() {

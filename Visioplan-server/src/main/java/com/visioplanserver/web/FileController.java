@@ -6,6 +6,7 @@ import com.visioplanserver.model.view.FileViewModel;
 import com.visioplanserver.service.BuildingService;
 import com.visioplanserver.service.FileService;
 import com.visioplanserver.service.FloorService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -42,12 +43,12 @@ public class FileController {
 //    }
 
     @GetMapping("/all")
-    public String getAllPages(Model model){
+    public String getAllPages(Model model) {
         return getOnePage(model, 1);
     }
 
     @GetMapping("/all/{pageNumber}")
-    public String getOnePage(Model model, @PathVariable("pageNumber") int currentPage){
+    public String getOnePage(Model model, @PathVariable("pageNumber") int currentPage) {
         Page<FileViewModel> page = fileService.findPage(currentPage);
         int totalPages = page.getTotalPages();
         Long totalFiles = page.getTotalElements();
@@ -70,6 +71,7 @@ public class FileController {
         model.addAttribute("testPrint", "testPrint");
         return "file-upload";
     }
+
     @ModelAttribute
     public void addAttributes(Model model) {
         model.addAttribute("comemnts", new CommentsViewModel());
@@ -91,6 +93,7 @@ public class FileController {
         return "redirect:/file/all";
     }
 
+    @Transactional
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id) {
         fileService.deleteFile(id);

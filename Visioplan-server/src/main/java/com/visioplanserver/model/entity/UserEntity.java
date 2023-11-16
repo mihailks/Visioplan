@@ -20,11 +20,13 @@ public class UserEntity extends BaseEntity {
     private String lastName;
     @ManyToOne
     private CompanyEntity company;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns =  @JoinColumn(name = "role_id"))
     private List<UserRoleEntity> role;
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private List<CommentsEntity> comments;
 
     public UserEntity() {
     }
@@ -91,6 +93,15 @@ public class UserEntity extends BaseEntity {
 
     public UserEntity setCompany(CompanyEntity company) {
         this.company = company;
+        return this;
+    }
+
+    public List<CommentsEntity> getComments() {
+        return comments;
+    }
+
+    public UserEntity setComments(List<CommentsEntity> comments) {
+        this.comments = comments;
         return this;
     }
 }
