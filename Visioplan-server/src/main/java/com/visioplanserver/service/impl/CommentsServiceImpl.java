@@ -32,10 +32,11 @@ public class CommentsServiceImpl implements CommentsService {
     }
 
 
-    public List<CommentsViewModel> getAllCommentsByFileId(Long fileId){
+    public List<CommentsViewModel> getAllCommentsByFileId(Long fileId) {
         return commentsRepository.getAllByFileId(fileId);
     }
-@Transactional
+
+    @Transactional
     @Override
     public void addComment(Long id, String username, CommentsAddDTO commentsAddDTO) {
         FileEntity file = fileService.findById(id);

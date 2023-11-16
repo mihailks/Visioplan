@@ -6,6 +6,7 @@ import com.visioplanserver.model.view.FileViewModel;
 import com.visioplanserver.service.BuildingService;
 import com.visioplanserver.service.FileService;
 import com.visioplanserver.service.FloorService;
+import com.visioplanserver.service.exeption.FileNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -98,5 +100,12 @@ public class FileController {
     public String delete(@PathVariable("id") Long id) {
         fileService.deleteFile(id);
         return "redirect:/file/all";
+    }
+
+    @ExceptionHandler(FileNotFoundException.class)
+    public ModelAndView handleNotFound(FileNotFoundException exception) {
+        ModelAndView modelAndView = new ModelAndView("error/file-not-found");
+        modelAndView.addObject("id", exception.getMessage());
+        return modelAndView;
     }
 }

@@ -5,6 +5,7 @@ import com.visioplanserver.model.dto.UserRegistrationDTO;
 import com.visioplanserver.model.entity.UserEntity;
 import com.visioplanserver.model.entity.UserRoleEntity;
 import com.visioplanserver.model.entity.enums.RolesEnum;
+import com.visioplanserver.model.event.UserRegisterEvent;
 import com.visioplanserver.model.view.UserViewModel;
 import com.visioplanserver.model.view.UserWithRoleViewModel;
 import com.visioplanserver.repository.UserRepository;
@@ -14,6 +15,7 @@ import com.visioplanserver.service.UserService;
 import com.visioplanserver.service.exeption.UserNotFoundException;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,14 +31,16 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final CompanyService companyService;
     private final UserRoleRepository userRoleRepository;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
 
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, CompanyService companyService, UserRoleRepository userRoleRepository) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, CompanyService companyService, UserRoleRepository userRoleRepository, ApplicationEventPublisher applicationEventPublisher) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
         this.companyService = companyService;
         this.userRoleRepository = userRoleRepository;
+        this.applicationEventPublisher = applicationEventPublisher;
     }
 
 
@@ -49,6 +53,9 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new IllegalArgumentException("Role USER not found!"))));
         user.setPassword(passwordEncoder.encode(userRegistrationDTO.password()));
         userRepository.save(user);
+        applicationEventPublisher.publishEvent(new UserRegisterEvent(
+                "UserService", userRegistrationDTO.username(), userRegistrationDTO.email()
+        ));
     }
 
     @Override
