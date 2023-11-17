@@ -5,6 +5,7 @@ import com.visioplanserver.model.dto.UserRegistrationDTO;
 import com.visioplanserver.model.entity.*;
 import com.visioplanserver.model.entity.enums.RolesEnum;
 import com.visioplanserver.model.view.UserViewModel;
+import com.visioplanserver.model.view.UserWithRoleViewModel;
 import com.visioplanserver.repository.CompanyRepository;
 import com.visioplanserver.repository.UserRepository;
 import com.visioplanserver.repository.UserRoleRepository;
@@ -20,11 +21,14 @@ import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 
@@ -65,31 +69,31 @@ class UserServiceImplTest {
     }
 
     @Test
+    void testRegisterUser() {
+        UserRegistrationDTO userRegistrationDTO = createUserRegistrationDTO();
+        UserEntity userEntity = createTestUser();
+
+        when(mockModelMapper.map(userRegistrationDTO, UserEntity.class))
+                .thenReturn(userEntity);
+
+        when(mockCompanyService.getCompanyByName(userRegistrationDTO.companyName()))
+                .thenReturn(createTestCompany());
+
+        when(mockUserRoleRepository.findByRole(RolesEnum.USER))
+                .thenReturn(Optional.of(new UserRoleEntity().setRole(RolesEnum.USER)));
+
+        when(mockPasswordEncoder.encode(userRegistrationDTO.password()))
+                .thenReturn("testPassword");
+        serviceToTest.registerUser(userRegistrationDTO);
+        verify(mockUserRepository).save(any());
+
+    }
+
+    @Test
     void userNotFoundShouldThrow() {
         assertThrows(UserNotFoundException.class, () -> {
             serviceToTest.findUserByUsername("testUsername");
         });
-    }
-
-    @Test
-    void testRegisterUser() {
-        UserRegistrationDTO userRegistrationDTO = createUserRegistrationDTO();
-
-            when(mockModelMapper.map(userRegistrationDTO, UserEntity.class))
-                    .thenReturn(createTestUser());
-
-    }
-
-    private UserRegistrationDTO createUserRegistrationDTO() {
-        return new UserRegistrationDTO(
-                "username",
-                "password",
-                "password",
-                "email",
-                "firstName",
-                "lastName",
-                "companyName");
-
     }
 
     @Test
@@ -127,24 +131,9 @@ class UserServiceImplTest {
 
     @Test
     void testDeleteUser() {
-        UserEntity testUserEntity = createTestUser();
-
-        when(mockUserRepository.save(Mockito.any(UserEntity.class)))
-                .thenReturn(testUserEntity);
-
-        mockUserRepository.save(testUserEntity);
-
-//        assertEquals(1, mockUserRepository.count());
-
-        mockUserRepository.deleteById(testUserEntity.getId());
-
-        assertEquals(0, mockUserRepository.count());
-
-//        Optional<UserEntity> byUsername = mockUserRepository.findByUsername(testUserEntity.getUsername());
-//        assertEquals(Optional.empty(), byUsername);
-
-//        System.out.println(mockUserRepository.findAll().size());
-
+       Long id = 1L;
+        serviceToTest.deleteUser(id);
+        verify(mockUserRepository).deleteById(id);
     }
 
     private UserProfileEditDTO createTestUserProfileEditDTO() {
@@ -153,6 +142,72 @@ class UserServiceImplTest {
                 .setFirstName("testFirstName")
                 .setLastName("testLastName")
                 .setEmail("testEmail");
+    }
+
+    @Test
+    void testPromoteUser() {
+        UserEntity testUserEntity = createTestUserWithRole_User();
+        UserRoleEntity userRoleEntity = createUserEntityRole();
+
+        when(mockUserRoleRepository.findByRole(RolesEnum.ADMIN))
+                .thenReturn(Optional.of(userRoleEntity));
+
+        when(mockUserRepository.findById(testUserEntity.getId()))
+                .thenReturn(Optional.of(testUserEntity));
+
+        serviceToTest.promoteUser(testUserEntity.getId());
+
+        assertEquals(2, testUserEntity.getRole().size(), "User should have 2 roles");
+    }
+
+    @Test
+    void testDemoteUser() {
+        UserEntity testUserEntity = createTestUser();
+        UserRoleEntity userRoleEntity = createUserEntityRole();
+
+        when(mockUserRoleRepository.findByRole(RolesEnum.ADMIN))
+                .thenReturn(Optional.of(userRoleEntity));
+
+        when(mockUserRepository.findById(testUserEntity.getId()))
+                .thenReturn(Optional.of(testUserEntity));
+
+        serviceToTest.demoteUser(testUserEntity.getId());
+
+        assertEquals(1, testUserEntity.getRole().size(), "User should have 2 roles");
+    }
+
+    @Test
+    void testFindUserRoleByUsername() {
+        UserEntity testUserEntity = createTestUser();
+        UserRoleEntity userRoleEntity = createUserEntityRole();
+
+        when(mockUserRepository.findByUsername(testUserEntity.getUsername()))
+                .thenReturn(Optional.of(testUserEntity));
+
+        when(mockModelMapper.map(testUserEntity, UserWithRoleViewModel.class))
+                .thenReturn(createTestUserWithRoleViewModel());
+
+        UserWithRoleViewModel userWithRoleViewModel = serviceToTest.findUserRoleByUsername(testUserEntity.getUsername());
+
+        assertEquals(testUserEntity.getUsername(), userWithRoleViewModel.getUsername(), "Username should match");
+        assertEquals(testUserEntity.getEmail(), userWithRoleViewModel.getEmail(), "Email should match");
+        assertEquals(testUserEntity.getFirstName(), userWithRoleViewModel.getFirstName(), "First name should match");
+        assertEquals(testUserEntity.getLastName(), userWithRoleViewModel.getLastName(), "Last name should match");
+        assertEquals(2, userWithRoleViewModel.getRole().size(), "User should have 2 roles");
+    }
+
+    private UserWithRoleViewModel createTestUserWithRoleViewModel() {
+        return new UserWithRoleViewModel()
+                .setUsername("testUsername")
+                .setEmail("testEmail")
+                .setFirstName("testFirstName")
+                .setLastName("testLastName")
+                .setRole(List.of(RolesEnum.ADMIN, RolesEnum.USER));
+    }
+
+    private UserRoleEntity createUserEntityRole() {
+        return new UserRoleEntity()
+                .setRole(RolesEnum.USER);
     }
 
     private UserViewModel createTestUserViewModel() {
@@ -167,6 +222,9 @@ class UserServiceImplTest {
     }
 
     private UserEntity createTestUser() {
+        List <UserRoleEntity> userRoleToAdd = new ArrayList<>();
+        userRoleToAdd.add(new UserRoleEntity().setRole(RolesEnum.ADMIN));
+        userRoleToAdd.add(new UserRoleEntity().setRole(RolesEnum.USER));
         UserEntity userEntity = new UserEntity();
         userEntity.setId(1L);
         userEntity.setUsername("testUsername")
@@ -174,10 +232,22 @@ class UserServiceImplTest {
                 .setFirstName("testFirstName")
                 .setLastName("testLastName")
                 .setCompany(createTestCompany())
-                .setRole(List.of(
-                        new UserRoleEntity().setRole(RolesEnum.ADMIN),
-                        new UserRoleEntity().setRole(RolesEnum.USER)
-                ))
+                .setRole(userRoleToAdd)
+                .setPassword("testPassword");
+        return userEntity;
+    }
+
+    private UserEntity createTestUserWithRole_User() {
+        List <UserRoleEntity> userRoleToAdd = new ArrayList<>();
+        userRoleToAdd.add(new UserRoleEntity().setRole(RolesEnum.USER));
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(1L);
+        userEntity.setUsername("testUsername")
+                .setEmail("testEmail")
+                .setFirstName("testFirstName")
+                .setLastName("testLastName")
+                .setCompany(createTestCompany())
+                .setRole(userRoleToAdd)
                 .setPassword("testPassword");
         return userEntity;
     }
@@ -207,6 +277,18 @@ class UserServiceImplTest {
                 .setCompanies(new HashSet<>())
                 .setFloors(new HashSet<>());
         return buildingEntity;
+    }
+
+    private UserRegistrationDTO createUserRegistrationDTO() {
+        return new UserRegistrationDTO(
+                "username",
+                "email",
+                "password",
+                "email",
+                "firstName",
+                "lastName",
+                "companyName");
+
     }
 
 
