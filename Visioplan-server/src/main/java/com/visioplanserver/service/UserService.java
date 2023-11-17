@@ -20,7 +20,6 @@ public interface UserService {
 
     Page<UserWithRoleViewModel> findPage(int pageNumber);
 
-
     void promoteUser(Long id);
 
     void demoteUser(Long id);

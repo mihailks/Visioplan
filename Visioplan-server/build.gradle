@@ -15,30 +15,24 @@ repositories {
     mavenCentral()
 }
 
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-
-    implementation 'org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE'
-
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
     runtimeOnly 'com.mysql:mysql-connector-j'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
 
-    implementation 'org.webjars:bootstrap:5.3.2'
-
-
     implementation 'org.modelmapper:modelmapper:3.2.0'
-    implementation "org.modelmapper:modelmapper-module-record:1.0.0"
-
 
     implementation 'com.cloudinary:cloudinary-core:1.35.0'
     implementation 'com.cloudinary:cloudinary-http44:1.35.0'
@@ -48,6 +42,8 @@ dependencies {
 
 }
 
+
 tasks.named('test') {
     useJUnitPlatform()
 }
+

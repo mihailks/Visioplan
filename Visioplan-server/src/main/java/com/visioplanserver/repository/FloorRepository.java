@@ -4,6 +4,7 @@ import com.visioplanserver.model.entity.FloorEntity;
 import com.visioplanserver.model.view.FloorNameDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,5 +20,5 @@ public interface FloorRepository extends JpaRepository<FloorEntity, Long> {
     @Query("SELECT new com.visioplanserver.model.view.FloorNameDTO(f.number) " +
             "FROM FloorEntity f " +
             "WHERE f.building.name = :buildingName")
-    List<FloorNameDTO> findAllByBuildingId(String buildingName);
+    List<FloorNameDTO> findAllByBuildingId(@Param("buildingName") String buildingName);
 }

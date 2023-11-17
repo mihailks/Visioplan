@@ -20,7 +20,6 @@ public class LoginUserDetailService implements UserDetailsService {
 
 
     @Override
-    //this is just a mapper between the user and the user details
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username)
                 .map(LoginUserDetailService::map)
