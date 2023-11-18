@@ -1,0 +1,35 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: never
+
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.org.jdbc.bind: TRACE
+
+cloudinary:
+  cloud-name: testName
+  api-key: testApiKey
+  api-secret: testApiSecret
+
+dropbox:
+  accessToken: DB-token
+
+mail:
+  visioplan: "visioplan@support.com"
+  host: localhost
+  port: 3333
+  username: testUsername
+  password: testPassword
+
+

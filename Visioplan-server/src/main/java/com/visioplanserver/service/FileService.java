@@ -13,7 +13,9 @@ public interface FileService {
 
     List<FileViewModel> getAllFiles();
 
-    Page<FileViewModel> getAllFiles(Pageable pageable);
+
+// from mobilele
+//    Page<FileViewModel> getAllFiles(Pageable pageable);
 
     Page<FileViewModel> findPage(int pageNumber);
 

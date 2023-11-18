@@ -1,6 +1,11 @@
 package com.visioplanserver.model.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public record UserRegistrationDTO(
+        @NotNull
+                @NotBlank
         String username,
         String email,
         String password,
