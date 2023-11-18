@@ -131,7 +131,7 @@ class UserServiceImplTest {
 
     @Test
     void testDeleteUser() {
-       Long id = 1L;
+        Long id = 1L;
         serviceToTest.deleteUser(id);
         verify(mockUserRepository).deleteById(id);
     }
@@ -222,7 +222,7 @@ class UserServiceImplTest {
     }
 
     private UserEntity createTestUser() {
-        List <UserRoleEntity> userRoleToAdd = new ArrayList<>();
+        List<UserRoleEntity> userRoleToAdd = new ArrayList<>();
         userRoleToAdd.add(new UserRoleEntity().setRole(RolesEnum.ADMIN));
         userRoleToAdd.add(new UserRoleEntity().setRole(RolesEnum.USER));
         UserEntity userEntity = new UserEntity();
@@ -238,7 +238,7 @@ class UserServiceImplTest {
     }
 
     private UserEntity createTestUserWithRole_User() {
-        List <UserRoleEntity> userRoleToAdd = new ArrayList<>();
+        List<UserRoleEntity> userRoleToAdd = new ArrayList<>();
         userRoleToAdd.add(new UserRoleEntity().setRole(RolesEnum.USER));
         UserEntity userEntity = new UserEntity();
         userEntity.setId(1L);
