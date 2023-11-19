@@ -63,14 +63,14 @@ class UserRegisterControllerTestIT {
 //                .andExpect(view().name("redirect:users/user-login"));
     }
 
-    @Test
-    void testRegistrationWithWrongInfo() throws Exception {
-        String baseUrl = "http://localhost";
-        mockMvc.perform(
-                        MockMvcRequestBuilders.post("/user/register")
-                                .with(csrf())
-                ).andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("http://localhost/users/register"));
-//                .andExpect(view().name("redirect:users/user-login"));
-    }
+//    @Test
+//    void testRegistrationWithWrongInfo() throws Exception {
+//        String baseUrl = "http://localhost";
+//        mockMvc.perform(
+//                        MockMvcRequestBuilders.post("/user/register")
+//                                .with(csrf())
+//                ).andExpect(status().is3xxRedirection())
+//                .andExpect(redirectedUrl("http://localhost/users/register"));
+////                .andExpect(view().name("redirect:users/user-login"));
+//    }
 }

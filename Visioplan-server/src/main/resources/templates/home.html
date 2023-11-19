@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/commons::head-bootstrap}"><title>Home page</title></head>
+
+<body>
+<header><div th:replace="~{fragments/commons::navbar}"></div></header>
+
+<div class="top-container text-center text-white pb-3 pt-3"
+     style="background-image: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(22, 33, 65, 1) 80%, rgba(0, 212, 255, 1) 100%)">
+    <section class="hero">
+        <h1 class="main-title">Visioplan is the help you need.</h1>
+        <h1 class="main-title">We bring your plans to life</h1>
+        <p class="hero-info">Visioplan is a project management tool that helps you plan your projects and keep track of
+            your progress.</p>
+    </section>
+</div>
+
+<!--<section class="row text-center">-->
+<!--        <h1 class="main-title">What we offer</h1>-->
+<!--        <h2 class="sub-title">ALIQUAM ID URNA IMPERDIET LIBERO MOLLIS HENDRERIT</h2>-->
+<!--</section>-->
+<section class="card-group gap-5 p-lg-5" style="background-image: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(22, 33, 65, 1) 80%, rgba(0, 212, 255, 1) 100%)">
+        <article class="card mb-4">
+            <div class="row">
+                <img src="/images/img_01.png" class="card-img-top" alt="plan view">
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Plan review</h3>
+                <p class="card-text">Sed tincidunt dictum lobortis. Aenean tempus diam vel augue luctus dignissim. Nunc
+                    ornare leo tortor.
+                </p>
+                <button class="btn">READ MORE</button>
+            </div>
+        </article>
+
+        <article class="card mb-4">
+            <div class="card">
+                <img src="/images/img_02.png" class="card-img-top" alt="schema">
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Schema Review</h3>
+                <p class="card-text">Sed tincidunt dictum lobortis. Aenean tempus diam vel augue luctus dignissim. Nunc
+                    ornare leo tortor.
+                </p>
+                <button class="btn">READ MORE</button>
+            </div>
+        </article>
+
+        <article class="card mb-4">
+            <div class="row">
+                <img src="/images/img_03.png" class="card-img-top" alt="data sheet">
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Data Sheets</h3>
+                <p class="card-text">Sed tincidunt dictum lobortis. Aenean tempus diam vel augue luctus dignissim. Nunc
+                    ornare leo tortor.
+                </p>
+                <button class="btn">READ MORE</button>
+            </div>
+        </article>
+
+</section>
+
+<div class="container-fluid" style="position: relative">
+<footer th:replace="~{fragments/commons::footer}" style="position: relative" class="container-fluid"></footer>
+</div>
+</body>
+</html>

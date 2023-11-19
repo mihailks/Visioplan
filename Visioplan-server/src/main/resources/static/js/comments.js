@@ -19,6 +19,9 @@ async function loadComments(e) {
     });
 }
 
+
+
+
 function cleanComments(e) {
     let id = e.target.value;
     let container = document.getElementById(`comments-${id}`);
