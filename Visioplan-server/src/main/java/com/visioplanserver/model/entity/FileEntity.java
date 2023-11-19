@@ -34,6 +34,8 @@ public class FileEntity extends BaseEntity {
     private FloorEntity floor;
     @OneToMany(mappedBy = "file", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<CommentsEntity> comments;
+    @ManyToOne
+    private UserEntity uploader;
 
     public FileEntity() {
     }
@@ -117,6 +119,15 @@ public class FileEntity extends BaseEntity {
 
     public FileEntity setComments(Set<CommentsEntity> comments) {
         this.comments = comments;
+        return this;
+    }
+
+    public UserEntity getUploader() {
+        return uploader;
+    }
+
+    public FileEntity setUploader(UserEntity uploader) {
+        this.uploader = uploader;
         return this;
     }
 }

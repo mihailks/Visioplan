@@ -1,116 +1,127 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/commons::head-bootstrap}"><title>Register company</title></head>
 
 <body>
 
 <header>
     <div th:replace="~{fragments/commons::navbar}"></div>
+</header>
 
-<div class="container">
-    <h2 class="text-center text-white">Register company</h2>
+<article class="my-5 w-50 max-width: 50% mx-auto" id="file-add">
+
     <form th:action="@{/company/register}"
           th:method="POST"
           th:object="${companyRegistrationDTO}"
-          class="form-myForm mx-auto col-md-8 d-flex flex-column justify-content-center">
-        <div class="row">
-            <div class="form-group col-md-6 mb-3">
-                <label for="name" class="text-white font-weight-bold">Name</label>
-                <input id="name"
-                       th:field="*{name}"
-                       type="text"
-                       class="form-control"
-                       placeholder="Name"/>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Username name is required.
-                </p>
-            </div>
-            <div class="form-group col-md-6 mb-3">
-                <label for="address" class="text-white font-weight-bold">Address</label>
-                <input id="address"
-                       th:field="*{address}"
+          class="row g-3">
 
-                       type="text"
-                       class="form-control"
-                       placeholder="Address"/>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Email is required.
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-6 mb-3">
-                <label for="city" class="text-white font-weight-bold">City</label>
-                <input id="city"
-                       th:field="*{city}"
-                       type="text"
-                       class="form-control"
-                       placeholder="City"/>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Username name is required.
-                </p>
-            </div>
-            <div class="form-group col-md-6 mb-3">
-                <label for="country" class="text-white font-weight-bold">Country</label>
-                <input id="country"
-                       th:field="*{country}"
-
-                       type="text"
-                       class="form-control"
-                       placeholder="Country"/>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Email is required.
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-6 mb-3">
-                <label for="phone" class="text-white font-weight-bold">Phone</label>
-                <input id="phone"
-                       th:field="*{phone}"
-                       type="text"
-                       class="form-control"
-                       placeholder="Phone"/>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Username name is required.
-                </p>
-            </div>
-            <div class="form-group col-md-6 mb-3">
-                <label for="email" class="text-white font-weight-bold">Email</label>
-                <input id="email"
-                       th:field="*{email}"
-
-                       type="text"
-                       class="form-control"
-                       placeholder="Email"/>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Email is required.
-                </p>
-            </div>
+        <div class="col-md-6">
+            <label for="name" class="form-label text-black font-weight-bold">Name</label>
+            <input id="name"
+                   th:field="*{name}"
+                   th:errorclass="is-invalid"
+                   type="text"
+                   class="form-control"
+                   placeholder="Name"/>
+            <p th:if="${#fields.hasErrors('name')}"
+                th:errors="*{name}"
+                    class="invalid-feedback errors alert alert-danger">
+                Username name is required.
+            </p>
         </div>
 
-        <div class="row">
-            <div class="form-group col-md-6 mb-3">
-                <label for="website" class="text-white font-weight-bold">Website</label>
-                <input id="website"
-                       th:field="*{website}"
-                       type="text"
-                       class="form-control"
-                       placeholder="Website"/>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Username name is required.
-                </p>
-            </div>
+        <div class="col-md-6">
+            <label for="address" class="form-label text-black font-weight-bold">Address</label>
+            <input id="address"
+                   th:field="*{address}"
+                   th:errorclass="is-invalid"
+                   type="text"
+                   class="form-control"
+                   placeholder="Address"/>
+            <p th:if="${#fields.hasErrors('address')}"
+               th:errors="*{address}"
+               class="invalid-feedback errors alert alert-danger">
+                Email is required.
+            </p>
+        </div>
+
+        <div class="col-md-6">
+            <label for="city" class="form-label text-black font-weight-bold">City</label>
+            <input id="city"
+                   th:field="*{city}"
+                   th:errorclass="is-invalid"
+                   type="text"
+                   class="form-control"
+                   placeholder="City"/>
+            <p class="invalid-feedback errors alert alert-danger">
+                Username name is required.
+            </p>
+        </div>
+
+        <div class="col-md-6">
+            <label for="country" class="form-label text-black font-weight-bold">Country</label>
+            <input id="country"
+                   th:field="*{country}"
+                   th:errorclass="is-invalid"
+                   type="text"
+                   class="form-control"
+                   placeholder="Country"/>
+            <p class="invalid-feedback errors alert alert-danger">
+                Email is required.
+            </p>
+        </div>
+
+        <div class="col-md-6">
+            <label for="phone" class="form-label text-black font-weight-bold">Phone</label>
+            <input id="phone"
+                   th:field="*{phone}"
+                   th:errorclass="is-invalid"
+                   type="text"
+                   class="form-control"
+                   placeholder="Phone"/>
+            <p class="invalid-feedback errors alert alert-danger">
+                Username name is required.
+            </p>
+        </div>
+
+        <div class="col-md-6">
+            <label for="email" class="form-label text-black font-weight-bold">Email</label>
+            <input id="email"
+                   th:field="*{email}"
+                   th:errorclass="is-invalid"
+                   type="text"
+                   class="form-control"
+                   placeholder="Email"/>
+            <p class="invalid-feedback errors alert alert-danger">
+                Email is required.
+            </p>
+
         </div>
 
 
-        <div class="row">
-            <div class="col col-md-4">
-                <div class="button-holder">
-                    <input type="submit" class="btn btn-info btn-lg" value="Register"/>
-                </div>
+        <div class="form-group col-md-6 mb-3">
+            <label for="website" class="form-label text-black font-weight-bold">Website</label>
+            <input id="website"
+                   th:field="*{website}"
+                   th:errorclass="is-invalid"
+                   type="text"
+                   class="form-control"
+                   placeholder="Website"/>
+            <p class="invalid-feedback errors alert alert-danger">
+                Username name is required.
+            </p>
+        </div>
+
+
+        <div class="col-md-12">
+            <div class="col-md-12 text-center">
+                <input type="submit" class="btn btn-primary" value="Register"/>
             </div>
         </div>
+
     </form>
-</div>
+</article>
 
 <footer th:replace="~{fragments/commons::footer}"></footer>
 </body>

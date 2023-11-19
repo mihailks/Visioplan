@@ -4,6 +4,7 @@ import com.visioplanserver.model.dto.AddFileDTO;
 import com.visioplanserver.model.entity.BuildingEntity;
 import com.visioplanserver.model.entity.FileEntity;
 import com.visioplanserver.model.entity.FloorEntity;
+import com.visioplanserver.model.entity.UserEntity;
 import com.visioplanserver.model.entity.enums.BuldingDocumentationPartEnum;
 import com.visioplanserver.model.entity.enums.DrawingTypeEnum;
 import com.visioplanserver.model.entity.enums.FileExtensionEnum;
@@ -14,6 +15,7 @@ import com.visioplanserver.service.BuildingService;
 import com.visioplanserver.service.DropboxService;
 import com.visioplanserver.service.FloorService;
 import com.visioplanserver.service.exeption.FileNotFoundException;
+import org.apache.catalina.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,6 +26,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
@@ -51,11 +54,13 @@ class FileServiceImplTest {
     @Mock
     private FloorService mockFloorService;
     @Mock
+    private UserServiceImpl mockUserService;
+    @Mock
     ModelMapper mockModelMapper;
 
     @BeforeEach
     void setUp() {
-        serviceToTest = new FileServiceImpl(mockFileRepository, mockModelMapper, mockDropboxService, mockBuildingService, mockFloorService);
+        serviceToTest = new FileServiceImpl(mockFileRepository, mockModelMapper, mockDropboxService, mockBuildingService, mockFloorService, mockUserService);
     }
 
     @Test
@@ -106,6 +111,7 @@ class FileServiceImplTest {
         AddFileDTO addFileDTO = createTestAddFileDTO();
         FileEntity fileEntity = createTestFile();
 
+
         when(mockModelMapper.map(addFileDTO, FileEntity.class))
                 .thenReturn(fileEntity);
         when(mockFileRepository.save(fileEntity))
@@ -115,7 +121,7 @@ class FileServiceImplTest {
         when(mockFloorService.getFloorIdByNameAndBuildingId(any(), any()))
                 .thenReturn(createTestFloor());
 
-        serviceToTest.addNewFile(addFileDTO);
+        serviceToTest.addNewFile(addFileDTO, null ); //TODO: fix this test
         verify(mockFileRepository).save(any());
     }
 

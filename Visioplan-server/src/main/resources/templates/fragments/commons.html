@@ -143,8 +143,14 @@
 <nav class="navbar navbar-expand-lg rounded" aria-label="Eleventh navbar example" th:fragment="navbar"
 >
     <div class="container-fluid">
+        <th:block sec:authorize="!isAuthenticated()">
         <a class="navbar-brand me-2" th:href="@{/}"><img class="img-fluid" src="/images/logo-white.png"
                                                          alt="company-logo" style="max-width: 200px"></a>
+        </th:block>
+            <th:block sec:authorize="isAuthenticated()">
+        <a class="navbar-brand me-2" th:href="@{/home}"><img class="img-fluid" src="/images/logo-white.png"
+                                                         alt="company-logo" style="max-width: 200px"></a>
+            </th:block>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-text"
                 aria-controls="navbar-text" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

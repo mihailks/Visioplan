@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/commons::head-bootstrap}"><title>all files</title></head>
+<style>
+    .form-my {
+        padding: 0;
+        margin: 0;
+    }
+
+    /*.submit-my{*/
+    /*    !*display: none;*!*/
+    /*    display: inline-block;*/
+    /*}*/
+    /*.form-my{*/
+    /*    display: inline-block;*/
+    /*}*/
+    .comment-submit-container {
+        display: flex;
+
+    }
+</style>
+<body>
+
+<header>
+    <div th:replace="~{fragments/commons::navbar}"></div>
+</header>
+
+<h1>all projects show here</h1>
+<div class="table-responsive m-5">
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th class="text-center" scope="col">Part</th>
+            <th class="text-center" scope="col">Floor</th>
+            <th class="text-center" scope="col">File name</th>
+            <th class="text-center" scope="col">Extension</th>
+            <th class="text-center" scope="col">Upload Date</th>
+            <th class="text-center" scope="col">Comments</th>
+            <th class="text-center" scope="col">White a comment</th>
+            <th class="text-center" scope="col">Link</th>
+            <th class="text-center" scope="col">Delete</th>
+
+        </tr>
+        </thead>
+        <tbody class="table-group-divider">
+        <tr th:each="f :${files}" th:object="${f}">
+            <td class="align-middle col-md-auto" th:text="*{part}">cell3_1</td>
+            <td class="align-middle col-md-auto" th:text="*{floor}">cell2_1</td>
+            <td class="align-middle col-md-auto" th:text="*{name}">cell1_1</td>
+            <td class="align-middle col-md-auto" th:text="*{extension}">cell4_1</td>
+            <td class="align-middle col-md-auto" th:text="${#temporals.format(f.uploadDate, 'dd-MM-yyyy HH:mm')}">
+                cell5_1
+            </td>
+            <td class="align-middle col-md-auto text-center">
+                <!--                <a th:href="@{/api/{id}/comments(id=*{id})}"-->
+                <!--                   class="btn btn-outline-success"-->
+                <!--                   id="comments-btn"-->
+                <!--                   target="_blank"-->
+                <!--                   th:text="*{commentsCounter}">commentsCounter</a>-->
+                <button class="comments-btn btn btn-outline-success" th:value="*{id}" th:text="*{commentsCounter}">
+                    number of comments
+
+                </button>
+
+                <div th:id="'comments-' + *{id}" th:classappend="*{id}"></div>
+
+            </td>
+
+            <td class="align-middle">
+
+                <form class="comment-submit-container"
+                      th:method="POST"
+                      th:action="@{/comment/add/{id}(id=*{id})}">
+                    <textarea type="text"
+                              th:field="${comemnts.textContent}"
+                              class="form-control form-my"
+                              th:id="'white-' + *{id}"
+                              placeholder="Enter your comment here">
+                    </textarea>
+                    <button class="comments-btn btn btn-outline-success submit-my"
+                            th:id="'submit-btn' + *{id}"
+                            th:value="*{id}"
+                    >submit</button>
+                </form>
+
+            </td>
+
+            <td class="align-middle col-md-1 text-center">
+
+                <a th:href="*{url}"
+                   class="btn btn-outline-success"
+                   target="_blank">Download</a>
+            </td>
+            <td class="align-middle col-md-auto text-center">
+                <form th:method="DELETE"
+                      th:action="@{/file/delete/{id}(id=*{id})}">
+                    <input type="submit" id="delete-btn" value="Delete" class="btn btn-outline-danger">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<nav aria-label="file-pages">
+
+    <ul class="pagination justify-content-center">
+
+        <li class="page-item">
+            <a class="page-link" th:href="@{'/file/' + ${buildingName}}">First</a>
+        </li>
+
+        <li class="page-item" th:if="${currentPage > 1}">
+            <a class="page-link" th:href="@{'/file/' + ${buildingName} + '/' + ${currentPage - 1}}">Previous</a>
+        </li>
+
+
+        <li class="page-item" th:each="page : ${#numbers.sequence(1,totalPages)}">
+            <a class="page-link" th:href="@{'/file/' + ${buildingName} + '/' + ${page}}">[[${page}]]</a>
+        </li>
+
+
+        <li class="page-item" th:if="${currentPage < totalPages}">
+            <a class="page-link" th:href="@{'/file/' + ${buildingName} + '/' + ${currentPage + 1}}">Next</a>
+        </li>
+
+        <li class="page-item" th:if="${currentPage < totalPages}">
+            <a class="page-link" th:href="@{'/file/' + ${buildingName} + '/' + ${totalPages}}">Last</a>
+        </li>
+    </ul>
+    <p class="text-center">Total files found: [[${totalFiles}]] : Page [[${currentPage}]] of [[${totalPages}]]</p>
+</nav>
+
+<footer th:replace="~{fragments/commons::footer}"></footer>
+<script th:src="@{/js/comments.js}"></script>
+</body>
+</html>
+

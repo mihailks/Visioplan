@@ -10,6 +10,8 @@ import com.visioplanserver.service.exeption.FileNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -49,9 +51,30 @@ public class FileController {
         return getOnePage(model, 1);
     }
 
+
     @GetMapping("/all/{pageNumber}")
     public String getOnePage(Model model, @PathVariable("pageNumber") int currentPage) {
         Page<FileViewModel> page = fileService.findPage(currentPage);
+        pageDetails(model, currentPage, page);
+        return "files-all";
+    }
+
+
+    @GetMapping("/{buildingName}")
+    public String getAllPages(Model model, @PathVariable("buildingName") String buildingName) {
+        return getOnePage(model, 1, buildingName);
+    }
+
+    @GetMapping("/{buildingName}/{pageNumber}")
+    public String getOnePage(Model model, @PathVariable("pageNumber") int currentPage, @PathVariable("buildingName") String buildingName) {
+        Page<FileViewModel> page = fileService.findPage(currentPage, buildingName);
+        model.addAttribute("buildingName", buildingName);
+        pageDetails(model, currentPage, page);
+        return "files-all-per-building";
+    }
+
+
+    private void pageDetails(Model model, @PathVariable("pageNumber") int currentPage, Page<FileViewModel> page) {
         int totalPages = page.getTotalPages();
         Long totalFiles = page.getTotalElements();
         List<FileViewModel> files = page.getContent();
@@ -60,8 +83,8 @@ public class FileController {
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("totalFiles", totalFiles);
         model.addAttribute("files", files);
-        return "files-all";
     }
+
 
     @GetMapping("/add")
     public String allProjects(Model model) {
@@ -82,7 +105,8 @@ public class FileController {
     @PostMapping("/add")
     public String addFile(@Valid AddFileDTO addFileDTO,
                           BindingResult bindingResult,
-                          RedirectAttributes redirectAttributes) {
+                          RedirectAttributes redirectAttributes,
+                          @AuthenticationPrincipal UserDetails uploader) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addFileDTO", addFileDTO);
@@ -90,7 +114,7 @@ public class FileController {
             return "redirect:add";
         }
 
-        fileService.addNewFile(addFileDTO);
+        fileService.addNewFile(addFileDTO, uploader);
 
         return "redirect:/file/all";
     }

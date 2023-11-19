@@ -2,6 +2,7 @@ package com.visioplanserver.web;
 
 import com.visioplanserver.model.dto.CompanyRegistrationDTO;
 import com.visioplanserver.service.CompanyService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,7 +31,7 @@ public class CompanyController {
     }
 
     @PostMapping("/register")
-    public String register(CompanyRegistrationDTO companyRegistrationDTO,
+    public String register(@Valid CompanyRegistrationDTO companyRegistrationDTO,
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes) {
 

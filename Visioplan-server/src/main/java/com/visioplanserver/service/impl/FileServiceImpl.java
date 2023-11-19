@@ -3,21 +3,22 @@ package com.visioplanserver.service.impl;
 import com.visioplanserver.model.dto.AddFileDTO;
 import com.visioplanserver.model.entity.FileEntity;
 import com.visioplanserver.model.entity.FloorEntity;
+import com.visioplanserver.model.entity.UserEntity;
 import com.visioplanserver.model.entity.enums.DrawingTypeEnum;
 import com.visioplanserver.model.entity.enums.FileExtensionEnum;
 import com.visioplanserver.model.entity.enums.TextFileTypeEnum;
 import com.visioplanserver.model.view.FileViewModel;
 import com.visioplanserver.repository.FileRepository;
-import com.visioplanserver.service.BuildingService;
-import com.visioplanserver.service.DropboxService;
-import com.visioplanserver.service.FileService;
-import com.visioplanserver.service.FloorService;
+import com.visioplanserver.service.*;
 import com.visioplanserver.service.exeption.FileNotFoundException;
 import jakarta.transaction.Transactional;
+import org.apache.catalina.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,14 +36,16 @@ public class FileServiceImpl implements FileService {
     private final DropboxService dropboxService;
     private final BuildingService buildingService;
     private final FloorService floorService;
+    private final UserService userService;
 
 
-    public FileServiceImpl(FileRepository fileRepository, ModelMapper modelMapper, DropboxService dropboxService, BuildingService buildingService, FloorService floorService) {
+    public FileServiceImpl(FileRepository fileRepository,ModelMapper modelMapper, DropboxService dropboxService, BuildingService buildingService, FloorService floorService, UserService userService) {
         this.fileRepository = fileRepository;
         this.modelMapper = modelMapper;
         this.dropboxService = dropboxService;
         this.buildingService = buildingService;
         this.floorService = floorService;
+        this.userService = userService;
     }
 
     @Override
@@ -79,7 +82,19 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public void addNewFile(AddFileDTO addFileDTO) {
+    public Page<FileViewModel> findPage(int pageNumber, String buildingName) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 10);
+        return fileRepository.findAllByFloor_Building_Name(buildingName, pageable)
+                .map(file -> {
+                    FileViewModel fileViewModel = modelMapper.map(file, FileViewModel.class);
+                    fileViewModel.setFloor(file.getFloor().getNumber());
+                    fileViewModel.setCommentsCounter(file.getComments().size());
+                    return fileViewModel;
+                });
+    }
+
+    @Override
+    public void addNewFile(AddFileDTO addFileDTO, UserDetails uploader) {
         MultipartFile dataFile = addFileDTO.dataFile();
 //        upload to dropbox
         String dataFileUrl = dropboxService.upload(dataFile);
@@ -102,6 +117,8 @@ public class FileServiceImpl implements FileService {
         //get floor id
         String floorName = addFileDTO.floor();
         FloorEntity floorId = floorService.getFloorIdByNameAndBuildingId(floorName, buildingId);
+        //get uploader
+        UserEntity user = userService.findUserByUsernameEntity(uploader.getUsername());
 
         FileEntity file = modelMapper.map(addFileDTO, FileEntity.class);
         file.setFloor(floorId)
@@ -112,7 +129,8 @@ public class FileServiceImpl implements FileService {
                 .setTextFileType(file.getTextFileType() == null ? TextFileTypeEnum.NOT_SPECIFIED : file.getTextFileType())
                 .setDrawingType(file.getDrawingType() == null ? DrawingTypeEnum.NOT_SPECIFIED : file.getDrawingType())
                 .setComments(new HashSet<>())
-                .setExtension(fileExtensionEnum);
+                .setExtension(fileExtensionEnum)
+                .setUploader(user);
         fileRepository.save(file);
     }
 
