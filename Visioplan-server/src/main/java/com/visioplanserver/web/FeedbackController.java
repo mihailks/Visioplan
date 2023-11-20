@@ -42,6 +42,33 @@ public class FeedbackController {
                 feedbackViewModel.getEmail(),
                 feedbackViewModel.getFeedback());
 
+        return "redirect:/home";
+    }
+
+    @GetMapping("/contact")
+    public String contact(Model model) {
+        if (!model.containsAttribute("feedbackViewModel")){
+            model.addAttribute("feedbackViewModel", new FeedbackViewModel());
+        }
+        return "contact";
+    }
+
+    @PostMapping("/contact")
+    public String contact(@Valid FeedbackViewModel feedbackViewModel,
+                                 BindingResult bindingResult,
+                                 RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()){
+            redirectAttributes.addFlashAttribute("feedbackViewModel", feedbackViewModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.feedbackViewModel", bindingResult);
+            return "redirect:contact";
+        }
+
+        emailService.sendFeedback(
+                feedbackViewModel.getName(),
+                feedbackViewModel.getEmail(),
+                feedbackViewModel.getFeedback());
+
         return "redirect:/";
     }
 

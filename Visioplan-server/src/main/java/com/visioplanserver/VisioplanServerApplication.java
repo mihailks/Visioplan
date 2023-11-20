@@ -22,7 +22,6 @@ public class VisioplanServerApplication {
 //
 //        FullAccount account = client.users().getCurrentAccount();
 //        System.out.println(account.getName().getDisplayName());
-
     }
 
 }

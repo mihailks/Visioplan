@@ -1,6 +1,8 @@
 package com.visioplanserver.web;
 
 import com.visioplanserver.model.dto.CompanyRegistrationDTO;
+import com.visioplanserver.model.view.CompanyNameViewModel;
+import com.visioplanserver.model.view.CompanyViewModel;
 import com.visioplanserver.service.CompanyService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/company")
@@ -44,6 +48,14 @@ public class CompanyController {
         companyService.register(companyRegistrationDTO);
         return "redirect:/";
     }
+
+    @GetMapping("/all")
+    public String getAll(Model model) {
+        List<CompanyViewModel> allCompanies = companyService.getAllCompaniesDetails();
+        model.addAttribute("companies", allCompanies);
+        return "companies-all";
+    }
+
 
 
 }

@@ -3,6 +3,7 @@ package com.visioplanserver.service.impl;
 import com.visioplanserver.model.dto.CompanyRegistrationDTO;
 import com.visioplanserver.model.entity.CompanyEntity;
 import com.visioplanserver.model.view.CompanyNameViewModel;
+import com.visioplanserver.model.view.CompanyViewModel;
 import com.visioplanserver.repository.CompanyRepository;
 import com.visioplanserver.service.CompanyService;
 import com.visioplanserver.service.exeption.CompanyNotFoundException;
@@ -37,6 +38,12 @@ public class CompanyServiceImpl implements CompanyService {
         return companyRepository.findAll().stream()
                 .map(companyEntity -> modelMapper.map(companyEntity, CompanyNameViewModel.class))
                 .toList();
+    }
+
+    @Override
+    public List<CompanyViewModel> getAllCompaniesDetails() {
+        List<CompanyViewModel> companiesDetails = companyRepository.getAllCompaniesDetails();
+        return companiesDetails;
     }
 
     @Override
