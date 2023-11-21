@@ -179,7 +179,7 @@
                 </li>
             </ul>
 
-            <ul class="navbar-nav">
+            <ul class="navbar-nav mb-2 mb-lg-0 gap-3">
                 <th:block sec:authorize="isAuthenticated()">
                     <li class="nav-item"><a class="nav-link text-black" th:href="@{/user/profile}">Profile</a></li>
 
@@ -226,7 +226,7 @@
                                     <a class="nav-link text-black" sec:authorize="hasRole('ADMIN')" th:href="@{/file/all}">files_all</a>
                                 </li>
                                 <li class="dropdown-item">
-                                    <a class="nav-link text-black" th:href="@{/file/add}">files_add</a>
+                                    <a class="nav-link text-black" th:href="@{/file/add}">Add new File</a>
                                 </li>
                             </ul>
                         </li>
@@ -240,8 +240,8 @@
                 </th:block>
 
                 <th:block sec:authorize="!isAuthenticated()">
-                    <li class="btn btn-outline-dark"><a th:href="@{/users/login}">Login</a></li>
-                    <li class="btn btn-outline-dark"><a th:href="@{/users/register}">Register</a></li>
+                    <li class="nav-item btn btn-outline-dark"><a th:href="@{/users/login}">Login</a></li>
+                    <li class="nav-item btn btn-outline-dark"><a th:href="@{/users/register}">Register</a></li>
                 </th:block>
             </ul>
         </div>

@@ -1,23 +1,18 @@
 package com.visioplanserver.service.impl;
 
 import com.visioplanserver.model.dto.AddBuildingDTO;
-import com.visioplanserver.model.dto.UserRegistrationDTO;
 import com.visioplanserver.model.entity.BuildingEntity;
 import com.visioplanserver.model.entity.FloorEntity;
-import com.visioplanserver.model.entity.UserEntity;
-import com.visioplanserver.model.entity.UserRoleEntity;
-import com.visioplanserver.model.entity.enums.RolesEnum;
 import com.visioplanserver.model.view.BuildingNameDTO;
 import com.visioplanserver.model.view.BuildingViewModel;
 import com.visioplanserver.repository.BuildingRepository;
 import com.visioplanserver.service.CloudImageService;
+import com.visioplanserver.service.CompanyService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.mock.web.MockMultipartFile;
@@ -42,10 +37,12 @@ class BuildingServiceImplTest {
     ModelMapper mockModelMapper;
     @Mock
     CloudImageService mockCloudImageService;
+    @Mock
+    CompanyService companyService;
 
     @BeforeEach
     void setUp() {
-        buildingService = new BuildingServiceImpl(mockBuildingRepository, mockModelMapper, mockCloudImageService);
+        buildingService = new BuildingServiceImpl(mockBuildingRepository, mockModelMapper, mockCloudImageService, companyService);
 //        MockitoAnnotations.openMocks(this);
     }
 

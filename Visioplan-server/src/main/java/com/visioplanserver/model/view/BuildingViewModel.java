@@ -3,31 +3,63 @@ package com.visioplanserver.model.view;
 import java.util.Set;
 
 public class BuildingViewModel {
-    private String id;
+    private Long id;
     private String name;
     private String address;
     private String city;
     private String country;
     private String imgUrl;
-    private Set<CompanyNameViewModel> companies;
+//    private Set<CompanyNameViewModel> companies;
+    private CompanyNameViewModel company;
 
     private Set<FloorViewModel> floors;
 
-    public String getId() {
+    public BuildingViewModel() {
+    }
+
+    public BuildingViewModel(Long id, String name, String address, String city, String country, String imgUrl) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.city = city;
+        this.country = country;
+        this.imgUrl = imgUrl;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public BuildingViewModel setId(String id) {
+    public BuildingViewModel setId(Long id) {
         this.id = id;
         return this;
     }
 
-    public Set<CompanyNameViewModel> getCompanies() {
-        return companies;
+//    public Set<CompanyNameViewModel> getCompanies() {
+//        return companies;
+//    }
+//
+//    public BuildingViewModel setCompanies(Set<CompanyNameViewModel> companies) {
+//        this.companies = companies;
+//        return this;
+//    }
+
+
+    public CompanyNameViewModel getCompany() {
+        return company;
     }
 
-    public BuildingViewModel setCompanies(Set<CompanyNameViewModel> companies) {
-        this.companies = companies;
+    public BuildingViewModel setCompany(CompanyNameViewModel company) {
+        this.company = company;
+        return this;
+    }
+
+    public Set<FloorViewModel> getFloors() {
+        return floors;
+    }
+
+    public BuildingViewModel setFloors(Set<FloorViewModel> floors) {
+        this.floors = floors;
         return this;
     }
 
@@ -67,8 +99,6 @@ public class BuildingViewModel {
         return this;
     }
 
-    public BuildingViewModel() {
-    }
 
     public String getImgUrl() {
         return imgUrl;

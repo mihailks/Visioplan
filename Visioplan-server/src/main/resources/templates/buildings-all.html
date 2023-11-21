@@ -20,16 +20,15 @@
             <th class="align-middle" scope="col">City</th>
             <th class="align-middle" scope="col">Country</th>
             <th class="align-middle" scope="col">URL</th>
-            <th class="align-middle" scope="col">Upload Date</th>
         </tr>
         </thead>
         <tbody class="table-group-divider">
         <tr th:each="b :${buildings}" th:object="${b}">
-            <td class="align-middle col-md-auto" th:text="*{name}">cell3_1</td>
-            <td class="align-middle col-md-3" th:text="*{address}">cell2_1</td>
-            <td class="align-middle col-md-auto" th:text="*{city}">cell1_1</td>
-            <td class="align-middle col-md-auto" th:text="*{country}">cell6_1</td>
-            <td class="align-middle col-md-6" th:text="*{imgUrl}">cell7_1</td>
+            <td class="align-middle col-md-1" th:text="*{name}">cell3_1</td>
+            <td class="align-middle col-md-1" th:text="*{address}">cell2_1</td>
+            <td class="align-middle col-md-1" th:text="*{city}">cell1_1</td>
+            <td class="align-middle col-md-1" th:text="*{country}">cell6_1</td>
+            <td class="align-middle col-md-1" th:text="*{imgUrl}">cell7_1</td>
 
 <!--            <td class="align-middle col-md-auto">-->
 <!--                <form th:method="DELETE"-->

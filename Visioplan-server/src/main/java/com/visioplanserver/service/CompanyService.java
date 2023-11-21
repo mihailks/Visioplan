@@ -17,5 +17,5 @@ public interface CompanyService {
 
     CompanyEntity getCompanyByName(String companyName);
 
-
+    CompanyNameViewModel findCompanyByEmployeeName(String username);
 }

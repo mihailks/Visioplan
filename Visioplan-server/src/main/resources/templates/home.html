@@ -4,6 +4,16 @@
 
 <head th:replace="~{fragments/commons::head-bootstrap}"><title>Home page</title></head>
 
+<style>
+    .img-container-my {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        height: 200px;
+
+    }
+</style>
 <body>
 <header>
     <div th:replace="~{fragments/commons::navbar}"></div>
@@ -19,9 +29,9 @@
                     <div class="card-body">
                         <h3 class="card-text text-center" th:text="*{name}"></h3>
 
-                        <div class=" p-0 overflow-hidden shadow-lg mb-5 rounded-2">
-                            <img class="img-fluid mb-5" th:src="*{imgUrl}" alt="building-photo">
-<!--                                 style="width: 450px; height: 450px">-->
+                        <div class="p-0 overflow-hidden shadow-lg mb-5 rounded-2 text-center img-container-my">
+                            <img class="img-fluid" th:src="*{imgUrl}" alt="building-photo">
+                            <!--                                 style="width: 450px; height: 450px">-->
                         </div>
 
                         <div class="d-flex justify-content-between align-items-center">

@@ -17,4 +17,5 @@ public interface BuildingService {
 
     List<BuildingNameDTO> getAllBuildingsNames();
 
+    List<BuildingViewModel> getAllBuildingsByCompanyName(String username);
 }

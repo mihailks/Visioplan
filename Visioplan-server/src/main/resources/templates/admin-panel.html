@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments/commons::head-bootstrap}"><title>Home page</title></head>
+
+<style>
+    .img-container-my {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        height: 200px;
+
+    }
+</style>
+<body>
+<header>
+    <div th:replace="~{fragments/commons::navbar}"></div>
+</header>
+
+<div class="container text-center mt-5">
+    <div class="row">
+        <h3 class="text-center mb-5">Welcome to the admin panel</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Total buildings
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">42</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Total companies
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">73</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Total users
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">180</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Total documents
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">42</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="position: relative">
+    <footer th:replace="~{fragments/commons::footer}" style="position: relative" class="container-fluid"></footer>
+</div>
+</body>
+</html>

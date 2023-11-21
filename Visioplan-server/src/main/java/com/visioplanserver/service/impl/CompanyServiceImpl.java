@@ -50,4 +50,9 @@ public class CompanyServiceImpl implements CompanyService {
     public CompanyEntity getCompanyByName(String companyName) {
         return companyRepository.findByName(companyName).orElseThrow(() -> new CompanyNotFoundException("Company not found"));
     }
+
+    @Override
+    public CompanyNameViewModel findCompanyByEmployeeName(String username) {
+        return companyRepository.findCompanyByEmployeeName(username);
+    }
 }

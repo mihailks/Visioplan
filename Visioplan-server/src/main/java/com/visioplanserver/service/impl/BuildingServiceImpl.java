@@ -5,10 +5,11 @@ import com.visioplanserver.model.entity.BuildingEntity;
 import com.visioplanserver.model.entity.FloorEntity;
 import com.visioplanserver.model.view.BuildingNameDTO;
 import com.visioplanserver.model.view.BuildingViewModel;
-import com.visioplanserver.model.view.FloorNameDTO;
+import com.visioplanserver.model.view.CompanyNameViewModel;
 import com.visioplanserver.repository.BuildingRepository;
 import com.visioplanserver.service.BuildingService;
 import com.visioplanserver.service.CloudImageService;
+import com.visioplanserver.service.CompanyService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,11 +23,13 @@ public class BuildingServiceImpl implements BuildingService {
     private final BuildingRepository buildingRepository;
     private final ModelMapper modelMapper;
     private final CloudImageService cloudImageService;
+    private final CompanyService companyService;
 
-    public BuildingServiceImpl(BuildingRepository buildingRepository, ModelMapper modelMapper, CloudImageService cloudImageService) {
+    public BuildingServiceImpl(BuildingRepository buildingRepository, ModelMapper modelMapper, CloudImageService cloudImageService, CompanyService companyService) {
         this.buildingRepository = buildingRepository;
         this.modelMapper = modelMapper;
         this.cloudImageService = cloudImageService;
+        this.companyService = companyService;
     }
 
 
@@ -84,6 +87,14 @@ public class BuildingServiceImpl implements BuildingService {
                         .toList();
 
         return list;
+    }
+
+    @Override
+    public List<BuildingViewModel> getAllBuildingsByCompanyName(String username) {
+        CompanyNameViewModel companyName = companyService.findCompanyByEmployeeName(username);
+        List<BuildingViewModel> buildingsByCompanies =  buildingRepository.findAllCompaniesByCompanyName(companyName.getName());
+        buildingsByCompanies.forEach(building -> building.setCompany(companyName));
+        return buildingsByCompanies;
     }
 }
 
