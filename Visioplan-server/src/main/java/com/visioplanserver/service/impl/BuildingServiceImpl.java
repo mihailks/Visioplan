@@ -6,6 +6,7 @@ import com.visioplanserver.model.entity.FloorEntity;
 import com.visioplanserver.model.view.BuildingNameDTO;
 import com.visioplanserver.model.view.BuildingViewModel;
 import com.visioplanserver.model.view.CompanyNameViewModel;
+import com.visioplanserver.model.view.StatsViewModel;
 import com.visioplanserver.repository.BuildingRepository;
 import com.visioplanserver.service.BuildingService;
 import com.visioplanserver.service.CloudImageService;
@@ -95,6 +96,12 @@ public class BuildingServiceImpl implements BuildingService {
         List<BuildingViewModel> buildingsByCompanies =  buildingRepository.findAllCompaniesByCompanyName(companyName.getName());
         buildingsByCompanies.forEach(building -> building.setCompany(companyName));
         return buildingsByCompanies;
+    }
+
+    @Override
+    public StatsViewModel getStats() {
+        StatsViewModel totalEntriesCount = buildingRepository.getTotalEntriesCount();
+        return totalEntriesCount;
     }
 }
 

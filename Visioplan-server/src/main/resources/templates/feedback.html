@@ -5,17 +5,18 @@
 <head th:replace="~{fragments/commons::head-bootstrap}"><title>Feedback</title></head>
 
 
-
 <body>
 
-<header><div th:replace="~{fragments/commons::navbar}"></div></header>
+<header>
+    <div th:replace="~{fragments/commons::navbar}"></div>
+</header>
 
 <article class="my-5 w-50 max-width: 50% mx-auto" id="file-add">
     <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2">
 
 
         <div class="bd-example m-5 border-5 mx-auto">
-            <h3>Add file</h3>
+            <h3 class="text-center">Send FeedBack</h3>
             <form class="row g-3"
                   th:action="@{/feedback}"
                   th:method="POST"
@@ -23,16 +24,16 @@
                   novalidate>
 
                 <div class="col-md-12">
-                    <label for="name" class="form-label d-block">File name</label>
+                    <label for="name" class="form-label d-block">Your name</label>
                     <input type="text"
                            class="form-control"
                            th:field="*{name}"
                            th:errorclass="is-invalid"
                            id="name"
-                           placeholder="File name">
-                    <div
-                            class="invalid-feedback">
-                        Please enter a name.
+                           placeholder="Enter your name">
+                    <div th:if="${#fields.hasErrors('name')}"
+                         th:errors="*{name}"
+                         class="invalid-feedback">
                     </div>
                 </div>
 
@@ -44,30 +45,29 @@
                            th:errorclass="is-invalid"
                            id="email"
                            placeholder="Enter your email">
-                    <div
-                            class="invalid-feedback">
-                        Please provide a valid email.
+                    <div th:if="${#fields.hasErrors('email')}"
+                         th:errors="*{email}"
+                         class="invalid-feedback">
                     </div>
                 </div>
 
                 <div class="col-md-12">
                     <label for="feedback" class="form-label d-block">Feedback</label>
                     <textarea type="text"
-                           class="form-control"
-                           th:field="*{feedback}"
-                           th:errorclass="is-invalid"
-                           id="feedback"
-                           placeholder="Enter your feedback here">
+                              class="form-control"
+                              th:field="*{feedback}"
+                              th:errorclass="is-invalid"
+                              id="feedback"
+                              placeholder="Enter your feedback here">
                     </textarea>
-                    <div  th:if="${#fields.hasErrors('feedback')}"
-                          th:errors="*{feedback}"
-                            class="invalid-feedback">
-                        The minimum length is 10 characters.
+                    <div th:if="${#fields.hasErrors('feedback')}"
+                         th:errors="*{feedback}"
+                         class="invalid-feedback">
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div class="col-12">
-                        <button class="btn btn-primary" type="submit">Submit feedback</button>
+                    <div class="col-12 text-center">
+                        <button class="btn btn-main" type="submit">Submit feedback</button>
                     </div>
                 </div>
             </form>
@@ -77,7 +77,6 @@
     <footer th:replace="~{fragments/commons::footer}"></footer>
 
 </article>
-
 
 
 <footer th:replace="~{fragments/commons::footer}"></footer>

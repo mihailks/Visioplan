@@ -1,16 +1,13 @@
 package com.visioplanserver.model.view;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 public class FeedbackViewModel {
-    @NotNull
+    @Size(min = 3, max = 50, message = "Name must be between 2 and 50 characters")
     private String name;
 
-    @NotNull
-    @Email
+    @NotBlank(message = "Please provide an email address.")
+    @Email(message = "Please provide a valid email.")
     private String email;
 
     @NotNull

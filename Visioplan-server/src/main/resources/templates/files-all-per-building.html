@@ -27,7 +27,7 @@
     <div th:replace="~{fragments/commons::navbar}"></div>
 </header>
 
-<h1>all projects show here</h1>
+<h3 class="text-center" th:text="|Project documentation for ${buildingName}|"></h3>
 <div class="table-responsive m-5">
     <table class="table table-hover table-bordered">
         <thead>
@@ -72,14 +72,14 @@
 
                 <form class="comment-submit-container"
                       th:method="POST"
-                      th:action="@{/comment/add/{id}(id=*{id})}">
+                      th:action="@{/comment/add/{id}/{buildingName}(id=*{id}, buildingName = ${buildingName})}">
                     <textarea type="text"
                               th:field="${comemnts.textContent}"
                               class="form-control form-my"
                               th:id="'white-' + *{id}"
                               placeholder="Enter your comment here">
                     </textarea>
-                    <button class="comments-btn btn btn-outline-success submit-my"
+                    <button class="comments-btn btn btn-outline-success submit-my m-lg-2"
                             th:id="'submit-btn' + *{id}"
                             th:value="*{id}"
                     >submit</button>

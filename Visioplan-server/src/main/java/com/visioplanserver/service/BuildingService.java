@@ -3,6 +3,7 @@ package com.visioplanserver.service;
 import com.visioplanserver.model.dto.AddBuildingDTO;
 import com.visioplanserver.model.view.BuildingNameDTO;
 import com.visioplanserver.model.view.BuildingViewModel;
+import com.visioplanserver.model.view.StatsViewModel;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface BuildingService {
     List<BuildingNameDTO> getAllBuildingsNames();
 
     List<BuildingViewModel> getAllBuildingsByCompanyName(String username);
+
+    StatsViewModel getStats();
 }

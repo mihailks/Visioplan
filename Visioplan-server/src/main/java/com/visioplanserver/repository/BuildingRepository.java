@@ -2,6 +2,7 @@ package com.visioplanserver.repository;
 
 import com.visioplanserver.model.entity.BuildingEntity;
 import com.visioplanserver.model.view.BuildingViewModel;
+import com.visioplanserver.model.view.StatsViewModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,4 +24,15 @@ public interface BuildingRepository extends JpaRepository<BuildingEntity, Long> 
     where c.name = :companyName
 """)
     List<BuildingViewModel> findAllCompaniesByCompanyName(@Param("companyName") String companyName);
+
+
+    @Query("""
+    SELECT new com.visioplanserver.model.view.StatsViewModel(
+        (SELECT COUNT(b) FROM BuildingEntity b),
+        (SELECT COUNT(c) FROM CompanyEntity c),
+        (SELECT COUNT(u) FROM UserEntity u),
+        (SELECT COUNT(f) FROM FileEntity f)
+    )
+    """)
+    StatsViewModel getTotalEntriesCount();
 }

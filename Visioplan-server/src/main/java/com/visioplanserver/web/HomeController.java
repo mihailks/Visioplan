@@ -27,6 +27,7 @@ public class HomeController {
     @GetMapping("/home")
     public String homePage(Model model, Principal principal, @AuthenticationPrincipal UserDetails viewer) {
         if (viewer.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+            model.addAttribute("stats", buildingService.getStats());
             return "admin-panel";
         }
 

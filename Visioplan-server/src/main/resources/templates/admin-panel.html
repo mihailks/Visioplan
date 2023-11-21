@@ -19,7 +19,7 @@
     <div th:replace="~{fragments/commons::navbar}"></div>
 </header>
 
-<div class="container text-center mt-5">
+<div class="container text-center mt-5" th:object="${stats}">
     <div class="row">
         <h3 class="text-center mb-5">Welcome to the admin panel</h3>
     </div>
@@ -33,7 +33,7 @@
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Total buildings
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">42</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="*{totalBuildings}">42</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -51,7 +51,7 @@
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Total companies
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">73</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="*{totalCompanies}">73</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -69,7 +69,7 @@
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 Total users
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">180</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="*{totalUsers}">180</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -87,7 +87,7 @@
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Total documents
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">42</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="*{totalFiles}">42</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>

@@ -31,11 +31,12 @@ public class CommentsController {
         return ResponseEntity.ok(commentsService.getAllCommentsByFileId(fileId));
     }
 
-    @PostMapping("/comment/add/{id}")
+    @PostMapping("/comment/add/{id}/{buildingName}")
     public String addComment(@Valid CommentsAddDTO commentsAddDTO,
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes,
                              @PathVariable Long id,
+                             @PathVariable String buildingName,
                              Principal principal) {
 
         if (bindingResult.hasErrors()){
@@ -48,7 +49,7 @@ public class CommentsController {
 
         commentsService.addComment(id, principal.getName(), commentsAddDTO);
 
-        return "redirect:/file/all";
+        return "redirect:/file/{buildingName}";
 
     }
 
