@@ -41,6 +41,11 @@ public class HomeController {
         return "about";
     }
 
+    @GetMapping("/features")
+    public String features() {
+        return "features";
+    }
+
     @GetMapping("/picture")
     public String picture() {
         return "bulding-add";

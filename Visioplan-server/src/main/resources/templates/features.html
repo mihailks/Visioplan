@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head-bootstrap}"></head>
+
+<style>
+    body {
+        background-image: url("/images/index-BG.jpg");
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .custom-text{
+        font-size: 1.20rem;
+    }
+
+</style>
+
+<body>
+<header>
+    <div th:replace="~{fragments/commons::navbar}"></div>
+</header>
+
+<div class="container my-3 custom-text">
+    <div class="row p-2 pe-lg-0 pt-lg-5 align-items-center rounded-5 border shadow-lg"
+         style="backdrop-filter: blur(0.6rem)">
+        <div class="p-5 pt-3">
+            <h4>Visioplan is a website where all parties involved in a construction project can
+                exchange information and files. With Visioplan, you can:</h4>
+            <ul>
+                <li class="m-5">Manage your documents in a secure and organized way. You can upload, download, share, edit and
+                    approve documents with different access levels and permissions. You can also track the changes and
+                    versions of your documents with a clear audit trail.
+                </li>
+                <li  class="m-5">Monitor your site progress and quality with real-time data and feedback. You can create and assign
+                    tasks, checklists and issues to your team members and contractors. You can also capture and annotate
+                    photos and videos of your site conditions and report any problems or defects.
+                </li>
+                <li  class="m-5">Control your financials and budget with accurate and transparent information. You can generate and
+                    send invoices, payments and receipts with ease. You can also monitor your cash flow and expenses and
+                    compare them with your estimated budget.
+                </li>
+            </ul>
+            <h5>
+                Visioplan is designed to make your construction project management easier, faster and more efficient.
+                With Visioplan, you can save time, money and resources and deliver your project on time and on budget.
+                Try Visioplan today and see the difference for yourself
+            </h5>
+            <a class="nav-link text-black text-center mt-5" th:href="@{/contact}">Please <strong>contact us</strong> for more information.</a>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{fragments/commons::footer}"></footer>
+
+
+</body>
+</html>

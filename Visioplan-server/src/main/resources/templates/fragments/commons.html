@@ -169,9 +169,9 @@
         <div class="collapse navbar-collapse" id="navbar-text">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <th:block sec:authorize="!isAuthenticated()">
-                    <li class="nav-item"><a class="nav-link text-black" href="#">Features</a></li>
-                    <li class="nav-item"><a class="nav-link text-black" th:href="@{/about}">How it works</a></li>
-                    <li class="nav-item"><a class="nav-link text-black" href="#">Prices</a></li>
+                    <li class="nav-item"><a class="nav-link text-black" th:href="@{/features}">Features</a></li>
+<!--                    <li class="nav-item"><a class="nav-link text-black" th:href="@{/about}">How it works</a></li>-->
+<!--                    <li class="nav-item"><a class="nav-link text-black" href="#">Prices</a></li>-->
                     <li class="nav-item"><a class="nav-link text-black" th:href="@{/contact}">Contact</a></li>
                 </th:block>
                 <th:block sec:authorize="isAuthenticated()">
