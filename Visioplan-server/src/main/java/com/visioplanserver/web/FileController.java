@@ -7,6 +7,7 @@ import com.visioplanserver.service.BuildingService;
 import com.visioplanserver.service.FileService;
 import com.visioplanserver.service.FloorService;
 import com.visioplanserver.service.exeption.FileNotFoundException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -47,7 +48,8 @@ public class FileController {
 //    }
 
     @GetMapping("/all")
-    public String getAllPages(Model model) {
+    public String getAllPages(Model model, HttpServletRequest request) {
+        model.addAttribute("platform", request.getAttribute("platform"));
         return getOnePage(model, 1);
     }
 
@@ -61,7 +63,8 @@ public class FileController {
 
 
     @GetMapping("/{buildingName}")
-    public String getAllPages(Model model, @PathVariable("buildingName") String buildingName) {
+    public String getAllPages(Model model, @PathVariable("buildingName") String buildingName, HttpServletRequest request) {
+        model.addAttribute("platform", request.getAttribute("platform"));
         return getOnePage(model, 1, buildingName);
     }
 

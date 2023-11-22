@@ -26,7 +26,7 @@
 <header>
     <div th:replace="~{fragments/commons::navbar}"></div>
 </header>
-
+<h6 class="text-center" th:if="${platform == 'mobile'}">To enjoy the optimal user experience, please avoid using a mobile device.</h6>
 <h3 class="text-center" th:text="|Project documentation for ${buildingName}|"></h3>
 <div class="table-responsive m-5">
     <table class="table table-hover table-bordered">
