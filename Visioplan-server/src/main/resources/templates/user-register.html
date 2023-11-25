@@ -10,7 +10,8 @@
             <form th:action="@{/users/register}"
                   th:method="POST"
                   th:object="${userRegistrationDTO}"
-                  class="row g-3">
+                  class="row g-3"
+                  id="registration-form">
 
                 <div class="col-md-6">
                     <label for="username" class="text-white font-weight-bold">Username</label>
@@ -128,11 +129,29 @@
                 <!--            </div>-->
 
                 <div class="col-md-12">
-                    <button class="btn btn-main" type="submit">Register</button>
+                    <button class="g-recaptcha btn btn-info btn-lg"
+                            th:attr="data-sitekey=${@reCaptchaConfig.getSiteKey()}"
+                            data-callback='onSubmit'
+                            data-action='submit'>Register
+                    </button>
+
                 </div>
             </form>
         </div>
     </div>
 </article>
+
+<!-- ReCaptcha -->
+
+<script src="https://www.google.com/recaptcha/api.js"></script>
+
+<script>
+    function onSubmit(token) {
+        document.getElementById("registration-form").submit();
+    }
+</script>
+
+<!-- EO: ReCaptcha -->
+
 <footer th:replace="~{fragments/commons::footer}"></footer>
 </body>
