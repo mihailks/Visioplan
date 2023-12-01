@@ -38,13 +38,10 @@ class UserServiceImplTest {
     @Mock
     UserRepository mockUserRepository;
     private UserServiceImpl serviceToTest;
-
     @Mock
     private CompanyRepository mockCompanyRepository;
     @Mock
     private CompanyService mockCompanyService;
-
-
     @Mock
     private ModelMapper mockModelMapper;
     @Mock
