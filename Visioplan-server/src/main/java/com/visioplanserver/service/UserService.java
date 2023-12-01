@@ -7,6 +7,7 @@ import com.visioplanserver.model.view.UserViewModel;
 import com.visioplanserver.model.view.UserWithRoleViewModel;
 import org.springframework.data.domain.Page;
 
+import java.util.Collection;
 import java.util.Optional;
 
 public interface UserService {
@@ -27,6 +28,10 @@ public interface UserService {
     UserWithRoleViewModel findUserRoleByUsername(String name);
 
     UserEntity findUserByUsernameEntity(String username);
+
+    Optional<UserEntity> findByUsername(String value);
+
+    Optional<UserEntity> findUserByEmail(String value);
 }
 
 

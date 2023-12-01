@@ -1,132 +1,137 @@
 <head th:replace="~{fragments/commons::head-bootstrap}"><title>Register user</title></head>
 
-<link rel="stylesheet" th:href="@{/css/user-login-form.css}"/>
+<link rel="stylesheet" th:href="@{/css/user-register-form.css}"/>
 <body>
-<header th:replace="~{fragments/commons::navbar}"></header>
 
-<article class="my-5 w-50 max-width: 50% mx-auto" id="file-add">
-    <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2">
-        <div class="bd-example m-5 border-5 mx-auto">
-            <h2 class="text-center text-black">Register User</h2>
-            <form th:action="@{/users/register}"
-                  th:method="POST"
-                  th:object="${userRegistrationDTO}"
-                  class="row g-3"
-                  id="registration-form">
+<div class="d-flex justify-content-center align-items-center container">
 
-                <div class="col-md-6">
-                    <label for="username" class="text-white font-weight-bold">Username</label>
-                    <input id="username"
-                           th:field="*{username}"
-                           th:errorclass="is-invalid"
-                           type="text"
-                           class="form-control"
-                           placeholder="Username"/>
-                    <p th:if="${#fields.hasErrors('username')}"
-                       th:errors="*{username}"
-                       class="invalid-feedback errors alert alert-danger"></p>
+    <div class="card py-5 px-3">
+        <h2 class="text-center text-black">Register User</h2>
+        <form th:action="@{/users/register}"
+              th:method="POST"
+              th:object="${userRegistrationDTO}"
+              class="row g-3"
+              id="registration-form">
+
+            <div class="col-md-6">
+                <label for="username" class="text-black font-weight-bold">Username</label>
+                <input id="username"
+                       th:field="*{username}"
+                       th:errorclass="is-invalid"
+                       type="text"
+                       class="form-control"
+                       placeholder="Username"/>
+                <p th:if="${#fields.hasErrors('username')}"
+                   th:errors="*{username}"
+                   class="invalid-feedback errors alert alert-danger"></p>
+            </div>
+
+            <div class="col-md-6">
+                <label for="email" class="text-black font-weight-bold">Email</label>
+                <input id="email"
+                       th:field="*{email}"
+                       th:errorclass="is-invalid"
+                       type="text"
+                       class="form-control"
+                       placeholder="Email"/>
+                <p th:if="${#fields.hasErrors('email')}"
+                   th:errors="*{email}"
+                   class="invalid-feedback errors alert alert-danger"></p>
+            </div>
+
+
+            <div class="col-md-6">
+                <label for="firstName" class="text-black font-weight-bold">First name</label>
+                <input id="firstName"
+                       th:field="*{firstName}"
+                       th:errorclass="is-invalid"
+                       type="text"
+                       class="form-control"
+                       placeholder="First Name"/>
+                <p th:if="${#fields.hasErrors('firstName')}"
+                   th:errors="*{firstName}"
+                   class="invalid-feedback errors alert alert-danger"></p>
+            </div>
+
+            <div class="col-md-6">
+                <label for="lastName" class="text-black font-weight-bold">Last name</label>
+                <input id="lastName"
+                       th:field="*{lastName}"
+                       th:errorclass="is-invalid"
+                       type="text"
+                       class="form-control"
+                       placeholder="Last Name"/>
+                <p th:if="${#fields.hasErrors('lastName')}"
+                   th:errors="*{lastName}"
+                   class="invalid-feedback errors alert alert-danger">
+
+                </p>
+            </div>
+
+            <div class="col-md-6">
+                <label for="password" class="text-black font-weight-bold">Password</label>
+                <input id="password"
+                       th:field="*{password}"
+                       th:errorclass="is-invalid"
+                       type="password"
+                       class="form-control"
+                       placeholder="Password"/>
+                <p th:if="${#fields.hasErrors('password')}"
+                   th:errors="*{password}"
+                   class="invalid-feedback errors alert alert-danger"></p>
+            </div>
+
+            <div class="col-md-6">
+                <label for="confirmPassword" class="text-black font-weight-bold">Confirm password</label>
+                <input id="confirmPassword"
+                       th:field="*{confirmPassword}"
+                       th:errorclass="is-invalid"
+                       type="password"
+                       class="form-control"
+                       placeholder="Confirm password"/>
+                <p th:if="${#fields.hasErrors('confirmPassword')}"
+                   th:errors="*{confirmPassword}"
+                   class="invalid-feedback errors alert alert-danger"></p>
+            </div>
+
+
+            <div class="col-md-12">
+                <label for="companyName" class="form-label">Company name</label>
+                <select class="form-select"
+                        th:field="*{companyName}"
+                        th:errorclass="is-invalid"
+                        id="companyName"
+                        aria-describedby="buildingNameError">
+                    <option th:selected="selected" value="">Select your company</option>
+                    <option th:each="c : ${companies}"
+                            th:text="${c.name}"
+                            th:value="${c.name}">
+                    </option>
+                </select>
+                <div th:if="${#fields.hasErrors('companyName')}"
+                     th:errors="*{companyName}"
+                     id="companyNameError"
+                     class="invalid-feedback"></div>
+            </div>
+
+            <div class="col-md-6 text-center">
+                <button class="g-recaptcha btn btn-primary"
+                        th:attr="data-sitekey=${@reCaptchaConfig.getSiteKey()}"
+                        data-callback='onSubmit'
+                        data-action='submit'>Register
+                </button>
+            </div>
+
+            <div class="col-md-6 text-center">
+                <div class="button-holder">
+                    <a href="/users/login" class="btn btn-primary">Login</a>
                 </div>
+            </div>
 
-                <div class="col-md-6">
-                    <label for="email" class="text-white font-weight-bold">Email</label>
-                    <input id="email"
-                           th:field="*{email}"
-                           th:errorclass="is-invalid"
-                           type="text"
-                           class="form-control"
-                           placeholder="Email"/>
-                    <p th:if="${#fields.hasErrors('email')}"
-                       th:errors="*{email}"
-                       class="invalid-feedback errors alert alert-danger"></p>
-                </div>
-
-
-                <div class="col-md-6">
-                    <label for="firstName" class="text-white font-weight-bold">First name</label>
-                    <input id="firstName"
-                           th:field="*{firstName}"
-                           th:errorclass="is-invalid"
-                           type="text"
-                           class="form-control"
-                           placeholder="First Name"/>
-                    <p th:if="${#fields.hasErrors('firstName')}"
-                       th:errors="*{firstName}"
-                       class="invalid-feedback errors alert alert-danger"></p>
-                </div>
-
-                <div class="form-group col-md-6 mb-3">
-                    <label for="lastName" class="text-white font-weight-bold">Last name</label>
-                    <input id="lastName"
-                           th:field="*{lastName}"
-                           th:errorclass="is-invalid"
-                           type="text"
-                           class="form-control"
-                           placeholder="Last Name"/>
-                    <p th:if="${#fields.hasErrors('lastName')}"
-                       th:errors="*{lastName}"
-                       class="invalid-feedback errors alert alert-danger">
-
-                    </p>
-                </div>
-
-                <div class="col-md-6">
-                    <label for="password" class="text-white font-weight-bold">Password</label>
-                    <input id="password"
-                           th:field="*{password}"
-                           th:errorclass="is-invalid"
-                           type="password"
-                           class="form-control"
-                           placeholder="Password"/>
-                    <p th:if="${#fields.hasErrors('password')}"
-                       th:errors="*{password}"
-                       class="invalid-feedback errors alert alert-danger"></p>
-                </div>
-
-                <div class="col-md-6">
-                    <label for="confirmPassword" class="text-white font-weight-bold">Confirm password</label>
-                    <input id="confirmPassword"
-                           th:field="*{confirmPassword}"
-                           th:errorclass="is-invalid"
-                           type="password"
-                           class="form-control"
-                           placeholder="Confirm password"/>
-                    <p th:if="${#fields.hasErrors('confirmPassword')}"
-                          th:errors="*{confirmPassword}"
-                            class="invalid-feedback errors alert alert-danger"></p>
-                </div>
-
-
-                <div class="col-md-12">
-                    <label for="companyName" class="form-label">Company name</label>
-                    <select class="form-select"
-                            th:field="*{companyName}"
-                            th:errorclass="is-invalid"
-                            id="companyName"
-                            aria-describedby="buildingNameError">
-                        <option th:selected="selected" value="">Select your company</option>
-                        <option th:each="c : ${companies}"
-                                th:text="${c.name}"
-                                th:value="${c.name}">
-                        </option>
-                    </select>
-                    <div th:if="${#fields.hasErrors('companyName')}"
-                         th:errors="*{companyName}"
-                         id="companyNameError"
-                         class="invalid-feedback"></div>
-                </div>
-
-                <div class="col-md-12">
-                    <button class="g-recaptcha btn btn-info btn-lg"
-                            th:attr="data-sitekey=${@reCaptchaConfig.getSiteKey()}"
-                            data-callback='onSubmit'
-                            data-action='submit'>Register
-                    </button>
-
-                </div>
-            </form>
-        </div>
+        </form>
     </div>
-</article>
+</div>
+
 
 <!-- ReCaptcha -->
 
@@ -140,5 +145,4 @@
 
 <!-- EO: ReCaptcha -->
 
-<footer th:replace="~{fragments/commons::footer}"></footer>
 </body>

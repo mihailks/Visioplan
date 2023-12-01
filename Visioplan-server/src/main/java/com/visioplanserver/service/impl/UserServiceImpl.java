@@ -23,6 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -139,6 +140,16 @@ public class UserServiceImpl implements UserService {
     public UserEntity findUserByUsernameEntity(String username) {
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new UserNotFoundException("User with name " + username + " not found!"));
+    }
+
+    @Override
+    public Optional<UserEntity> findByUsername(String value) {
+        return userRepository.findByUsername(value);
+    }
+
+    @Override
+    public Optional<UserEntity> findUserByEmail(String value) {
+        return userRepository.findUserByEmail(value);
     }
 
 

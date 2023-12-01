@@ -1,17 +1,26 @@
 package com.visioplanserver.model.dto;
 
+import com.visioplanserver.model.validation.FieldMatch;
+import com.visioplanserver.model.validation.UniqueUserEmail;
+import com.visioplanserver.model.validation.UniqueUsername;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+@FieldMatch(
+        first = "password",
+        second = "confirmPassword"
+)
 public record UserRegistrationDTO(
 
         @NotBlank(message = "Please enter a username")
         @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters")
+        @UniqueUsername
         String username,
         @Email(message = "Please enter a valid email address")
         @Size(min = 5, max = 50, message = "Email must be between 5 and 50 characters")
+        @UniqueUserEmail
         String email,
 
         @NotBlank(message = "Please enter strong a password")
