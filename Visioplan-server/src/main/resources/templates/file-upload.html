@@ -2,20 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/commons::head-bootstrap}"><title>Add file</title></head>
 <body>
-<header><div th:replace="~{fragments/commons::navbar}"></div></header>
+<header>
+    <div th:replace="~{fragments/commons::navbar}"></div>
+</header>
 
 <article class="my-5 w-50 max-width: 50% mx-auto" id="file-add">
     <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2">
-
-
         <div class="bd-example m-5 border-5 mx-auto">
-            <h3>Add file</h3>
+            <h3 class="text-center">Add file</h3>
+
             <form class="row g-3"
                   th:action="@{/file/add}"
                   th:method="POST"
                   th:object="${addFileDTO}"
                   enctype="multipart/form-data" novalidate>
-
 
                 <div class="col-md-9">
                     <label for="buildingName" class="form-label">Building name</label>
@@ -33,9 +33,7 @@
                     <div th:if="${#fields.hasErrors('buildingName')}"
                          th:errors="*{buildingName}"
                          id="buildingNameError"
-                         class="invalid-feedback">
-                        Please choose a building.
-                    </div>
+                         class="invalid-feedback"></div>
                 </div>
 
                 <div class="col-md-3">
@@ -46,18 +44,11 @@
                             th:errorclass="is-invalid">
                         <option th:selected="selected" value="">Select Floor</option>
                     </select>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                    <div class="invalid-feedback">
-                        Please choose a floor.
-                    </div>
                 </div>
 
                 <div class="col-md-12">
                     <label for="documentationPart" class="form-label">Select part</label>
                     <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend3">@</span>
                         <select class="form-select"
                                 th:field="*{part}"
                                 th:errorclass="is-invalid"
@@ -70,9 +61,9 @@
                                     th:value="${p}">
                             </option>
                         </select>
-                        <div class="invalid-feedback">
-                            Please choose a document part.
-                        </div>
+                        <div th:if="${#fields.hasErrors('part')}"
+                             th:errors="*{part}"
+                             class="invalid-feedback"></div>
                     </div>
                 </div>
 
@@ -92,7 +83,6 @@
                     <div class="input-group has-validation">
                         <select class="form-select"
                                 th:field="*{drawingType}"
-                                th:errorclass="is-invalid"
                                 id="drawingType"
                                 disabled
                                 required="">
@@ -102,9 +92,6 @@
                                     th:value="${t}">
                             </option>
                         </select>
-                        <div class="invalid-feedback">
-                            Please choose a type of the drawing.
-                        </div>
                     </div>
                 </div>
 
@@ -113,7 +100,6 @@
                     <div class="input-group has-validation">
                         <select class="form-select"
                                 th:field="*{textFileType}"
-                                th:errorclass="is-invalid"
                                 id="textType"
                                 disabled
                                 required="">
@@ -123,9 +109,6 @@
                                     th:value="${tft}">
                             </option>
                         </select>
-                        <div class="invalid-feedback">
-                            Please choose a type ot the document.
-                        </div>
                     </div>
                 </div>
 
@@ -137,10 +120,9 @@
                            th:errorclass="is-invalid"
                            id="name"
                            placeholder="File name">
-                    <div
-                         class="invalid-feedback">
-                        Please choose a name.
-                    </div>
+                    <div th:if="${#fields.hasErrors('name')}"
+                         th:errors="*{name}"
+                         class="invalid-feedback"></div>
                 </div>
 
                 <div class="col-md-12">
@@ -148,16 +130,16 @@
                            class="form-control"
                            th:field="*{dataFile}"
                            th:errorclass="is-invalid"
-                           accept="application/pdf"
                            id="customFile"/>
-                    <div class="invalid-feedback">
-                        Please provide a valid zip.
-                    </div>
+                    <div th:if="${#fields.hasErrors('dataFile')}"
+                         th:errors="*{dataFile}"
+                         class="invalid-feedback"></div>
                 </div>
+
                 <div class="col-md-12">
-                <div class="col-12 text-center">
-                    <button class="btn btn-main" type="submit">Upload new file</button>
-                </div>
+                    <div class="col-12 text-center">
+                        <button class="btn btn-main" type="submit">Upload new file</button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -210,3 +192,14 @@
 </script>
 
 </body>
+
+<!--accept="application/pdf,-->
+<!--dwg/dxf,-->
+<!--application/autoCAD,-->
+<!--application/zip,-->
+<!--application/msword,-->
+<!--application/vnd.openxmlformats-officedocument.wordprocessingml.document,-->
+<!--application/vnd.ms-excel,-->
+<!--application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,-->
+<!--application/vnd.ms-powerpoint,-->
+<!--application/vnd.openxmlformats-officedocument.presentationml.presentation"-->
