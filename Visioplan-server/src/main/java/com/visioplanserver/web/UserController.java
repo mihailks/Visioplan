@@ -49,11 +49,10 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userProfileEditDTO", userProfileEditDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userProfileEditDTO", bindingResult);
-            return "redirect:profile-edit";
+            return "redirect:/user/profile/edit";
         }
         userProfileEditDTO.setId(id);
         userService.updateUserProfile(userProfileEditDTO);
-
 
         return "redirect:/user/profile";
     }

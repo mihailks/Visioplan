@@ -1,10 +1,22 @@
 package com.visioplanserver.model.dto;
 
+import com.visioplanserver.model.validation.UniqueUserEmail;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class UserProfileEditDTO {
     private Long id;
     private String username;
+    @Email(message = "Please enter a valid email address")
+    @Size(min = 5, max = 50, message = "Email must be between 5 and 50 characters")
+    @UniqueUserEmail
     private String email;
+    @NotBlank(message = "Please enter your first name")
+    @Size(min = 2, max = 20, message = "First name must be between 2 and 20 characters")
     private String firstName;
+    @NotBlank(message = "Please enter your last name")
+    @Size(min = 2, max = 20, message = "Last name must be between 2 and 20 characters")
     private String lastName;
 
     public UserProfileEditDTO() {
