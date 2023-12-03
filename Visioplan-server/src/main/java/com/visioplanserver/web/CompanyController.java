@@ -3,12 +3,15 @@ package com.visioplanserver.web;
 import com.visioplanserver.model.dto.CompanyRegistrationDTO;
 import com.visioplanserver.model.view.CompanyNameViewModel;
 import com.visioplanserver.model.view.CompanyViewModel;
+import com.visioplanserver.model.view.FileViewModel;
 import com.visioplanserver.service.CompanyService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -51,11 +54,26 @@ public class CompanyController {
 
     @GetMapping("/all")
     public String getAll(Model model) {
-        List<CompanyViewModel> allCompanies = companyService.getAllCompaniesDetails();
-        model.addAttribute("companies", allCompanies);
-        return "companies-all";
+        return getOnePage(model, 1);
     }
 
+        @GetMapping("/all/{pageNumber}")
+        public String getOnePage (Model model, @PathVariable("pageNumber") int currentPage){
+//            List<CompanyViewModel> allCompanies = companyService.getAllCompaniesDetails();
+            Page<CompanyViewModel> page = companyService.findPage(currentPage);
+//            model.addAttribute("companies", allCompanies);
+            pageDetails(model, currentPage, page);
+            return "companies-all";
+        }
 
+    private void pageDetails(Model model, @PathVariable("pageNumber") int currentPage, Page<CompanyViewModel> page) {
+        int totalPages = page.getTotalPages();
+        Long totalFiles = page.getTotalElements();
+        List<CompanyViewModel> companies = page.getContent();
 
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("totalCompanies", totalFiles);
+        model.addAttribute("companies", companies);
+    }
 }

@@ -8,6 +8,9 @@ import com.visioplanserver.repository.CompanyRepository;
 import com.visioplanserver.service.CompanyService;
 import com.visioplanserver.service.exeption.CompanyNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,5 +57,12 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public CompanyNameViewModel findCompanyByEmployeeName(String username) {
         return companyRepository.findCompanyByEmployeeName(username);
+    }
+
+    @Override
+    public Page<CompanyViewModel> findPage(int pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 10);
+        Page<CompanyViewModel> companiesDetails = companyRepository.getAllCompaniesDetails(pageable);
+        return companiesDetails;
     }
 }

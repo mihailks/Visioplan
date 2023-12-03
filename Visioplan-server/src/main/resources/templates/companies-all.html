@@ -10,7 +10,7 @@
     <div th:replace="~{fragments/commons::navbar}"></div>
 </header>
 
-<h1>all buildings show here</h1>
+<h1 class="text-center">Companies contacts</h1>
 <div class="table-responsive m-5">
     <table class="table table-hover table-bordered">
         <thead>
@@ -29,37 +29,49 @@
             <td class="align-middle col-md-auto" th:text="*{name}">cell3_1</td>
             <td class="align-middle col-md-auto" th:text="*{email}">cell2_1</td>
             <td class="align-middle col-md-auto" th:text="*{phone}">cell7_1</td>
-            <td class="align-middle col-md-auto" th:text="*{website}">cell7_1</td>
+
+            <td class="text-center">
+                <a th:href="*{website}" class="btn btn-outline-success" id="comments-btn" target="_blank">
+                    <span th:if="*{website}">Website</span>
+                    <span th:unless="*{website}">No website</span>
+                </a>
+            </td>
+
             <td class="align-middle col-md-auto" th:text="*{country}">cell6_1</td>
             <td class="align-middle col-md-auto" th:text="*{city}">cell7_1</td>
             <td class="align-middle col-md-auto" th:text="*{address}">cell1_1</td>
-
-
-<!--            <td class="align-middle col-md-auto">-->
-<!--                <form th:method="DELETE"-->
-<!--                      th:action="@{/file/delete/{id}(id=*{id})}">-->
-<!--                    <input type="submit" value="Delete" class="btn btn-outline-danger">-->
-<!--                </form>-->
-<!--            </td>-->
         </tr>
         </tbody>
     </table>
 </div>
 
-<nav aria-label="...">
+<nav aria-label="file-pages">
+
     <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-            <a class="page-link">Previous</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item active" aria-current="page">
-            <a class="page-link" href="#">2</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
+
         <li class="page-item">
-            <a class="page-link" href="#">Next</a>
+            <a class="page-link" th:href="@{/company/all}">First</a>
+        </li>
+
+        <li class="page-item" th:if="${currentPage > 1}">
+            <a class="page-link" th:href="@{'/company/all/' + ${currentPage - 1}}">Previous</a>
+        </li>
+
+
+        <li class="page-item" th:each="page : ${#numbers.sequence(1,totalPages)}">
+            <a class="page-link" th:href="@{'/company/all/' + ${page}}">[[${page}]]</a>
+        </li>
+
+
+        <li class="page-item" th:if="${currentPage < totalPages}">
+            <a class="page-link" th:href="@{'/company/all/' + ${currentPage + 1}}">Next</a>
+        </li>
+
+        <li class="page-item" th:if="${currentPage < totalPages}">
+            <a class="page-link" th:href="@{'/company/all/' + ${totalPages}}">Last</a>
         </li>
     </ul>
+    <p class="text-center">Total companies found: [[${totalCompanies}]] : Page [[${currentPage}]] of [[${totalPages}]]</p>
 </nav>
 
 <footer th:replace="~{fragments/commons::footer}"></footer>

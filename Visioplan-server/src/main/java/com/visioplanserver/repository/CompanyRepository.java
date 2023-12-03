@@ -3,6 +3,8 @@ package com.visioplanserver.repository;
 import com.visioplanserver.model.entity.CompanyEntity;
 import com.visioplanserver.model.view.CompanyNameViewModel;
 import com.visioplanserver.model.view.CompanyViewModel;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -32,6 +34,23 @@ public interface CompanyRepository extends JpaRepository<CompanyEntity, Long> {
           
             """)
     List<CompanyViewModel> getAllCompaniesDetails();
+
+    @Query("""
+            SELECT distinct new com.visioplanserver.model.view.CompanyViewModel(
+                c.id,
+                c.name,
+                c.address,
+                c.city,
+                c.country,
+                c.phone,
+                c.email,
+                c.website
+            )
+            FROM CompanyEntity as c
+            join c.employees as e
+          
+            """)
+    Page<CompanyViewModel> getAllCompaniesDetails(Pageable pageable);
 
 
     @Query("""
