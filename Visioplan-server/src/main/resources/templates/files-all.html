@@ -27,7 +27,7 @@
     <div th:replace="~{fragments/commons::navbar}"></div>
 </header>
 
-<h1>all projects show here</h1>
+<h1 class="text-center">All files</h1>
 <div class="table-responsive m-5">
     <table class="table table-hover table-bordered">
         <thead>
@@ -38,7 +38,10 @@
             <th class="text-center" scope="col">Extension</th>
             <th class="text-center" scope="col">Upload Date</th>
             <th class="text-center" scope="col">Comments</th>
-            <th class="text-center" scope="col">White a comment</th>
+            <th:block sec:authorize="hasRole('ADMIN')">
+                <th class="text-center" scope="col">White a comment</th>
+            </th:block>
+
             <th class="text-center" scope="col">Link</th>
             <th class="text-center" scope="col">Delete</th>
 

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -35,20 +36,9 @@ public class FileController {
         this.buildingService = buildingService;
         this.floorService = floorService;
     }
-// old getAllFiles
-//    @GetMapping("/all")
-//    public String allFiles(Model model,
-//                           @PageableDefault(size = 10)
-//                           Pageable pageable) {
-//        List<FileViewModel> files = fileService.getAllFiles(); // all files, no pagination
-//        Page<FileViewModel> allFiles = fileService.getAllFiles(pageable); // no pagination, 10 files per page
-//
-//        model.addAttribute("files", allFiles);
-//        return "all-files";
-//    }
-
+    //show all files
     @GetMapping("/all")
-    public String getAllPages(Model model, HttpServletRequest request) {
+    public String getAllPages(Model model, HttpServletRequest request, Principal principal, @AuthenticationPrincipal UserDetails viewer) {
         model.addAttribute("platform", request.getAttribute("platform"));
         return getOnePage(model, 1);
     }
@@ -61,7 +51,7 @@ public class FileController {
         return "files-all";
     }
 
-
+    //show all files per building
     @GetMapping("/{buildingName}")
     public String getAllPages(Model model, @PathVariable("buildingName") String buildingName, HttpServletRequest request) {
         model.addAttribute("platform", request.getAttribute("platform"));
@@ -76,25 +66,12 @@ public class FileController {
         return "files-all-per-building";
     }
 
-
-    private void pageDetails(Model model, @PathVariable("pageNumber") int currentPage, Page<FileViewModel> page) {
-        int totalPages = page.getTotalPages();
-        Long totalFiles = page.getTotalElements();
-        List<FileViewModel> files = page.getContent();
-
-        model.addAttribute("currentPage", currentPage);
-        model.addAttribute("totalPages", totalPages);
-        model.addAttribute("totalFiles", totalFiles);
-        model.addAttribute("files", files);
-    }
-
-
+    //upload file
     @GetMapping("/add")
     public String allProjects(Model model) {
         if (!model.containsAttribute("addFileDTO")) {
             model.addAttribute("addFileDTO", AddFileDTO.createEmpty());
         }
-
         model.addAttribute("buildings", buildingService.getAllBuildingsNames());
         model.addAttribute("testPrint", "testPrint");
         return "file-upload";
@@ -135,4 +112,16 @@ public class FileController {
         modelAndView.addObject("id", exception.getMessage());
         return modelAndView;
     }
+
+    private void pageDetails(Model model, @PathVariable("pageNumber") int currentPage, Page<FileViewModel> page) {
+        int totalPages = page.getTotalPages();
+        Long totalFiles = page.getTotalElements();
+        List<FileViewModel> files = page.getContent();
+
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("totalFiles", totalFiles);
+        model.addAttribute("files", files);
+    }
+
 }

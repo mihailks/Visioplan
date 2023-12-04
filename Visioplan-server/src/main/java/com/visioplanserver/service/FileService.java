@@ -26,4 +26,6 @@ public interface FileService {
     void deleteFile(Long id);
 
     FileEntity findById(Long id);
+
+
 }

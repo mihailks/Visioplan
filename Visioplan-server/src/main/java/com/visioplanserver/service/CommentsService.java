@@ -10,4 +10,7 @@ public interface CommentsService {
 
 
     void addComment(Long id, String username, CommentsAddDTO commentsAddDTO);
+
+    void sendNewCommentsEmail();
+
 }

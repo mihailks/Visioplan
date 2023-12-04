@@ -2,7 +2,6 @@ package com.visioplanserver.web;
 
 import com.visioplanserver.model.dto.UserProfileEditDTO;
 import com.visioplanserver.model.entity.enums.RolesEnum;
-import com.visioplanserver.model.view.UserViewModel;
 import com.visioplanserver.model.view.UserWithRoleViewModel;
 import com.visioplanserver.service.UserService;
 import jakarta.transaction.Transactional;
@@ -21,6 +20,7 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
+    private static int currentPageOn;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -29,10 +29,8 @@ public class UserController {
     @GetMapping("/profile")
     public String profile(Model model, Principal principal) {
         model.addAttribute("user", userService.findUserByUsername(principal.getName()));
-
         return "user-profile-view";
     }
-
 
     @GetMapping("/profile/edit")
     public String editProfile(Model model, Principal principal) {
@@ -80,24 +78,25 @@ public class UserController {
         int totalPages = page.getTotalPages();
         Long totalUsers = page.getTotalElements();
         List<UserWithRoleViewModel> users = page.getContent();
-
+        currentPageOn = currentPage;
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("totalUsers", totalUsers);
         model.addAttribute("users", users);
+
         return "admin-users-all";
     }
 
     @PostMapping("/promote/{id}")
     public String promoteUser(@PathVariable("id") Long id) {
         userService.promoteUser(id);
-        return "redirect:/user/all";
+        return "redirect:/user/all/" + currentPageOn;
     }
 
     @PostMapping("/demote/{id}")
     public String demoteUser(@PathVariable("id") Long id) {
         userService.demoteUser(id);
-        return "redirect:/user/all";
+        return "redirect:/user/all/" + currentPageOn;
     }
 
 

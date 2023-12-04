@@ -7,6 +7,7 @@ import com.visioplanserver.model.entity.UserEntity;
 import com.visioplanserver.model.view.CommentsViewModel;
 import com.visioplanserver.repository.CommentsRepository;
 import com.visioplanserver.service.CommentsService;
+import com.visioplanserver.service.EmailService;
 import com.visioplanserver.service.FileService;
 import com.visioplanserver.service.UserService;
 import jakarta.transaction.Transactional;
@@ -22,13 +23,15 @@ public class CommentsServiceImpl implements CommentsService {
     private final ModelMapper modelMapper;
     private final UserService userService;
     private final FileService fileService;
+    private final EmailService emailService;
 
 
-    public CommentsServiceImpl(CommentsRepository commentsRepository, ModelMapper modelMapper, UserService userService, FileService fileService) {
+    public CommentsServiceImpl(CommentsRepository commentsRepository, ModelMapper modelMapper, UserService userService, FileService fileService, EmailService emailService) {
         this.commentsRepository = commentsRepository;
         this.modelMapper = modelMapper;
         this.userService = userService;
         this.fileService = fileService;
+        this.emailService = emailService;
     }
 
 
@@ -47,6 +50,12 @@ public class CommentsServiceImpl implements CommentsService {
                 .setCreated(LocalDateTime.now())
                 .setTextContent(commentsAddDTO.getTextContent());
         commentsRepository.save(commentsEntity);
+    }
+
+    @Override
+    public void sendNewCommentsEmail() {
+        List<CommentsViewModel> commentsEntities = commentsRepository.findAllByCreatedBefore(LocalDateTime.now().minusDays(1));
+        emailService.sendNewCommentsEmail(commentsEntities);
     }
 
 

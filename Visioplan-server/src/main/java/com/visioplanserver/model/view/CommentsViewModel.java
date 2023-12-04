@@ -8,6 +8,8 @@ public class CommentsViewModel {
     private String author;
     private LocalDateTime created;
     private Long file;
+    private String fileName;
+    private String uploaderEmail;
 
     public CommentsViewModel() {
     }
@@ -17,6 +19,13 @@ public class CommentsViewModel {
         this.author = author;
         this.file = file;
         this.created = created;
+    }
+
+    public CommentsViewModel(String textContent, String author, String fileName,String uploaderEmail) {
+        this.textContent = textContent;
+        this.author = author;
+        this.fileName = fileName;
+        this.uploaderEmail = uploaderEmail;
     }
 
     public Long getCommentsId() {
@@ -61,6 +70,24 @@ public class CommentsViewModel {
 
     public CommentsViewModel setFile(Long file) {
         this.file = file;
+        return this;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public CommentsViewModel setFileName(String fileName) {
+        this.fileName = fileName;
+        return this;
+    }
+
+    public String getUploaderEmail() {
+        return uploaderEmail;
+    }
+
+    public CommentsViewModel setUploaderEmail(String uploaderEmail) {
+        this.uploaderEmail = uploaderEmail;
         return this;
     }
 }
