@@ -12,7 +12,7 @@ import java.util.Set;
 @Entity
 @Table(name = "files")
 public class FileEntity extends BaseEntity {
-    @Column(name = "file_name", nullable = false, unique = true)
+    @Column(name = "file_name", nullable = false)
     private String name;
     @Column(name = "file_url", nullable = false, unique = true)
     private String url;

@@ -29,6 +29,7 @@ public class FileController {
     private final FileService fileService;
     private final BuildingService buildingService;
     private final FloorService floorService;
+    private static int currentPage;
 
 
     public FileController(FileService fileService, BuildingService buildingService, FloorService floorService) {
@@ -96,7 +97,7 @@ public class FileController {
 
         fileService.addNewFile(addFileDTO, uploader);
 
-        return "redirect:/file/all";
+        return "redirect:add";
     }
 
     @Transactional
