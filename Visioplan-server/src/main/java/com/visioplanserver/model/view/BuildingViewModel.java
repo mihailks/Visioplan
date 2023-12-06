@@ -9,7 +9,6 @@ public class BuildingViewModel {
     private String city;
     private String country;
     private String imgUrl;
-//    private Set<CompanyNameViewModel> companies;
     private CompanyNameViewModel company;
 
     private Set<FloorViewModel> floors;
@@ -34,16 +33,6 @@ public class BuildingViewModel {
         this.id = id;
         return this;
     }
-
-//    public Set<CompanyNameViewModel> getCompanies() {
-//        return companies;
-//    }
-//
-//    public BuildingViewModel setCompanies(Set<CompanyNameViewModel> companies) {
-//        this.companies = companies;
-//        return this;
-//    }
-
 
     public CompanyNameViewModel getCompany() {
         return company;

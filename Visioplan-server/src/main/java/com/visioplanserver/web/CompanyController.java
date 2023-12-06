@@ -30,7 +30,7 @@ public class CompanyController {
     @GetMapping("/register")
     public String register(Model model) {
 
-        if(!model.containsAttribute("companyRegistrationDTO")){
+        if (!model.containsAttribute("companyRegistrationDTO")) {
             model.addAttribute("companyRegistrationDTO", CompanyRegistrationDTO.createEmpty());
         }
 
@@ -49,7 +49,7 @@ public class CompanyController {
         }
 
         companyService.register(companyRegistrationDTO);
-        return "redirect:/";
+        return "redirect:home";
     }
 
     @GetMapping("/all")
@@ -57,14 +57,12 @@ public class CompanyController {
         return getOnePage(model, 1);
     }
 
-        @GetMapping("/all/{pageNumber}")
-        public String getOnePage (Model model, @PathVariable("pageNumber") int currentPage){
-//            List<CompanyViewModel> allCompanies = companyService.getAllCompaniesDetails();
-            Page<CompanyViewModel> page = companyService.findPage(currentPage);
-//            model.addAttribute("companies", allCompanies);
-            pageDetails(model, currentPage, page);
-            return "companies-all";
-        }
+    @GetMapping("/all/{pageNumber}")
+    public String getOnePage(Model model, @PathVariable("pageNumber") int currentPage) {
+        Page<CompanyViewModel> page = companyService.findPage(currentPage);
+        pageDetails(model, currentPage, page);
+        return "companies-all";
+    }
 
     private void pageDetails(Model model, @PathVariable("pageNumber") int currentPage, Page<CompanyViewModel> page) {
         int totalPages = page.getTotalPages();

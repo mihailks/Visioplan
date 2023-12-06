@@ -1,3 +1,6 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/commons::head-bootstrap}"><title>Login User</title></head>
 
 <link rel="stylesheet" th:href="@{/css/user-login-form.css}"/>
@@ -9,7 +12,6 @@
     <div class="card py-5 px-3">
 
         <img src="/images/logo-white.png" alt="logo">
-
 
         <form class="row g-3 main-form"
               th:action="@{/users/login}"

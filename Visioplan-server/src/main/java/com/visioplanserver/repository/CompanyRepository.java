@@ -60,9 +60,13 @@ public interface CompanyRepository extends JpaRepository<CompanyEntity, Long> {
             WHERE e.username = :username
             """)
     CompanyNameViewModel findCompanyByEmployeeName(@Param("username") String username);
-}
+
 //@Query("""
 //            SELECT new com.visioplanserver.model.view.FloorNameDTO(f.number)
 //            FROM FloorEntity f
 //            WHERE f.building.name = :buildingName
 //            """)
+
+
+
+}

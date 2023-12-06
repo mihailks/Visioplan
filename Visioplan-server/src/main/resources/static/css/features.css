@@ -1,0 +1,10 @@
+body {
+    background-image: url("../images/index-BG.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.custom-text{
+    font-size: 1.20rem;
+}
+

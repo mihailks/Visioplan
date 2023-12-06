@@ -14,7 +14,6 @@ public interface CompanyService {
     String getNameById(Long id);
 
     List<CompanyNameViewModel> getAllCompanies();
-    List<CompanyViewModel> getAllCompaniesDetails();
 
     CompanyEntity getCompanyByName(String companyName);
 

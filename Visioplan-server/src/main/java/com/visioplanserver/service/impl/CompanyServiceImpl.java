@@ -44,12 +44,6 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public List<CompanyViewModel> getAllCompaniesDetails() {
-        List<CompanyViewModel> companiesDetails = companyRepository.getAllCompaniesDetails();
-        return companiesDetails;
-    }
-
-    @Override
     public CompanyEntity getCompanyByName(String companyName) {
         return companyRepository.findByName(companyName).orElseThrow(() -> new CompanyNotFoundException("Company not found"));
     }
@@ -61,8 +55,10 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Page<CompanyViewModel> findPage(int pageNumber) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 10);
-        Page<CompanyViewModel> companiesDetails = companyRepository.getAllCompaniesDetails(pageable);
-        return companiesDetails;
+        Pageable pageable = PageRequest.of(pageNumber -1, 10);
+//        Page<CompanyViewModel> companiesDetails = companyRepository.getAllCompaniesDetails(pageable); //TODO: find why i get only 11 companies
+
+        return companyRepository.findAll(pageable)
+                .map(companyEntity -> modelMapper.map(companyEntity, CompanyViewModel.class));
     }
 }

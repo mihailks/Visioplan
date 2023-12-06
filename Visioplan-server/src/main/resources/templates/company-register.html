@@ -2,7 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/commons::head-bootstrap}"><title>Register company</title></head>
-
 <body>
 
 <header>
@@ -25,10 +24,8 @@
                    class="form-control"
                    placeholder="Name"/>
             <p th:if="${#fields.hasErrors('name')}"
-                th:errors="*{name}"
-                    class="invalid-feedback errors alert alert-danger">
-                Username name is required.
-            </p>
+               th:errors="*{name}"
+               class="invalid-feedback"></p>
         </div>
 
         <div class="col-md-6">
@@ -41,9 +38,7 @@
                    placeholder="Address"/>
             <p th:if="${#fields.hasErrors('address')}"
                th:errors="*{address}"
-               class="invalid-feedback errors alert alert-danger">
-                Email is required.
-            </p>
+               class="invalid-feedback"></p>
         </div>
 
         <div class="col-md-6">
@@ -54,9 +49,9 @@
                    type="text"
                    class="form-control"
                    placeholder="City"/>
-            <p class="invalid-feedback errors alert alert-danger">
-                Username name is required.
-            </p>
+            <p th:if="${#fields.hasErrors('city')}"
+               th:errors="*{city}"
+               class="invalid-feedback"></p>
         </div>
 
         <div class="col-md-6">
@@ -67,22 +62,18 @@
                    type="text"
                    class="form-control"
                    placeholder="Country"/>
-            <p class="invalid-feedback errors alert alert-danger">
-                Email is required.
-            </p>
+            <p th:if="${#fields.hasErrors('country')}"
+               th:errors="*{country}"
+               class="invalid-feedback"></p>
         </div>
 
         <div class="col-md-6">
             <label for="phone" class="form-label text-black font-weight-bold">Phone</label>
             <input id="phone"
                    th:field="*{phone}"
-                   th:errorclass="is-invalid"
                    type="text"
                    class="form-control"
                    placeholder="Phone"/>
-            <p class="invalid-feedback errors alert alert-danger">
-                Username name is required.
-            </p>
         </div>
 
         <div class="col-md-6">
@@ -93,26 +84,19 @@
                    type="text"
                    class="form-control"
                    placeholder="Email"/>
-            <p class="invalid-feedback errors alert alert-danger">
-                Email is required.
-            </p>
-
+            <p th:if="${#fields.hasErrors('email')}"
+               th:errors="*{email}"
+               class="invalid-feedback"></p>
         </div>
-
 
         <div class="form-group col-md-6 mb-3">
             <label for="website" class="form-label text-black font-weight-bold">Website</label>
             <input id="website"
                    th:field="*{website}"
-                   th:errorclass="is-invalid"
                    type="text"
                    class="form-control"
                    placeholder="Website"/>
-            <p class="invalid-feedback errors alert alert-danger">
-                Username name is required.
-            </p>
         </div>
-
 
         <div class="col-md-12">
             <div class="col-md-12 text-center">

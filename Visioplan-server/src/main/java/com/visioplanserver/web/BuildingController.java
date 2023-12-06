@@ -3,13 +3,11 @@ package com.visioplanserver.web;
 import com.visioplanserver.model.dto.AddBuildingDTO;
 import com.visioplanserver.model.view.BuildingViewModel;
 import com.visioplanserver.service.BuildingService;
-import com.visioplanserver.service.FileService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -22,11 +20,9 @@ import java.util.List;
 public class BuildingController {
 
     private final BuildingService buildingService;
-    private final FileService fileService;
 
-    public BuildingController(BuildingService buildingService, FileService fileService) {
+    public BuildingController(BuildingService buildingService) {
         this.buildingService = buildingService;
-        this.fileService = fileService;
     }
 
     @GetMapping("/add")
@@ -34,11 +30,11 @@ public class BuildingController {
         if (!model.containsAttribute("addBuildingDTO")) {
             model.addAttribute("addBuildingDTO", AddBuildingDTO.createEmpty());
         }
-        return "bulding-add";
+        return "building-add";
     }
 
     @GetMapping("/all")
-    public String project(Model model, Principal principal) {
+    public String project(Model model) {
         List<BuildingViewModel> buildings = buildingService.getAllBuildings();
         model.addAttribute("buildings", buildings);
         return "buildings-all";
@@ -58,9 +54,6 @@ public class BuildingController {
 
         buildingService.addNewBuilding(addBuildingDTO);
 
-
         return "redirect:/building/all";
     }
-
-
 }

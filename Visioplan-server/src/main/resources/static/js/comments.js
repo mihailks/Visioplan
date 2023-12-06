@@ -11,10 +11,11 @@ async function loadComments(e) {
     container.innerHTML = '';
 
     const comments = await (await fetch(`http://localhost:8080/api/${id}/comments`)).json();
-
+    let counter = 1;
     Object.values(comments).forEach(comment => {
         const p1 = document.createElement("p");
-        p1.textContent = `${comment.author}: ${comment.textContent}`;
+        p1.textContent = counter +": "+ `${comment.author}: ${comment.textContent}`;
+        counter++;
         container.appendChild(p1);
     });
 }

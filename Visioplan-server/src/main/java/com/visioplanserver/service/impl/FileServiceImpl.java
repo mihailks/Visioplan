@@ -60,15 +60,6 @@ public class FileServiceImpl implements FileService {
                 }).collect(Collectors.toList());
     }
 
-//    @Override
-//    public Page<FileViewModel> getAllFiles(Pageable pageable) {
-//        //TODO: from mobile app, but only one page...
-////        return fileRepository
-////                .findAll(pageable)
-////                .map(fileEntity -> modelMapper.map(fileEntity, FileViewModel.class));
-//        return null;
-//    }
-
     @Override
     public Page<FileViewModel> findPage(int pageNumber) {
         Pageable pageable = PageRequest.of(pageNumber - 1, 10);
@@ -80,7 +71,7 @@ public class FileServiceImpl implements FileService {
                     return fileViewModel;
                 });
     }
-
+    //Pageable files by building name
     @Override
     public Page<FileViewModel> findPage(int pageNumber, String buildingName) {
         Pageable pageable = PageRequest.of(pageNumber - 1, 10);

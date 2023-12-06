@@ -45,10 +45,12 @@ public class BuildingServiceImpl implements BuildingService {
     @Override
     public void addNewBuilding(AddBuildingDTO addBuildingDTO) {
         MultipartFile imageFile = addBuildingDTO.imageFile();
-        String imageUrl = cloudImageService.uploadImage(imageFile);
         BuildingEntity buildingEntity = modelMapper.map(addBuildingDTO, BuildingEntity.class);
 
-        buildingEntity.setImgUrl(imageUrl);
+        if (imageFile != null) {
+            String imageUrl = cloudImageService.uploadImage(imageFile);
+            buildingEntity.setImgUrl(imageUrl);
+        }
 
         buildingRepository.save(buildingEntity);
     }

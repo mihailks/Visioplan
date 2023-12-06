@@ -36,11 +36,6 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("/about")
-    public String about() {
-        return "about";
-    }
-
     @GetMapping("/features")
     public String features() {
         return "features";
@@ -48,11 +43,7 @@ public class HomeController {
 
     @GetMapping("/picture")
     public String picture() {
-        return "bulding-add";
+        return "building-add";
     }
 
-    @GetMapping("/test-side-bar")
-    public String testForm() {
-        return "test-side-bar";
-    }
 }

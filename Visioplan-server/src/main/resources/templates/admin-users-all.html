@@ -2,13 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:replace="~{fragments/commons::head-bootstrap}"><title>all users</title></head>
+<head th:replace="~{fragments/commons::head-bootstrap}"><title>All users</title></head>
 
 <body>
 
-<header>
-    <div th:replace="~{fragments/commons::navbar}"></div>
-</header>
+<header><div th:replace="~{fragments/commons::navbar}"></div></header>
 
 <h1 class="text-center">All users</h1>
 <div class="table-responsive m-5">
@@ -67,11 +65,9 @@
             <a class="page-link" th:href="@{'/user/all/' + ${currentPage - 1}}">Previous</a>
         </li>
 
-
         <li class="page-item" th:each="page : ${#numbers.sequence(1,totalPages)}">
             <a class="page-link" th:href="@{'/user/all/' + ${page}}">[[${page}]]</a>
         </li>
-
 
         <li class="page-item" th:if="${currentPage < totalPages}">
             <a class="page-link" th:href="@{'/user/all/' + ${currentPage + 1}}">Next</a>

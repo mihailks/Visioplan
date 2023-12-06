@@ -19,62 +19,69 @@
             <label for="name" class="form-label text-black font-weight-bold">Name</label>
             <input id="name"
                    th:field="*{name}"
-
+                   th:errorclass="is-invalid"
                    type="text"
                    class="form-control"
                    placeholder="Name"/>
-            <p class="invalid-feedback errors alert alert-danger">
-                Username name is required.
-            </p>
+            <p th:if="${#fields.hasErrors('name')}"
+               th:errors="*{name}"
+               class="invalid-feedback"></p>
         </div>
 
         <div class="col-md-6">
             <label for="address" class="form-label text-black font-weight-bold">Address</label>
             <input id="address"
                    th:field="*{address}"
-
+                   th:errorclass="is-invalid"
                    type="text"
                    class="form-control"
                    placeholder="Address"/>
-            <p class="invalid-feedback errors alert alert-danger">
-                Email is required.
-            </p>
+            <p th:if="${#fields.hasErrors('address')}"
+               th:errors="*{address}"
+               class="invalid-feedback"></p>
         </div>
 
         <div class="col-md-6">
             <label for="city" class="form-label text-black font-weight-bold">City</label>
             <input id="city"
                    th:field="*{city}"
-
+                   th:errorclass="is-invalid"
                    type="text"
                    class="form-control"
                    placeholder="City"/>
-            <p class="invalid-feedback errors alert alert-danger">
-                Username name is required.
-            </p>
+            <p th:if="${#fields.hasErrors('city')}"
+               th:errors="*{city}"
+               class="invalid-feedback"></p>
         </div>
 
         <div class="col-md-6">
             <label for="country" class="form-label text-black font-weight-bold">Country</label>
             <input id="country"
                    th:field="*{country}"
-
+                   th:errorclass="is-invalid"
                    type="text"
                    class="form-control"
                    placeholder="Country"/>
-            <p class="invalid-feedback errors alert alert-danger">
-                Email is required.
-            </p>
+            <p th:if="${#fields.hasErrors('country')}"
+               th:errors="*{country}"
+               class="invalid-feedback"></p>
         </div>
 
         <div class="col-md-12">
             <label for="building-image" class="form-label">Upload photo</label>
-            <input type="file" class="form-control" th:field="*{imageFile}"
-                   accept="image/jpeg, image/png, image/jpg" id="building-image"/>
+            <input type="file"
+                   class="form-control"
+                   th:field="*{imageFile}"
+                   th:errorclass="is-invalid"
+                   accept="image/jpeg, image/png, image/jpg"
+                   id="building-image"/>
+            <p th:if="${#fields.hasErrors('imageFile')}"
+                th:errors="*{imageFile}"
+                class="invalid-feedback"></p>
         </div>
 
         <div class="col-md-12 text-center">
-                <button class="btn btn-main" type="submit">Create new building</button>
+            <button class="btn btn-main" type="submit">Create new building</button>
         </div>
     </form>
     <footer th:replace="~{fragments/commons::footer}"></footer>
