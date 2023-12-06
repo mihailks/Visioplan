@@ -1,16 +1,30 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/commons::head-bootstrap}"><title>500</title></head>
-<body>
-<header><div th:replace="~{fragments/commons::navbar}"></div></header>
 
-<div class="container-fluid">
-    <h5 class="text-center text-black mt-5">
-        nothing here error 500!, this is my custom page for it!
-    </h5>
-    <a th:href="@{/}">go back</a>
-</div>
+<link rel="stylesheet" th:href="@{/css/errors.css}"/>
 
-<footer th:replace="~{fragments/commons::footer}"></footer>
+<body class="d-flex flex-column h-100">
+<header>
+    <div th:replace="~{fragments/commons::navbar}"></div>
+</header>
+
+<main class="flex-shrink-0">
+
+    <div class="container">
+        <div class="text-center">
+            <h2 class="display-4 my-error-title">Page not found</h2>
+            <div class="text-center">
+                <img class="img-fluid" src="../images/error.jpg" alt="500">
+            </div>
+            <h3><a class="text-center text-success" th:href="@{/}">But you can always go back</a></h3>
+        </div>
+    </div>
+
+</main>
 </body>
 </html>
+
+
+
+
