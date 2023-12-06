@@ -3,15 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="~{fragments/commons::head-bootstrap}"><title>Home page</title></head>
-
-<style>
-    body {
-        background-image: url("/images/index-BG.jpg");
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-</style>
+<link rel="stylesheet" th:href="@{/css/index.css}"/>
 
 <body>
 <header>
@@ -41,7 +33,6 @@
     </div>
 </div>
 
-
 <div class="container my-5">
     <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-5 border shadow-lg"
          style="backdrop-filter: blur(0.6rem)">
@@ -61,7 +52,6 @@
     </div>
 </div>
 
-
 <div class="container my-5">
     <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-5 border shadow-lg"
          style="backdrop-filter: blur(0.6rem)">
@@ -80,7 +70,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="container-fluid">
     <footer th:replace="~{fragments/commons::footer}"></footer>
