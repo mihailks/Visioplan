@@ -20,15 +20,13 @@ import java.util.List;
 @Service
 public class CommentsServiceImpl implements CommentsService {
     private final CommentsRepository commentsRepository;
-    private final ModelMapper modelMapper;
     private final UserService userService;
     private final FileService fileService;
     private final EmailService emailService;
 
 
-    public CommentsServiceImpl(CommentsRepository commentsRepository, ModelMapper modelMapper, UserService userService, FileService fileService, EmailService emailService) {
+    public CommentsServiceImpl(CommentsRepository commentsRepository, UserService userService, FileService fileService, EmailService emailService) {
         this.commentsRepository = commentsRepository;
-        this.modelMapper = modelMapper;
         this.userService = userService;
         this.fileService = fileService;
         this.emailService = emailService;

@@ -1,11 +1,8 @@
 package com.visioplanserver.service.impl;
 
 import com.visioplanserver.model.entity.UserEntity;
-import com.visioplanserver.model.entity.UserRoleEntity;
 import com.visioplanserver.model.entity.enums.RolesEnum;
 import com.visioplanserver.repository.UserRepository;
-import org.apache.catalina.User;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,9 +11,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.List;
 import java.util.Optional;
 
+import static com.visioplanserver.testUtils.CreateTestData.createTestUser;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -79,16 +76,5 @@ class LoginUserDetailServiceTest {
     }
 
 
-    private static UserEntity createTestUser() {
-        return new UserEntity()
-                .setUsername("username")
-                .setFirstName("firstName")
-                .setLastName("lastName")
-                .setPassword("password")
-                .setEmail("email@test.com")
-                .setRole(List.of(
-                        new UserRoleEntity().setRole(RolesEnum.ADMIN),
-                        new UserRoleEntity().setRole(RolesEnum.USER)
-                ));
-    }
+
 }

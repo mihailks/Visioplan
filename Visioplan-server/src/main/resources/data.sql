@@ -23,30 +23,29 @@ values  (1, 'ul. "Vasil Levski" 272, 4003 Severna Promishlena Zona, Plovdiv', 'P
         (23, 'р-н Приморски, АКАДЕМИК АТАНАС БЕШКОВ, 13, ет. 4', 'Варна', 'България', 'p.atanasov@pbengineering.bg', 'ПБ-Еngineering-2022', 'тел.: 0883 339 223', 'https://pbengineering2022.com/'),
         (24, 'бул.Драган Цанков 36, Интерпред СТЦ-София, офис Б408', 'София', 'България', 'office.sofia@energy-ka.net', 'Energy-ka', '+359 2 969 5073', 'https://www.energy-ka.net/?page_id=682');
 
-insert into visiodb.companies (id, address, city, country, email, name, phone, website)
-values  (1, 'ul. "Vasil Levski" 272, 4003 Severna Promishlena Zona, Plovdiv', 'Plovdiv', 'Bulgaria', 'plovdiv@ataro.bg', 'Ataro Clima', '+359 7001 1618', 'https://www.ataro.bg/en'),
-        (2, '93B, Simeonovsko shosse, Blvd. entrance B, 2 nd floor', 'Sofia', 'Bulgaria', 'office@pipesystem.bg', 'Pipe System', '+359 878 252 655', 'https://www.pipesystem.bg/'),
-        (3, 'бул. д-р Петър Дертлиев 129.', 'Sofia', 'Bulgaria', 'office@raicommerce.bg', 'Raicommerce', '+359 02 9251444', 'https://www.raicommerce.bg/'),
-        (4, '11, place de l''Europe Campus Pierre-Berger, bât. D 78140 Vélizy-Villacoublay', 'Paris', 'France', 'office@eiffage.fr', 'Eiffage', '+33 (0) 1 34 65 89 89', 'https://www.eiffage.com/en/'),
-        (5, 'Pl. de la Bastille, 75004 Paris', 'Paris', 'France', 'contact@sfica.fr', 'Sfica', '+33 01 44 92 89 00', 'https://www.sfica.fr/'),
-        (6, 'The Alrov Tower 46 Rothschild Blvd.', 'Tel-Aviv', 'Israel', 'info@alrov.co.il', 'Alrov', '+972-3-7147777', 'https://www.alrov.co.il/'),
-        (7, '20 rue des Jardins 92600 Asnières-sur-Seine', 'Paris', 'France', 'contact@bouygues.fr', 'Bouygues ', '+33 01 86 65 29 80', 'https://www.bouygues-es.fr/'),
-        (8, 'София, ж.к. Младост 4, бул. Александър Малинов №78 ПК: 1799', 'Sofia', 'Bulgaria', 'university@softuni.bg', 'Softuni', '+ 359 899 55 55 92', 'https://softuni.bg/'),
-        (10, 'Centre', 'Sliven', 'Sliven', 'support@visioplan.com', 'Visiolan', '+395 886 997 993', 'https://www.visioplan.com/'),
-        (11, 'ул. Дамяница 3-5, София 1619, България', 'София', 'България', 'office@gbs-bg.com', 'Главболгарстрой Холдинг АД', '+359 2 91 51 703', 'https://gbs-bg.com/bg/'),
-        (12, 'гр. София 1408, жил. група "Южен парк" ул. „Никола Образописов" № 12', 'София', 'България', 'tracegroup@trace.bg', 'Trace Group', '+359 2 806 67 00', 'https://www.tracebg.com/bg'),
-        (13, 'Карловско шосе - комплекс "АНДИ",', 'Пловдив', 'България', 'office@andi-bg.com', 'Анди', '032/904 000', 'https://andi-bg.com/'),
-        (14, 'бул. Марица 154', 'Пловдив ', 'България', 'info@boradi.com', 'Boradi', '032 - 94 74 94', 'https://www.boradi.com/index.html'),
-        (15, 'Пловдив 4003, бул. "В.Левски" № 56 ', 'Пловдив', 'България', 'office@dragiev-co.bg', '“ДРАГИЕВ и КО” ООД', '032/ 908 940', 'http://www.dragiev-co.bg/'),
-        (16, 'бул.”Черни връх” № 59 A', 'София', 'България', 'office@gpgroup.bg', 'GP Group', '+359 2 816 99 00', 'https://gpgroup.bg/bg'),
-        (17, 'БЪЛГАРИЯ, гр. Пловдив, р-н Източен, ул. Карловска, 36 ', 'Пловдив', 'България', 'multikom.shop@gmail.com', 'МУЛТИКОМ ООД', '032 945 765', 'bg-maistor.com'),
-        (18, 'ул. Челопешко шосе 36', 'София', 'България', 'office@aco.bg', 'АСО', '02 445 6701', 'www.aco.bg'),
-        (19, 'бул. "Г.М.Димитров " 54, ет. 3', 'София', 'България', 'info@wilo.bg', ' Wilo Bulgaria EOOD', '+359 2 970 1979', 'www.wilo.bg'),
-        (20, 'Околовръстен път Коматево База Хъс', 'Пловдив', 'България', 'office@arhcitystroy.com', 'АРХСТРОЙ БГ ЕООД', '0882 300149', 'https://arhcitystroy.com/'),
-        (21, 'blvd “Kuklensko shose” 12, RT Office', 'Пловдив', 'България', 'office@rtcbg.com', 'Ер Те Консулт Инженеринг ЕООД', '+359 888 733 333', 'https://rtconsult.eu/'),
-        (22, 'с. Марково, местност ЗАХАРИДЕВО, 043А', 'Пловдив', 'България', 'laleksanyan@pimkbuild.bg', 'ПИМК ООД', '+359 893 345 784', 'https://pimkbuild.bg/'),
-        (23, 'р-н Приморски, АКАДЕМИК АТАНАС БЕШКОВ, 13, ет. 4', 'Варна', 'България', 'p.atanasov@pbengineering.bg', 'ПБ-Еngineering-2022', 'тел.: 0883 339 223', 'https://pbengineering2022.com/'),
-        (24, 'бул.Драган Цанков 36, Интерпред СТЦ-София, офис Б408', 'София', 'България', 'office.sofia@energy-ka.net', 'Energy-ka', '+359 2 969 5073', 'https://www.energy-ka.net/?page_id=682');
+insert into visiodb.buildings (id, address, city, country, img_url, name)
+values  (1, '45 Bd Raspail, 75006 Paris', 'Paris', 'France', 'https://res.cloudinary.com/daqpjk60x/image/upload/v1700420511/Lutetia_sia81r.jpg', 'Lutetia'),
+        (2, 'Gentsestraat 79, 8530 Harelbeke', 'Harelbeke', 'Belgium', 'https://res.cloudinary.com/daqpjk60x/image/upload/v1700494564/Harelbeke_lmil6j.png', 'Varbel'),
+        (3, 'София, ж.к. Младост 4, бул. Александър Малинов №78 ПК: 1799', 'Sofia', 'Bugaria', 'https://res.cloudinary.com/daqpjk60x/image/upload/v1700494655/SoftUni_ikqu0e.jpg', 'Softuni'),
+        (4, 'бул. „Пещерско шосе“ 80, 4002 Западна промишлена зона, Пловдив', 'Plovdiv', 'Bugaria', 'https://res.cloudinary.com/daqpjk60x/image/upload/v1700494620/Selena_tkfy0m.jpg', 'УСБАЛАГ "Селена"'),
+        (5, 'Отдих и Култура 1М, 4015 Западна промишлена зона, Пловдив', 'Plovdiv', 'Bugaria', 'https://res.cloudinary.com/daqpjk60x/image/upload/v1700494674/Sunset_Green_Residents_g4q27y.jpg', 'Sunset Green Residents'),
+        (6, '4MPX+PX, 4001 Западна промишлена зона, Пловдив', 'Plovdiv', 'Bugaria', 'https://res.cloudinary.com/daqpjk60x/image/upload/v1700494918/zapaden_park_1_2_y867ni.jpg', 'Западен парк резидънс 1 и 2'),
+        (7, 'ул. „Рая“ 17, 4000 Западна промишлена зона, Пловдив', 'Plovdiv', 'Bugaria', 'https://res.cloudinary.com/daqpjk60x/image/upload/v1700494739/Magnolia_Residence_sstkxc.jpg', 'Magnolia Residence'),
+        (8, '6, ул. „Лев Толстой“ str, 4017 Пловдив', 'Plovdiv', 'Bugaria', 'https://res.cloudinary.com/daqpjk60x/image/upload/v1700494738/Hotel_Imperial_Plovdiv_oeidpk.jpg', 'Hotel Imperial Plovdiv'),
+        (9, 'ул. „Братя Миладинови“, 8800 Сливен Център, Сливен', 'Sliven', 'Bugaria', 'https://res.cloudinary.com/daqpjk60x/image/upload/v1700494918/%D0%A5%D0%BE%D1%82%D0%B5%D0%BB_%D0%A0%D0%B8%D0%BA%D0%B0%D1%81_bqremm.jpg', 'Хотел Рикас'),
+        (10, 'ул. „Предел“ 1, 8800 Сливен Център, Сливен', 'Sliven', 'Bugaria', 'https://res.cloudinary.com/daqpjk60x/image/upload/v1700494737/hotel_kredo_uiyhhp.jpg', 'Hotel Kredo'),
+        (11, 'бул. „Цар Освободител“ 6, 8800 Сливен Център, Сливен', 'Sliven', 'Bugaria', 'https://res.cloudinary.com/daqpjk60x/image/upload/v1700494738/Hotel_%D0%A5%D0%BE%D1%82%D0%B5%D0%BB_%D0%9F%D0%B0%D1%80%D0%BA_%D0%A6%D0%B5%D0%BD%D1%82%D1%80%D0%B0%D0%BB_qrognk.jpg', 'Hotel Хотел Парк Централ'),
+        (13, 'Mестност "Карандила, ж.к. Сини камъни, 8800 Сливен', 'Sliven', 'Bugaria', 'https://res.cloudinary.com/daqpjk60x/image/upload/v1700494738/%D0%9A%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81_%D0%A1%D0%B8%D0%BD%D0%B8%D1%82%D0%B5_%D0%BA%D0%B0%D0%BC%D1%8A%D0%BD%D0%B8_gmqnvg.jpg', 'Комплекс "Сините камъни"'),
+        (14, 'ул. „Проф. д-р Иван Странски“ 20, 1000 ж.к. Малинова долина, София', 'Sofia', 'Bugaria', 'https://res.cloudinary.com/daqpjk60x/image/upload/v1700494737/%D0%9A%D0%B0%D1%83%D1%84%D0%BB%D0%B0%D0%BD%D0%B4_%D0%A1%D0%BE%D1%84%D0%B8%D1%8F-%D0%9C%D0%B0%D0%BB%D0%B8%D0%BD%D0%BE%D0%B2%D0%B0_%D0%B4%D0%BE%D0%BB%D0%B8%D0%BD%D0%B0_l8s6lv.jpg', 'Кауфланд София-Малинова долина'),
+        (15, 'ул. „Владичина ливада“ 2, 1000 кв. Горубляне, София', 'Sofia', 'Bugaria', 'https://res.cloudinary.com/daqpjk60x/image/upload/v1700494738/%D0%9A%D0%B0%D1%83%D1%84%D0%BB%D0%B0%D0%BD%D0%B4_%D0%A1%D0%BE%D1%84%D0%B8%D1%8F_%D0%93%D0%BE%D1%80%D1%83%D0%B1%D0%BB%D1%8F%D0%BD%D0%B5_yerk6p.jpg', 'Кауфланд София Горубляне'),
+        (23, 'ул. „Сребърна“ 27, 1407 Промишлена зона Хладилника, София', 'Sofiq', 'Bulgaria', 'http://res.cloudinary.com/daqpjk60x/image/upload/v1700492280/umcw3kkmku0bvmhzbhag.jpg', 'SoHome'),
+        (24, 'Kapsida Industrial Zone, 11 Bavaria Str, Kuklen 4000, 4101 Пловдив', 'Plovdiv', 'Bulgaria', 'http://res.cloudinary.com/daqpjk60x/image/upload/v1700492409/pd7o8og01fjoeux159lw.jpg', 'Odelo'),
+        (25, 'Anton Petrov, 2227 Божурище', 'Sofia', 'Bulgaria', 'http://res.cloudinary.com/daqpjk60x/image/upload/v1700492562/lrojypjzahtcdf6f5g3x.jpg', 'logistics base'),
+        (26, 'Бл. „Кукленско шосе“ 17, 4004 Южна промишлена зона, Пловдив', 'Plovdiv', 'Bulgaria', 'http://res.cloudinary.com/daqpjk60x/image/upload/v1700492647/pbplagqob42amptuyhea.jpg', 'Сейдж Технолоджис ООД'),
+        (27, 'бул. „Цариградско шосе“ 28, 1113 НПЗ Дианабад, София', 'София', 'България', 'http://res.cloudinary.com/daqpjk60x/image/upload/v1700492735/uta6czsa3dzlak0yhhxq.jpg', 'Комплекс Изток Плаза'),
+        (28, '4271 Първомай', 'Първомай', 'България', 'http://res.cloudinary.com/daqpjk60x/image/upload/v1700492884/utnkprye9xsybrabxm0x.jpg', 'Ритейл парк - Първомай'),
+        (29, 'ул. „Рокфелер“ 1, 2850 Петрич', 'Петрич', 'България', 'http://res.cloudinary.com/daqpjk60x/image/upload/v1700492967/c2bmtr84jznebsavqrfc.png', 'кауфланд Петрич');
+
 
 INSERT INTO `buildings_companies`
 VALUES (4, 1),

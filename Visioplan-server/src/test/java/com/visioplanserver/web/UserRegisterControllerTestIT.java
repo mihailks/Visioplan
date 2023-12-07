@@ -2,7 +2,9 @@ package com.visioplanserver.web;
 
 import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.ServerSetup;
+import jakarta.mail.internet.MimeMessage;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +49,6 @@ class UserRegisterControllerTestIT {
 
     @Test
     void testRegistration() throws Exception {
-        String baseUrl = "http://localhost";
         mockMvc.perform(
                         MockMvcRequestBuilders.post("/user/register")
                                 .param("username", "Ivan")
@@ -60,17 +61,17 @@ class UserRegisterControllerTestIT {
                                 .with(csrf())
                 ).andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("http://localhost/users/login"));
-//                .andExpect(view().name("redirect:users/user-login"));
+
+
+//        greenMail.waitForIncomingEmail(1);
+//        MimeMessage[] receivedMessages = greenMail.getReceivedMessages();
+//
+//        Assertions.assertEquals(1, receivedMessages.length);
+//
+//        MimeMessage receivedMessage = receivedMessages[0];
+//        Assertions.assertTrue(receivedMessage.getContent().toString().contains("Ivan"));
+//        Assertions.assertEquals(1, receivedMessage.getAllRecipients().length);
+//        Assertions.assertEquals("ivan@hotmail.com", receivedMessage.getAllRecipients()[0].toString());
     }
 
-//    @Test
-//    void testRegistrationWithWrongInfo() throws Exception {
-//        String baseUrl = "http://localhost";
-//        mockMvc.perform(
-//                        MockMvcRequestBuilders.post("/user/register")
-//                                .with(csrf())
-//                ).andExpect(status().is3xxRedirection())
-//                .andExpect(redirectedUrl("http://localhost/users/register"));
-////                .andExpect(view().name("redirect:users/user-login"));
-//    }
 }

@@ -1,7 +1,6 @@
 package com.visioplanserver.service.impl;
 
 import com.visioplanserver.model.dto.AddFileDTO;
-import com.visioplanserver.model.entity.BuildingEntity;
 import com.visioplanserver.model.entity.FileEntity;
 import com.visioplanserver.model.entity.FloorEntity;
 import com.visioplanserver.model.entity.UserEntity;
@@ -11,11 +10,11 @@ import com.visioplanserver.model.entity.enums.FileExtensionEnum;
 import com.visioplanserver.model.entity.enums.TextFileTypeEnum;
 import com.visioplanserver.model.view.FileViewModel;
 import com.visioplanserver.repository.FileRepository;
+import com.visioplanserver.repository.UserRepository;
 import com.visioplanserver.service.BuildingService;
 import com.visioplanserver.service.DropboxService;
 import com.visioplanserver.service.FloorService;
 import com.visioplanserver.service.exeption.FileNotFoundException;
-import org.apache.catalina.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,6 +34,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
+import static com.visioplanserver.testUtils.CreateTestData.createTestUser;
+import static com.visioplanserver.testUtils.CreateTestData.createTestUserWithRoleViewModel;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -56,6 +57,10 @@ class FileServiceImplTest {
     @Mock
     private UserServiceImpl mockUserService;
     @Mock
+    private LoginUserDetailService mockLoginUserDetailService;
+    @Mock
+    private UserRepository mockUserRepository;
+    @Mock
     ModelMapper mockModelMapper;
 
     @BeforeEach
@@ -64,11 +69,12 @@ class FileServiceImplTest {
     }
 
     @Test
-    void getAllFiles() {
+    void testGetAllFiles() {
         List<FileEntity> files = new ArrayList<>();
         files.add(createTestFile());
         when(mockFileRepository.findAll())
                 .thenReturn(files);
+
         FileViewModel fileViewModel = createTestFileViewModel();
         when(mockModelMapper.map(any(FileEntity.class), any()))
                 .thenReturn(fileViewModel);
@@ -106,24 +112,35 @@ class FileServiceImplTest {
     }
 
     @Test
-    void testAddNewFile() {
-        MultipartFile dataFile = createTestMultipartFile();
-        AddFileDTO addFileDTO = createTestAddFileDTO();
-        FileEntity fileEntity = createTestFile();
+    void findPageByBuildingName() {
+        List<FileEntity> files = new ArrayList<>();
+        files.add(createTestFile());
+        Page<FileEntity> page = new PageImpl<>(files);
+        FileViewModel fileViewModel = createTestFileViewModel();
+        when(mockModelMapper.map(any(FileEntity.class), any()))
+                .thenReturn(fileViewModel);
+        when(mockFileRepository.findAllByFloor_Building_Name(any(), any(PageRequest.class)))
+                .thenReturn(page);
 
+        Page<FileViewModel> result = serviceToTest.findPage(1, "test");
 
-        when(mockModelMapper.map(addFileDTO, FileEntity.class))
-                .thenReturn(fileEntity);
-        when(mockFileRepository.save(fileEntity))
-                .thenReturn(fileEntity);
-        when(mockBuildingService.getBuildingByName(any()))
-                .thenReturn(1L);
-        when(mockFloorService.getFloorIdByNameAndBuildingId(any(), any()))
-                .thenReturn(createTestFloor());
-
-        serviceToTest.addNewFile(addFileDTO, null ); //TODO: fix this test
-        verify(mockFileRepository).save(any());
+        assertEquals(1, result.getTotalElements());
+        assertEquals(1, result.getTotalPages());
+        assertEquals(1, result.getContent().size());
+        assertEquals(fileViewModel.getName(), result.getContent().get(0).getName());
+        assertEquals(fileViewModel.getUrl(), result.getContent().get(0).getUrl());
+        assertEquals(fileViewModel.getUploadDate(), result.getContent().get(0).getUploadDate());
+        assertEquals(fileViewModel.getExtension(), result.getContent().get(0).getExtension());
+        assertEquals(fileViewModel.getPart(), result.getContent().get(0).getPart());
+        assertEquals(fileViewModel.getFloor(), result.getContent().get(0).getFloor());
+        assertEquals(fileViewModel.getCommentsCounter(), result.getContent().get(0).getCommentsCounter());
     }
+
+    @Test
+    void testAddNewFile() {
+
+    }
+
 
     @Test
     void testDeleteFile() {

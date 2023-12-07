@@ -41,9 +41,4 @@ public class HomeController {
         return "features";
     }
 
-    @GetMapping("/picture")
-    public String picture() {
-        return "building-add";
-    }
-
 }
