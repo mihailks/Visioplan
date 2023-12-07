@@ -7,6 +7,7 @@ import com.visioplanserver.service.UserService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,6 +39,7 @@ public class UserController {
         return "user-profile-edit";
     }
 
+
     @PostMapping("/profile/edit/{id}")
     public String editProfile(@PathVariable("id") Long id,
                               @Valid UserProfileEditDTO userProfileEditDTO,
@@ -60,11 +62,7 @@ public class UserController {
     public String deleteUser(@PathVariable("id") Long id, Principal principal) {
         UserWithRoleViewModel user = userService.findUserRoleByUsername(principal.getName());
         userService.deleteUser(id);
-        if (user.getRole().contains(RolesEnum.ADMIN)) {
-            return "redirect:/user/all";
-        }
-        //TODO: logout after delete user. How to make POST request from controller?
-        return "redirect:/users/logout";
+        return "redirect:/user/all";
     }
 
     @GetMapping("/all")

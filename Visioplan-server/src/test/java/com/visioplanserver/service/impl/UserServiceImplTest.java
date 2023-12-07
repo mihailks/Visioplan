@@ -15,17 +15,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 
+import static com.visioplanserver.testUtils.CreateTestData.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -133,13 +130,7 @@ class UserServiceImplTest {
         verify(mockUserRepository).deleteById(id);
     }
 
-    private UserProfileEditDTO createTestUserProfileEditDTO() {
-        return new UserProfileEditDTO()
-                .setId(1L)
-                .setFirstName("testFirstName")
-                .setLastName("testLastName")
-                .setEmail("testEmail");
-    }
+
 
     @Test
     void testPromoteUser() {
@@ -193,100 +184,7 @@ class UserServiceImplTest {
         assertEquals(2, userWithRoleViewModel.getRole().size(), "User should have 2 roles");
     }
 
-    private UserWithRoleViewModel createTestUserWithRoleViewModel() {
-        return new UserWithRoleViewModel()
-                .setUsername("testUsername")
-                .setEmail("testEmail")
-                .setFirstName("testFirstName")
-                .setLastName("testLastName")
-                .setRole(List.of(RolesEnum.ADMIN, RolesEnum.USER));
-    }
 
-    private UserRoleEntity createUserEntityRole() {
-        return new UserRoleEntity()
-                .setRole(RolesEnum.USER);
-    }
-
-    private UserViewModel createTestUserViewModel() {
-        UserViewModel userViewModel = new UserViewModel();
-        userViewModel.setId(1L)
-                .setUsername("testUsername")
-                .setEmail("testEmail")
-                .setFirstName("testFirstName")
-                .setLastName("testLastName")
-                .setCompany("testCompany");
-        return userViewModel;
-    }
-
-    private UserEntity createTestUser() {
-        List<UserRoleEntity> userRoleToAdd = new ArrayList<>();
-        userRoleToAdd.add(new UserRoleEntity().setRole(RolesEnum.ADMIN));
-        userRoleToAdd.add(new UserRoleEntity().setRole(RolesEnum.USER));
-        UserEntity userEntity = new UserEntity();
-        userEntity.setId(1L);
-        userEntity.setUsername("testUsername")
-                .setEmail("testEmail")
-                .setFirstName("testFirstName")
-                .setLastName("testLastName")
-                .setCompany(createTestCompany())
-                .setRole(userRoleToAdd)
-                .setPassword("testPassword");
-        return userEntity;
-    }
-
-    private UserEntity createTestUserWithRole_User() {
-        List<UserRoleEntity> userRoleToAdd = new ArrayList<>();
-        userRoleToAdd.add(new UserRoleEntity().setRole(RolesEnum.USER));
-        UserEntity userEntity = new UserEntity();
-        userEntity.setId(1L);
-        userEntity.setUsername("testUsername")
-                .setEmail("testEmail")
-                .setFirstName("testFirstName")
-                .setLastName("testLastName")
-                .setCompany(createTestCompany())
-                .setRole(userRoleToAdd)
-                .setPassword("testPassword");
-        return userEntity;
-    }
-
-    private CompanyEntity createTestCompany() {
-        CompanyEntity companyEntity = new CompanyEntity();
-        companyEntity.setId(2L);
-        companyEntity.setName("testName")
-                .setAddress("testAddress")
-                .setCity("testCity")
-                .setCountry("testCountry")
-                .setPhone("testPhone")
-                .setEmail("testEmail")
-                .setWebsite("testWebsite")
-                .setBuildings(new HashSet<>());
-        return companyEntity;
-    }
-
-    private BuildingEntity createTestBuilding() {
-        BuildingEntity buildingEntity = new BuildingEntity();
-        buildingEntity.setId(3L);
-        buildingEntity.setName("testName")
-                .setAddress("testAddress")
-                .setCity("testCity")
-                .setCountry("testCountry")
-                .setImgUrl("testImgUrl")
-                .setCompanies(new HashSet<>())
-                .setFloors(new HashSet<>());
-        return buildingEntity;
-    }
-
-    private UserRegistrationDTO createUserRegistrationDTO() {
-        return new UserRegistrationDTO(
-                "username",
-                "email",
-                "password",
-                "email",
-                "firstName",
-                "lastName",
-                "companyName");
-
-    }
 
 
 }
