@@ -12,13 +12,13 @@ spring:
       filter:
         enabled: true
 
-logging:
-  level:
-    org.hibernate.SQL: DEBUG
-    org.hibernate.org.jdbc.bind: TRACE
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-
-    org.hibernate.type: TRACE
+#logging:
+#  level:
+#    org.hibernate.SQL: DEBUG
+#    org.hibernate.org.jdbc.bind: TRACE
+#    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+#
+#    org.hibernate.type: TRACE
 
 cloudinary:
   cloud-name: testName

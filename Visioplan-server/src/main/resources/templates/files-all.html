@@ -43,7 +43,7 @@
                       th:method="POST"
                       th:action="@{/comment/add/{id}(id=*{id})}">
                     <textarea type="text"
-                              th:field="${comemnts.textContent}"
+                              th:field="${comments.textContent}"
                               class="form-control form-my"
                               th:id="'white-' + *{id}"
                               placeholder="Enter your comment here">

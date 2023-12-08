@@ -24,6 +24,8 @@ public class SecurityConfiguration {
                         .requestMatchers("/features").permitAll()
                         .requestMatchers("/projects").hasRole(RolesEnum.ADMIN.name())
                         .requestMatchers("/user/all/**").hasRole(RolesEnum.ADMIN.name())
+                        .requestMatchers("/building/add").hasRole(RolesEnum.ADMIN.name())
+                        .requestMatchers("/building/all").hasRole(RolesEnum.ADMIN.name())
                         .anyRequest().authenticated()
         ).formLogin(
                 formLogin -> {

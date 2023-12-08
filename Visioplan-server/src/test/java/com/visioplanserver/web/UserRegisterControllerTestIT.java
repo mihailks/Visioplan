@@ -1,20 +1,14 @@
 package com.visioplanserver.web;
 
-import com.icegreen.greenmail.util.GreenMail;
-import com.icegreen.greenmail.util.ServerSetup;
-import jakarta.mail.internet.MimeMessage;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -24,33 +18,18 @@ class UserRegisterControllerTestIT {
     @Autowired
     private MockMvc mockMvc;
 
-    @Value("${mail.host}")
-    private String host;
-    @Value("${mail.port}")
-    private int port;
-    @Value("${mail.username}")
-    private String username;
-    @Value("${mail.password}")
-    private String password;
-
-    private GreenMail greenMail;
-
-    @BeforeEach
-    void SetUp() {
-        greenMail = new GreenMail(new ServerSetup(port, host, "smtp"));
-        greenMail.start();
-        greenMail.setUser(username, password);
-    }
-
-    @AfterEach
-    void tearDown() {
-        greenMail.stop();
+    @Test
+    void testRegistrationGET() throws Exception {
+        mockMvc.perform(
+                       get("/users/register")
+                )
+                .andExpect(status().isOk());
     }
 
     @Test
-    void testRegistration() throws Exception {
+    void testRegistrationShouldWork() throws Exception {
         mockMvc.perform(
-                        MockMvcRequestBuilders.post("/user/register")
+                        post("/user/register")
                                 .param("username", "Ivan")
                                 .param("email", "ivan@hotmail.com")
                                 .param("password", "ivan123")
@@ -61,17 +40,17 @@ class UserRegisterControllerTestIT {
                                 .with(csrf())
                 ).andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("http://localhost/users/login"));
-
-
-//        greenMail.waitForIncomingEmail(1);
-//        MimeMessage[] receivedMessages = greenMail.getReceivedMessages();
-//
-//        Assertions.assertEquals(1, receivedMessages.length);
-//
-//        MimeMessage receivedMessage = receivedMessages[0];
-//        Assertions.assertTrue(receivedMessage.getContent().toString().contains("Ivan"));
-//        Assertions.assertEquals(1, receivedMessage.getAllRecipients().length);
-//        Assertions.assertEquals("ivan@hotmail.com", receivedMessage.getAllRecipients()[0].toString());
     }
+
+    @Test
+    void testRegistrationWrongGOOGLEReCaptcha() throws Exception {
+        mockMvc.perform(
+                        post("http://localhost:8080/users/register")
+                                .param("g-recaptcha-response", "tetsttsts")
+                                .with(csrf())
+                ).andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/"));
+    }
+
 
 }

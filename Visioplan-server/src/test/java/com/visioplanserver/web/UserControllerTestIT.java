@@ -51,18 +51,6 @@ class UserControllerTestIT {
                 .andExpect(redirectedUrl("http://localhost/users/login"));
     }
 
-//    @Test
-//    @WithMockUser(username = TEST_USER_OWNER_NAME)
-//    void testOwnerUserProfile() throws Exception {
-//        itUserTestDataUtil.createTestUser(TEST_USER_OWNER_NAME);
-//        mockMvc.perform(
-//                        get("/users/profile")
-//                                .with(csrf())
-//                )
-//                .andExpect(status().isOk())
-//                .andExpect(redirectedUrl("http://localhost:8080/users/profile"));
-//    }
-
     @Test
     @WithMockUser(username = TEST_ADMIN_NAME, roles = {"ADMIN", "USER"})
     void testAdminUserProfileDelete() throws Exception {

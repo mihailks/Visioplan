@@ -6,14 +6,12 @@ import com.visioplanserver.model.entity.UserEntity;
 import com.visioplanserver.model.entity.UserRoleEntity;
 import com.visioplanserver.model.entity.enums.RolesEnum;
 import com.visioplanserver.repository.BuildingRepository;
-import org.hsqldb.rights.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Component
 public class BuildingTestUtil {
@@ -47,7 +45,7 @@ public class BuildingTestUtil {
         return userEntity;
     }
 
-    private CompanyEntity createCompany() {
+    public CompanyEntity createCompany() {
         CompanyEntity companyEntity = new CompanyEntity();
         companyEntity.setName("Softuni")
                 .setAddress("Sofia")

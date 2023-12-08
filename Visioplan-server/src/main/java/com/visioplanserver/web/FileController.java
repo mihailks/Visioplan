@@ -1,11 +1,11 @@
 package com.visioplanserver.web;
 
 import com.visioplanserver.model.dto.AddFileDTO;
+
 import com.visioplanserver.model.view.CommentsViewModel;
 import com.visioplanserver.model.view.FileViewModel;
 import com.visioplanserver.service.BuildingService;
 import com.visioplanserver.service.FileService;
-import com.visioplanserver.service.FloorService;
 import com.visioplanserver.service.exeption.FileNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -28,18 +27,16 @@ import java.util.List;
 public class FileController {
     private final FileService fileService;
     private final BuildingService buildingService;
-    private final FloorService floorService;
-    private static int currentPage;
 
 
-    public FileController(FileService fileService, BuildingService buildingService, FloorService floorService) {
+
+    public FileController(FileService fileService, BuildingService buildingService) {
         this.fileService = fileService;
         this.buildingService = buildingService;
-        this.floorService = floorService;
     }
     //show all files
     @GetMapping("/all")
-    public String getAllPages(Model model, HttpServletRequest request, Principal principal, @AuthenticationPrincipal UserDetails viewer) {
+    public String getAllPages(Model model, HttpServletRequest request) {
         model.addAttribute("platform", request.getAttribute("platform"));
         return getOnePage(model, 1);
     }
@@ -80,7 +77,7 @@ public class FileController {
 
     @ModelAttribute
     public void addAttributes(Model model) {
-        model.addAttribute("comemnts", new CommentsViewModel());
+        model.addAttribute("comments", new CommentsViewModel());
     }
 
     @PostMapping("/add")
