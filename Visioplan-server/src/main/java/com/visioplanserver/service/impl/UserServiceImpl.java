@@ -54,6 +54,7 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new IllegalArgumentException("Role USER not found!"))));
         user.setPassword(passwordEncoder.encode(userRegistrationDTO.password()));
         userRepository.save(user);
+
         applicationEventPublisher.publishEvent(new UserRegisterEvent(
                 "UserService", userRegistrationDTO.username(), userRegistrationDTO.email()
         ));

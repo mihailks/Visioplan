@@ -18,11 +18,11 @@ public class PrintOnTheConsoleTest {
 //    public void printOnTheConsole() {
 //        System.out.println("Print on the console");
 //    }
-//
-//    @Scheduled(cron = "0 0 6 * * ?")
-//    public void sendNewCommentsEmail() {
-//       commentsService.sendNewCommentsEmail();
-//    }
+
+    @Scheduled(cron = "0 0 6 * * ?")
+    public void sendNewCommentsEmail() {
+       commentsService.sendNewCommentsEmail();
+    }
 
 //    @Scheduled(fixedRate = 1000000)
 //    public void testNewCommentsSend() {
