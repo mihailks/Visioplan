@@ -1,6 +1,6 @@
 <h1 align="center" id="title">Visioplan</h1>
 
-<h3>Deployed to :</h3>
+<h3><strike>Deployed to :<strike></h3>
 
 [Visioplan](https://visioplan.yellowbush-38cf41bb.westeurope.azurecontainerapps.io)
 
