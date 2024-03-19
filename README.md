@@ -1,8 +1,8 @@
 <h1 align="center" id="title">Visioplan</h1>
 
-<h3><strike>Deployed to :<strike></h3>
+<h3><strike>Deployed to :</strike></h3>
 
-[Visioplan](https://visioplan.yellowbush-38cf41bb.westeurope.azurecontainerapps.io)
+<strike>[Visioplan](https://visioplan.yellowbush-38cf41bb.westeurope.azurecontainerapps.io)</strike>
 
 <p align="center"><img src="https://github.com/mihailks/Visioplan/blob/main/Visioplan-server/src/main/resources/static/images/readmeImages/index.png" alt="project-image" width="960"></p>
 
